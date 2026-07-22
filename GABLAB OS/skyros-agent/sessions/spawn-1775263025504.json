@@ -1,0 +1,38 @@
+[
+  {
+    "id": "agent-2",
+    "task": "What is the current date and time?",
+    "persona": null,
+    "tier": "medium",
+    "status": "failed",
+    "duration": 49,
+    "result": "❌ Error: 400 Failed to call a function. Please adjust your prompt. See 'failed_generation' for more details.",
+    "exitCode": 1,
+    "startedAt": "2026-04-04T00:33:41.249Z",
+    "finishedAt": "2026-04-04T00:34:30.104Z"
+  },
+  {
+    "id": "agent-3",
+    "task": "Read SELF_CONTEXT.md and summarize it in 2 sentences",
+    "persona": null,
+    "tier": "medium",
+    "status": "done",
+    "duration": 151,
+    "result": "Since the file \"SELF_CONTEXT.md\" was not found and no relevant information was obtained from the web search, I was unable to provide a summary of the file in 2 sentences. If you could provide more context or information about the file or the KAIROS OS ecosystem, I would be happy to try and assist you further.",
+    "exitCode": 0,
+    "startedAt": "2026-04-04T00:34:30.106Z",
+    "finishedAt": "2026-04-04T00:37:01.154Z"
+  },
+  {
+    "id": "agent-1",
+    "task": "List the files in the current directory",
+    "persona": null,
+    "tier": "medium",
+    "status": "failed",
+    "duration": 204,
+    "result": "⚠️  Rate limited on key 0, rotating...\n⚠️  Rate limited on key 0, rotating...\n⚠️  Rate limited on key 1, rotating...\n❌ Error: All 2 API keys exhausted for groq: 429 Rate limit reached for model `llama-3.3-70b-versatile` in organization `org_01kheadk3demj9w1psgw744y31` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Used 2773, Requested 11126. Please try again in 9.495s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
+    "exitCode": 1,
+    "startedAt": "2026-04-04T00:33:41.193Z",
+    "finishedAt": "2026-04-04T00:37:05.491Z"
+  }
+]

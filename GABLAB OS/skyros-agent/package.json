@@ -1,0 +1,32 @@
+{
+  "name": "skyros-agent",
+  "version": "1.0.0",
+  "description": "SKYROS — Independent AI Agent Runtime for KAIROS OS",
+  "type": "module",
+  "main": "cli.js",
+  "bin": {
+    "skyros": "./cli.js"
+  },
+  "scripts": {
+    "start": "node cli.js",
+    "test": "node validate.js",
+    "test:providers": "node validate.js --providers",
+    "test:tools": "node validate.js --tools",
+    "test:full": "node validate.js --full",
+    "validate": "node validate.js"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "kairos",
+    "skyros",
+    "cli"
+  ],
+  "author": "Gabriel Ferreira — Experia Solutions",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0",
+    "yaml": "^2.7.0"
+  }
+}

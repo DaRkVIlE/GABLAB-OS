@@ -1,0 +1,78 @@
+{
+  "timestamp": "2026-04-04T16:27:39.777Z",
+  "passed": 8,
+  "failed": 6,
+  "total": 14,
+  "results": [
+    {
+      "name": "T1: Config loader",
+      "status": "✅",
+      "detail": "5 tiers: light, medium, heavy, supreme, god"
+    },
+    {
+      "name": "T2: Provider router",
+      "status": "✅",
+      "detail": "3 providers: gemini, groq, huggingface"
+    },
+    {
+      "name": "T3: Tool registry + builtins",
+      "status": "✅",
+      "detail": "7 builtins: read_file, write_file, list_directory, git, grep_search, web_search, glob_search"
+    },
+    {
+      "name": "T4: Persona loader",
+      "status": "✅",
+      "detail": "12 personas: aiox-master, analyst, architect, data-engineer, dev..."
+    },
+    {
+      "name": "T5: MCP Bridge connect + tool sync",
+      "status": "✅",
+      "detail": "27 MCP tools bridged: aiox_list_squads, aiox_list_agents, aiox_get_agent, aiox_search_agents, aiox_status, aiox_invoke_squad..."
+    },
+    {
+      "name": "T6: Session save + load",
+      "status": "❌",
+      "detail": "store.save is not a function"
+    },
+    {
+      "name": "T7: Scheduler lifecycle",
+      "status": "✅",
+      "detail": "Job executed 4x in 350ms, scheduler reports 1 job(s)"
+    },
+    {
+      "name": "T8: Supabase — Event publish",
+      "status": "❌",
+      "detail": "Supabase not configured (.env missing SUPABASE_URL/KEY)"
+    },
+    {
+      "name": "T9: Supabase — Read recent events",
+      "status": "❌",
+      "detail": "Skipped (no Supabase)"
+    },
+    {
+      "name": "T10: Supabase — Task claim lifecycle",
+      "status": "❌",
+      "detail": "Skipped"
+    },
+    {
+      "name": "T11: Supabase — Decision log",
+      "status": "❌",
+      "detail": "Skipped"
+    },
+    {
+      "name": "T12: Supabase — Sync status",
+      "status": "❌",
+      "detail": "Skipped"
+    },
+    {
+      "name": "T13: Hivemind bootstrap",
+      "status": "✅",
+      "detail": "Connected: false, Agent: undefined @ undefined"
+    },
+    {
+      "name": "T14: Spawner source validation",
+      "status": "✅",
+      "detail": "6 patterns validated (AgentProcess, Spawner, runAll, lite, fork)"
+    }
+  ]
+}

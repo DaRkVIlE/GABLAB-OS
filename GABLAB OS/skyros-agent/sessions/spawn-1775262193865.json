@@ -1,0 +1,38 @@
+[
+  {
+    "id": "agent-3",
+    "task": "Read SELF_CONTEXT.md and summarize it in 2 sentences",
+    "persona": null,
+    "tier": "medium",
+    "status": "failed",
+    "duration": 10,
+    "result": "27 tools exposed (10 AIOX + 13 KAIROS)\n❌ Error: 413 Request too large for model `llama-3.3-70b-versatile` in organization `org_01kheadk3demj9w1psgw744y31` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Requested 12318, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
+    "exitCode": 1,
+    "startedAt": "2026-04-04T00:23:02.382Z",
+    "finishedAt": "2026-04-04T00:23:12.613Z"
+  },
+  {
+    "id": "agent-2",
+    "task": "What is the current date and time?",
+    "persona": null,
+    "tier": "medium",
+    "status": "failed",
+    "duration": 10,
+    "result": "27 tools exposed (10 AIOX + 13 KAIROS)\n❌ Error: 413 Request too large for model `llama-3.3-70b-versatile` in organization `org_01kheadk3demj9w1psgw744y31` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Requested 12315, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
+    "exitCode": 1,
+    "startedAt": "2026-04-04T00:23:02.368Z",
+    "finishedAt": "2026-04-04T00:23:12.614Z"
+  },
+  {
+    "id": "agent-1",
+    "task": "List the files in the current directory",
+    "persona": null,
+    "tier": "medium",
+    "status": "failed",
+    "duration": 12,
+    "result": "27 tools exposed (10 AIOX + 13 KAIROS)\n❌ Error: 413 Request too large for model `llama-3.3-70b-versatile` in organization `org_01kheadk3demj9w1psgw744y31` service tier `on_demand` on tokens per minute (TPM): Limit 12000, Requested 12314, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing",
+    "exitCode": 1,
+    "startedAt": "2026-04-04T00:23:02.342Z",
+    "finishedAt": "2026-04-04T00:23:13.861Z"
+  }
+]
