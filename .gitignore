@@ -420,3 +420,4 @@ photo_*.png
 skyros-agent-v4/
 tools/integrations/openclaude/
 skyros-agent-legacy/sessions/
+node_modules
