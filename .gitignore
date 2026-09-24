@@ -1,6 +1,11 @@
 # Obsidian Vault (SKYROS Anamnesis) - Sincronizado APENAS via Syncthing P2P
 docs/anamnesis/
 
+# Fresh Start Archive & Local Backups
+_archive/
+*.dump
+*.sql.gz
+
 # Dependencies
 node_modules/
 pnpm-lock.yaml
@@ -421,3 +426,17 @@ skyros-agent-v4/
 tools/integrations/openclaude/
 skyros-agent-legacy/sessions/
 node_modules
+
+# Large Database Dumps and System Backups (Google Drive only)
+*.dump
+*.sql
+!supabase-setup.sql
+desktop.ini
+**/desktop.ini
+
+# Python Virtual Environments and Caches
+**/venv/
+**/.venv/
+**/env/
+**/__pycache__/
+**/.pytest_cache/

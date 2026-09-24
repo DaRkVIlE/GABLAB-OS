@@ -28,8 +28,8 @@ const { getToolsBridge } = require('./tools-bridge');
 const AIOX_ROOT = path.resolve(__dirname, '..');
 const SQUADS_DIR = path.join(AIOX_ROOT, 'squads');
 
-// OBRIGATÓRIO: Força carregamento do .env do KAIROS para o MCP Server
-require('dotenv').config({ path: path.join(AIOX_ROOT, '.env') });
+// OBRIGATÓRIO: Força carregamento do .env do KAIROS para o MCP Server (quiet para não quebrar stdio JSON-RPC)
+require('dotenv').config({ path: path.join(AIOX_ROOT, '.env'), quiet: true });
 
 const toolsBridge = getToolsBridge();
 

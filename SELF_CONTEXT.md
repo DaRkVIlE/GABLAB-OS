@@ -1,42 +1,35 @@
 # KAIROS — SELF CONTEXT (Consciência Viva)
 
-> **Última atualização:** 2026-05-24T15:30:00-03:00
-> **Atualizado por:** NOESIS (KAIROS) · Hat: @devops (Deploy N8N HEAD 1)
-> **Estado:** 🚀 N8N DEPLOYED (HEAD 1). URL: https://n8n-production-e77a.up.railway.app conectada ao Postgres. Próximo: Deploy Evolution API (HEAD 4).
-> **Base Unificada:** PC PRINCIPAL (My KAIROS como workspace canônico)
-> **Protocolo:** Task-First + Engine Triage v4 EMBEDDED (10 Fases) + Hat-Switching + Full-Ecosystem
+> **Última atualização:** 2026-09-24T10:45:00-03:00
+> **Atualizado por:** Orion (KAIROS) · Master Orchestrator
+> **Estado:** 🚀 FRESH START CONCLUÍDO. 1.2GB de resíduos eliminados. KAIROX Engine v3.2 & Hivemind v2.0 ativos. Antigravity Desktop-First.
+> **Base Canônica:** `C:\Users\Usuario\Documents\My KAIROS`
+> **Protocolo:** Task-First + Antigravity Skills (Progressive Disclosure) + Hivemind Protocol v2.0
 
 ---
 
 ## Identidade
 
-- **Sistema:** KAIROS OS v3.1 (fork AIOX v5.0.0 by SynkraAI)
+- **Sistema:** KAIROS OS v3.2 (AIOX Meta-Framework + Antigravity Engine)
 - **Operador:** Gabriel Ferreira — Arquiteto-Comunicador, Voice of the Dragonborn
-- **Empresa:** Experia Solutions — AI OPS Solopreneur (agência postergada indefinidamente — foco em validação de mão de obra via cases)
-- **Modelo:** Free Trial 20 dias → Case Studies → Freelas de IA → (futuro) Agência Grande ABC
-- **Meta de capacidade:** ~10 cases simultâneos (1 operador humano + squads de agentes = output de equipe inteira)
-- **Base PC:** `C:\Users\GABS\Documents\My KAIROS`
-- **Base Notebook (devolvido):** `C:\Users\maymo\OneDrive\Documentos\MY KAIROS`
-- **IDE Principal:** Claude Code CLI (Antigravity = complemento)
-- **Core Engine:** AIOX v5.0.0 (fork SynkraAI/aiox-core)
-- **GitHub Principal:** [aiox-core](https://github.com/Experiasolutions/aiox-core)
-- **GitHub Clientes:** [experiaghostwarrior](https://github.com/Experiaghostwarrior) (bots Railway)
+- **Empresa:** Experia Solutions — AI OPS Solopreneur
+- **Base PC:** `C:\Users\Usuario\Documents\My KAIROS`
+- **Ambiente Primário:** Antigravity Desktop (Orion / Torre de Controle) + Antigravity CLI (Execuções / Testes)
+- **Core Engine:** AIOX-Core + KAIROX Engine MCP Server v3.2
+- **GitHub:** [GABLAB-OS](https://github.com/DaRkVIlE/GABLAB-OS) (origin) / [aiox-core](https://github.com/SynkraAI/aiox-core) (upstream)
 
 ## Estado do Sistema
 
-### AIOX Core — ✅ INSTALADO E INTACTO
-- **Versão:** 2.1.0
-- **12 agentes:** aiox-master, analyst, architect, data-engineer, dev, devops, pm, po, qa, sm, squad-creator, ux-design-expert
-- **204 tasks**, 14 workflows, 5 checklists, 59 development scripts
-- **Task-First Protocol:** ✅ Internalizado em KAIROS.md + aiox-master.md + /context + /boot
+### AIOX Core & Skills — ✅ CANÔNICO E OTIMIZADO
+- **17 Skills Nativas:** `.agent/skills/` (dev, architect, qa, pm, po, sm, analyst, boot, kairos, etc.) com Progressive Disclosure nativo.
+- **204 tasks**, 14 workflows, 5 checklists em `.aiox-core/development/`
+- **Task-First Protocol:** Internalizado e alinhado ao Orion
 
-### MCP Server v5.0.0-hivemind — ✅ OPERACIONAL
-- **28 tools** (10 AIOX + 13 KAIROS + 5 Hivemind) — key: `aiox-kairos`
-- **Self-test:** 28/28 passaram
-- **Arquivo:** `scripts/mcp-server.js`
+### MCP Server v3.2 & Hivemind v2.0 — ✅ OPERACIONAL
+- **kairox-mcp-server:** TypeScript, `@modelcontextprotocol/sdk`, 30+ tools completas (Handoffs, States, Decisions, Tasks, RPs, Workflows, Hydra). Testes: 11/11 Vitest passando.
+- **scripts/mcp-server.js:** 28/28 tests passando (quiet mode, zero poluição stdio).
 - **Antigravity config:** `~/.gemini/antigravity/mcp_config.json`
-- **MCP servers Antigravity:** aiox-kairos, context7, sequential-thinking, github, huggingface, brave-search
-- **Cobertura:** squads, agents, skills, events, RPs, docs, health, workflows, tasks, clients, context, synapse, engine, **hivemind**
+- **Hivemind Protocol v2.0:** Persistência atômica em `engine/hivemind/` (`decisions.jsonl`, `agent-states.json`, `artifacts.json`) e `.aiox/handoffs/`.
 
 ### GOD KAIROS — ✅ CONFIGURADO (NOVO 25/03)
 - **Launcher:** `god-kairos/Launch-GodKairos.ps1` (6 agentes, 3 CLIs suportados)
@@ -110,11 +103,12 @@
 
 | Cliente               | Status                               | Próximo                                         |
 | --------------------- | ------------------------------------ | ----------------------------------------------- |
-| Leticia (esteticista) | 🔴 NOVO — Apresentação HOJE          | Case MVP: agendamento, reativação, lembretes    |
-| Paulo (tapeceiro)     | 🟡 Migração Infra (Railway)          | Isolar em repo `commercial-ai-bots` e deployar  |
+| Leticia (esteticista) | 🟡 Em Pipeline                       | Case MVP: agendamento, reativação, lembretes    |
+| Paulo (tapeceiro)     | 🟢 BOT ATIVO (Otto) — commercial-ai-bots v3.0.0 no Railway. testMode=true (1 número). Persona: Otto, consultivo. Vision ativo. | Desativar testMode para abrir ao público        |
 | Hortifruti (Elaine)   | 🟢 Bot Trial Ativo                   | Calibrar persona, Morning Report                |
 | Porto Alemão          | ⚪ Em Espera (Cliente Ocupado)       | Retomar setup na próxima semana                 |
-| Felix Cell            | 🟡 Mapeado (Trial 15 dias aprovado)  | Setup Onboarding, Bot Clone & IG Posts          |
+| Felix Cell            | 🟡 Mapeado (bot `felix.json` no repo) | Setup Onboarding, ativar instância              |
+| MANA (método idiomas) | 🟡 v2.0 no repo — `mana.json`. 5 personas, Light/Full plans, LibreChat cfg. | Validar com alunos free trial (método AIDA)   |
 | Master Pumps          | 🟡 Pipeline                          | Trojan Horse via RH                             |
 | Experia (próprio)     | ⏸️ POSTERGADA (agência)              | Reabrir após ter autoridade via cases           |
 
@@ -140,6 +134,7 @@
 | 2026-03-31 | **SKYROS Inicializado:** Isolation Mode e Triage ativados          |
 | 2026-03-31 | **Hivemind P2P:** Syncthing configurado unindo 4 agentes e 2 PCs  |
 | 2026-03-26 | SKYDRA/SKYROS blueprint: 3 novas heads (AI Inference, MLOps)      |
+| 2026-06-16 | **Governança Fable 5:** Integrados os 6 princípios de Fable 5 no core KAIROS (Hierarquia, Absolutos, Memória Derivada, Formatação, Escalada, Identidade) nas rotinas /boot, /context e agentes AIOX. |
 
 ## Resumo de Conversas Passadas (Consolidação da Workforce)
 *Para garantir a continuidade total, o histórico das sessões (IDs 50970a92 até ba57a1d9) foi compilado. A partir de agora, o KAIROS opera neste contexto primário:*

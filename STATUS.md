@@ -6,10 +6,10 @@
 # ║          Data: 2026-05-12 | Dia 1 / 90                          ║
 # ╚══════════════════════════════════════════════════════════════════╝
 
-> **Última atualização:** 2026-05-24T15:30:00-03:00
-> **Estado Operacional:** 🔴 MONEY RUSH MODE | MVP AI OPS | God Pool 84 keys ATIVO
-> **Agente:** NOESIS (KAIROS) · Hat: @devops (Infra)
-> **Objetivo da Temporada:** Primeiro Contrato Pago — Boss Final da T1
+> **Última atualização:** 2026-09-24T10:59:00-03:00
+> **Estado Operacional:** 🟢 FRESH START CONCLUÍDO | KAIROX Engine v3.2 | Hivemind Protocol v2.0
+> **Agente:** NOESIS (KAIROS Master Orchestrator)
+> **Objetivo:** Orquestração unificada via Antigravity Desktop
 
 > [!IMPORTANT]
 > 🧪 **GABLAB v1.0 ATIVO** — Hub de governança pessoal consolidado em 17/05
@@ -459,6 +459,9 @@ BOSS FINAL T1: Primeiro Contrato Pago
 
 | Data | O que |
 |---|---|
+| 2026-09-24 | **Expurgo do FABLE5:** Removidos blocos estáticos de governança FABLE5 de todas as 17 skills em `.agent/skills/` e dos agentes em `.aiox-core/`. |
+| 2026-09-24 | **Fresh Start & Engine v3.2:** Saneamento do workspace (~1.2GB limpos/arquivados), KAIROX MCP Server v3.2 (30+ tools, 11/11 testes Vitest), Hivemind Protocol v2.0, skills core e SELF_CONTEXT atualizados. |
+| 2026-06-16 | **Fable 5 Governance:** Injetados os 6 princípios de controle (Hierarquia, Absolutos, Memória Derivada, Formatação Oculta, Escalada, Identidade) nos workflows `/boot`, `/context` e agent core (`KAIROS.md`). |
 | 2026-04-29 | **Estratégia AI OPS definida:** Experia agência postergada indefinidamente. Foco: solopreneur AI OPS com free trials 20 dias → case studies → freelas → agência. |
 | 2026-04-29 | **Engine Triage v4 EMBEDDED:** /triage workflow deletado. Triage v4 nativa em /boot (FASE 5.7) + /context (Passo 4.6) + /KAIROS. Permanente. |
 | 2026-04-29 | **SELF_CONTEXT + STATUS atualizados:** nova estratégia, novos clientes Leticia/Paulo, Boss Fights reformulados, bloqueios atualizados. |

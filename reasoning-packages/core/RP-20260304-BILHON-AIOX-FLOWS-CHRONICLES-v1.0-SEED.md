@@ -306,12 +306,13 @@ Corrige Bugs Urgentes       Está no Ar
 ### Executor 1: AGENTE 🤖
 **Inteligência contextual para decisões complexas**
 
-| Campo | Conteúdo |
-|-------|----------|
-| **O que é** | IA com capacidade de decisão, raciocínio e adaptação |
+| Campo           | Conteúdo                                                               |
+| --------------- | ---------------------------------------------------------------------- |
+| **O que é**     | IA com capacidade de decisão, raciocínio e adaptação                   |
 | **Quando usar** | Decisões complexas, Planejamento estratégico, Situações sem precedente |
-| **Exemplos** | @pm (Cria PRD), @architect (Define Arquitetura) |
-| **Poder único** | Capacidade de navegar ambiguidade e criar soluções |
+| **Exemplos**    | @pm (Cria PRD), @architect (Define Arquitetura)                        |
+| **Poder único** | Capacidade de navegar ambiguidade e criar soluções                     |
+|                 |                                                                        |
 
 **Quote:**
 > "Agentes não apenas executam ordens.

@@ -1,11 +1,11 @@
 {
   "agents": {
-    "pc-chatA-root": {
-      "id": "ac48d935",
-      "machine": "PC-GABS",
-      "label": "Root Node (Orchestrator) — PC",
-      "last_active": "2026-04-08T19:49:34.386Z",
-      "focus": "Consolidating OpenClaude + GodPool + Model Router. Activating /context, /boot, /kairos.",
+    "antigravity-orion-pc": {
+      "id": "f3329599",
+      "machine": "PC-MAIN",
+      "label": "Antigravity Desktop — Orion Master Orchestrator",
+      "last_active": "2026-09-24T13:42:00.000Z",
+      "focus": "Fresh Start concluído, Engine v3.2, Hivemind v2.0 e Skills /boot, /context, /kairos modernizadas.",
       "status": "active"
     },
     "note-chatB": {
@@ -13,41 +13,18 @@
       "machine": "NOTEBOOK-MAYMO",
       "label": "Notebook Node B — Skortex CLI + Sync",
       "last_active": "2026-04-04T00:14:00-03:00",
-      "focus": "Sessão encerrada (Fim de expediente)",
+      "focus": "Sessão encerrada (Standby)",
       "status": "idle"
     },
-    "pc-chatC": {
-      "id": "pending-registration",
+    "pc-chatA-root": {
+      "id": "ac48d935",
       "machine": "PC-GABS",
-      "label": "PC Sub-node C (awaiting first activation)",
-      "last_active": "2026-04-06T01:37:25.960Z",
-      "focus": "Integração KAIROX / Sincronização e Auditoria ccunpacked",
-      "status": "active"
-    },
-    "pc-chatD": {
-      "id": "pending-registration",
-      "machine": "PC-GABS",
-      "label": "PC Sub-node D (awaiting first activation)",
-      "last_active": "unknown",
-      "focus": "unassigned",
-      "status": "idle"
-    },
-    "antigravity-pc-root": {
-      "last_active": "2026-04-08T18:43:04.919Z",
-      "focus": "KAIROX Sovereign Engine Deployment & Experia Phase 3 Readiness",
-      "status": "active"
-    },
-    "test-agent": {
-      "last_active": "2026-04-16T03:28:40.611Z",
-      "focus": "self-test",
-      "status": "active"
-    },
-    "antigravity-root": {
-      "last_active": "2026-04-19T19:42:33.790Z",
-      "focus": "Aguardando comando do Operator (troca de conta/cota Opus 4.6) para iniciar o design da Extensão Antigravity-SKORTEX (MCP Spawner).",
+      "label": "Legacy Node A — PC",
+      "last_active": "2026-04-08T19:49:34.386Z",
+      "focus": "Arquivado / Migrado para Antigravity Desktop",
       "status": "idle"
     }
   },
-  "protocol_version": "1.0",
-  "last_sync": "2026-04-19T19:42:33.790Z"
+  "protocol_version": "2.0",
+  "last_sync": "2026-09-24T13:42:00.000Z"
 }

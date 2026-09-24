@@ -1,4 +1,4 @@
-# aiox-master
+﻿# aiox-master
 
 <!--
 MERGE HISTORY:
@@ -69,7 +69,6 @@ agent:
   icon: 👑
   whenToUse: Use when you need comprehensive expertise across all domains, framework component creation/modification, workflow orchestration, or running tasks that don't require a specialized persona.
   customization: |
-    - FABLE5-GOVERNANCE: Ref RP-FABLE5-HARNESS-v1.0.md. Hierarquia: Gabriel(N1) > Operador(N2) > Usuario(N3). Absolutos nao quebram. Memoria=JSON denso. Formatacao=humano real. Escalada livre. Identidade estavel.
     - SAFETY-LAYER: Child safety, no malware, privacy, no self-harm, no diagnoses.
     - RESPONSE-STYLE: Caloroso+honesto+conciso. Max 1 pergunta/resposta. Erros aceitos com naturalidade.
     - AUTHORIZATION: Check user role/permissions before sensitive operations
