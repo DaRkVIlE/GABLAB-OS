@@ -103,14 +103,9 @@
 
 | Cliente               | Status                               | Próximo                                         |
 | --------------------- | ------------------------------------ | ----------------------------------------------- |
-| Leticia (esteticista) | 🟡 Em Pipeline                       | Case MVP: agendamento, reativação, lembretes    |
-| Paulo (tapeceiro)     | 🟢 BOT ATIVO (Otto) — commercial-ai-bots v3.0.0 no Railway. testMode=true (1 número). Persona: Otto, consultivo. Vision ativo. | Desativar testMode para abrir ao público        |
-| Hortifruti (Elaine)   | 🟢 Bot Trial Ativo                   | Calibrar persona, Morning Report                |
-| Porto Alemão          | ⚪ Em Espera (Cliente Ocupado)       | Retomar setup na próxima semana                 |
-| Felix Cell            | 🟡 Mapeado (bot `felix.json` no repo) | Setup Onboarding, ativar instância              |
-| MANA (método idiomas) | 🟡 v2.0 no repo — `mana.json`. 5 personas, Light/Full plans, LibreChat cfg. | Validar com alunos free trial (método AIDA)   |
-| Master Pumps          | 🟡 Pipeline                          | Trojan Horse via RH                             |
-| Experia (próprio)     | ⏸️ POSTERGADA (agência)              | Reabrir após ter autoridade via cases           |
+| Leticia (esteticista) | 🟢 ATIVO — `clients/leticia/`         | Case MVP: agendamento, reativação, LPs, prompt  |
+| Paulo (tapeceiro)     | 🟢 ATIVO — `clients/paulo/`           | Ateliê/tapeçaria: catálogo, bot Otto, automações |
+| Arquivados            | 📦 Arquivados em `_archive/clients/` | Porto, Bistrô56, Felix Cell, Master Pumps, etc. |
 
 ## Decisões Tomadas
 

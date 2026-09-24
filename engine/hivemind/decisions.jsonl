@@ -4,5 +4,5 @@
 {"ts":"2026-09-23T20:47:48.475Z","agent":"test","type":"task","summary":"[ASSIGN → test-target] test task","context":"Priority: P1","affects":["test-target"]}
 {"ts":"2026-09-24T13:36:54.384Z","agent":"test","type":"event","summary":"MCP self-test","context":"","affects":[]}
 {"ts":"2026-09-24T13:36:54.404Z","agent":"test","type":"task","summary":"[ASSIGN → test-target] test task","context":"Priority: P1","affects":["test-target"]}
-{"ts":"2026-09-24T13:59:00.000Z","agent":"orion","type":"decision","summary":"Expurgo total da governanca FABLE5 dos arquivos de skills e agentes","context":"Blocos repetitivos de governanca FABLE5 RP-FABLE5-HARNESS foram removidos de todos os 17 SKILL.md em .agent/skills/ e das definicoes de agentes em .aiox-core/development/agents/. Limpeza completa para eliminar ruido estatico do prompt.","affects":[".agent/skills/",".aiox-core/development/agents/"]}
+{"ts":"2026-09-24T14:34:00.000Z","agent":"orion","type":"decision","summary":"Consolidacao de Clientes Ativos para Leticia e Paulo","context":"Clientes Porto, Bistro56, Felix Cell e Master Pumps foram desativados e arquivados em _archive/clients/. O ecossistema passa a focar exclusivamente nos clientes ativos Leticia (estética) e Paulo (tapeçaria/ateliê em clients/paulo/).","affects":["clients/","_archive/clients/",".agent/skills/","SELF_CONTEXT.md","STATUS.md"]}
 

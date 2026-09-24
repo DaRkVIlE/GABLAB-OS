@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulário — Letícia D Estética</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F9F5EF;
+    --warm-white: #FDFAF6;
+    --sand: #E8DDD0;
+    --taupe: #C4AE97;
+    --bronze: #9C7B5A;
+    --deep: #3D2C1E;
+    --text: #4A3728;
+    --muted: #8C7A6B;
+    --accent: #B8946A;
+    --success: #7A9E7E;
+    --radius: 12px;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: var(--deep);
+    padding: 28px 24px;
+    text-align: center;
+  }
+  .header-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--taupe);
+    margin-bottom: 8px;
+  }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--warm-white);
+    letter-spacing: 0.02em;
+  }
+  .header h1 span { font-style: italic; color: var(--taupe); }
+
+  /* ── Progress bar ── */
+  .progress-wrap {
+    background: #2A1E14;
+    padding: 16px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .progress-bar-bg {
+    flex: 1;
+    height: 3px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 99px;
+    transition: width 0.5s ease;
+  }
+  .progress-label {
+    font-size: 11px;
+    color: var(--taupe);
+    white-space: nowrap;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+  .step-dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .step-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .step-dot.active { background: var(--accent); transform: scale(1.4); }
+  .step-dot.done { background: var(--success); }
+
+  /* ── Main layout ── */
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* ── Step cards ── */
+  .step {
+    display: none;
+    animation: fadeSlideIn 0.4s ease;
+  }
+  .step.active { display: block; }
+
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .step-header {
+    margin-bottom: 32px;
+  }
+  .step-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .step-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--deep);
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .step-header p {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 480px;
+  }
+
+  /* ── Question cards ── */
+  .card {
+    background: var(--warm-white);
+    border: 1px solid var(--sand);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+  .card:focus-within { border-color: var(--bronze); }
+
+  .card label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--deep);
+    margin-bottom: 6px;
+  }
+  .card .hint {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 10px;
+    font-style: italic;
+  }
+
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"],
+  textarea,
+  select {
+    width: 100%;
+    background: var(--cream);
+    border: 1px solid var(--sand);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    resize: vertical;
+  }
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--bronze);
+    box-shadow: 0 0 0 3px rgba(156,123,90,0.12);
+  }
+  textarea { min-height: 90px; }
+
+  /* ── Checkbox / Radio pills ── */
+  .pill-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .pill-option {
+    display: none;
+  }
+  .pill-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 99px;
+    border: 1px solid var(--sand);
+    background: var(--cream);
+    font-size: 13px;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .pill-option:checked + .pill-label {
+    background: var(--deep);
+    border-color: var(--deep);
+    color: var(--warm-white);
+  }
+  .pill-label:hover {
+    border-color: var(--bronze);
+    color: var(--bronze);
+  }
+
+  /* ── Services table-style list ── */
+  .service-list { display: flex; flex-direction: column; gap: 10px; }
+  .service-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--cream);
+    border: 1px solid var(--sand);
+    border-radius: 10px;
+    padding: 12px 16px;
+    transition: border-color 0.2s;
+  }
+  .service-item:has(.svc-check:checked) {
+    border-color: var(--bronze);
+    background: #FBF6EF;
+  }
+  .svc-check {
+    appearance: none;
+    width: 18px; height: 18px;
+    border: 2px solid var(--taupe);
+    border-radius: 5px;
+    flex-shrink: 0;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+  }
+  .svc-check:checked {
+    background: var(--bronze);
+    border-color: var(--bronze);
+  }
+  .svc-check:checked::after {
+    content: '';
+    position: absolute;
+    left: 3px; top: 1px;
+    width: 8px; height: 5px;
+    border-left: 2px solid white;
+    border-bottom: 2px solid white;
+    transform: rotate(-45deg);
+  }
+  .svc-info { flex: 1; }
+  .svc-name { font-size: 14px; font-weight: 500; color: var(--deep); }
+  .svc-price-edit {
+    width: 80px;
+    background: var(--warm-white);
+    border: 1px solid var(--sand);
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-size: 13px;
+    color: var(--muted);
+    text-align: right;
+    outline: none;
+  }
+  .svc-price-edit:focus { border-color: var(--bronze); color: var(--text); }
+
+  /* ── Depoimentos textarea list ── */
+  .testimonial-add {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .btn-add {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 16px;
+    border-radius: 8px;
+    border: 1.5px dashed var(--taupe);
+    background: transparent;
+    font-size: 13px;
+    color: var(--bronze);
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s;
+  }
+  .btn-add:hover { border-color: var(--bronze); background: rgba(156,123,90,0.06); }
+
+  .testimony-block { margin-bottom: 12px; position: relative; }
+  .testimony-block textarea { padding-right: 36px; }
+  .remove-btn {
+    position: absolute;
+    top: 10px; right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .remove-btn:hover { color: #c0392b; background: #fdecea; }
+
+  /* ── Navigation ── */
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 36px;
+    gap: 12px;
+  }
+  .btn-back {
+    background: none;
+    border: 1.5px solid var(--sand);
+    color: var(--muted);
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-back:hover { border-color: var(--taupe); color: var(--text); }
+  .btn-next {
+    background: var(--deep);
+    color: var(--warm-white);
+    border: none;
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    flex: 1;
+    max-width: 280px;
+    letter-spacing: 0.03em;
+  }
+  .btn-next:hover { background: #5A3F2C; }
+
+  /* ── Finish screen ── */
+  .finish-screen {
+    display: none;
+    text-align: center;
+    padding: 40px 0;
+  }
+  .finish-screen.active { display: block; animation: fadeSlideIn 0.5s ease; }
+  .finish-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+  .finish-screen h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    font-weight: 400;
+    color: var(--deep);
+    margin-bottom: 12px;
+  }
+  .finish-screen p {
+    color: var(--muted);
+    font-size: 15px;
+    margin-bottom: 32px;
+    max-width: 440px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .btn-export {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 16px 40px;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-export:hover { background: var(--bronze); }
+  .btn-export-secondary {
+    background: transparent;
+    color: var(--bronze);
+    border: 1.5px solid var(--taupe);
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: all 0.2s;
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .btn-export-secondary:hover { border-color: var(--bronze); background: rgba(156,123,90,0.06); }
+
+  /* ── Optional badge ── */
+  .badge-opt {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--taupe);
+    border: 1px solid var(--sand);
+    border-radius: 99px;
+    padding: 2px 8px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--sand);
+    margin: 20px 0;
+  }
+
+  @media (max-width: 480px) {
+    .header h1 { font-size: 22px; }
+    .step-header h2 { font-size: 24px; }
+    .nav-row { flex-wrap: wrap; }
+    .btn-next { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-eyebrow">Site — Conteúdo</div>
+  <h1>Letícia D <span>Estética</span></h1>
+</div>
+
+<div class="progress-wrap">
+  <div class="step-dots" id="stepDots"></div>
+  <div class="progress-bar-bg">
+    <div class="progress-bar-fill" id="progressFill" style="width:14%"></div>
+  </div>
+  <div class="progress-label" id="progressLabel">1 de 7</div>
+</div>
+
+<div class="container">
+
+  <!-- ══ STEP 1: Sobre Você ══ -->
+  <div class="step active" id="step-1">
+    <div class="step-header">
+      <div class="step-tag">Passo 1 · Sobre Você</div>
+      <h2>Vamos começar pelo início —<br>fale de você</h2>
+      <p>Essas informações vão para a seção "Quem sou eu" do site. Quanto mais autêntico, melhor.</p>
+    </div>
+
+    <div class="card">
+      <label for="nome">Seu nome completo</label>
+      <input type="text" id="nome" placeholder="Ex: Letícia Dias da Silva">
+    </div>
+
+    <div class="card">
+      <label for="formacao">Formação profissional</label>
+      <div class="hint">Ex: Técnica em Estética, Tecnóloga em Cosmetologia...</div>
+      <input type="text" id="formacao" placeholder="Qual é o seu título?">
+    </div>
+
+    <div class="card">
+      <label for="instituicao">Onde você estudou?</label>
+      <input type="text" id="instituicao" placeholder="Nome da instituição ou escola">
+    </div>
+
+    <div class="card">
+      <label for="tempo">Há quanto tempo você trabalha como esteticista?</label>
+      <input type="text" id="tempo" placeholder="Ex: 3 anos, desde 2019...">
+    </div>
+
+    <div class="card">
+      <label for="cursos">Cursos, especializações ou certificações <span class="badge-opt">opcional</span></label>
+      <div class="hint">Liste os que considera mais importantes para destacar.</div>
+      <textarea id="cursos" placeholder="Ex: Curso de Radiofrequência — Instituto X&#10;Especialização em Drenagem Linfática — Y"></textarea>
+    </div>
+
+    <div class="card">
+      <label for="filosofia">Tem uma frase que define seu jeito de trabalhar? <span class="badge-opt">opcional</span></label>
+      <div class="hint">Ex: "Cuidado que vai além da pele", "Beleza com ciência e afeto"</div>
+      <input type="text" id="filosofia" placeholder="Sua filosofia em uma frase">
+    </div>
+
+    <div class="nav-row">
+      <div></div>
+      <button class="btn-next" onclick="goTo(2)">Continuar →</button>
+    </div>
+  </div>
+
+  <!-- ══ STEP 2: Serviços ══ -->
+  <div class="step" id="step-2">
+    <div class="step-header">
+      <div class="step-tag">Passo 2 · Serviços</div>
+      <h2>Quais serviços você oferece?</h2>
+      <p>Marque os que você faz e corrija o preço se precisar. Você também pode adicionar serviços novos.</p>
+    </div>
+
+    <div class="card">
+      <label>Marque os serviços ativos e confirme os preços</label>
+      <div class="hint">Clique no preço para editar. Desmarque o que não faz.</div>
+      <div class="service-list" id="serviceList">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+    <div class="card">
+      <label for="servicosNovos">Serviços que não estão na lista acima <span class="badge-opt">opcional</span></label>
+      <div class="hint">Um por linha, com o preço se quiser. Ex: Peeling Ultrassônico — R$200</div>
+      <textarea id="servicosNovos" placeholder="Adicione aqui os serviços que faltam..."></textarea>
+    </div>
+
+    <div class="card">
+      <label>Serviços "Em Breve" — confirme os que você planeja oferecer</label>
+      <div class="pill-group">
+        <input type="checkbox" class="pill-option" id="emb1" checked><label class="pill-label" for="emb1">✦ Microagulhamento</label>
+        <input type="checkbox" class="pill-option" id="emb2" checked><label class="pill-label" for="emb2">✦ Liberação Miofascial</label>
+        <input type="checkbox" class="pill-option" id="emb3" checked><label class="pill-label" for="emb3">✦ Tai Massage</label>
+        <input type="checkbox" class="pill-option" id="emb4" checked><label class="pill-label" for="emb4">✦ Diástase</label>
+        <input type="checkbox" class="pill-option" id="emb5" checked><label class="pill-label" for="emb5">✦ Auriculoterapia</label>
+      </div>
+    </div>
+
+    <div class="card">
+      <label for="pacotes">Tem pacotes ou combos? <span class="badge-opt">opcional</span></label>
+      <div class="hint">Ex: 3 sessões de drenagem por R$450, Duo relaxante por R$350...</div>
+      <textarea id="pacotes" placeholder="Descreva seus combos aqui..."></textarea>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-back" onclick="goTo(1)">← Voltar</button>
+      <button class="btn-next" onclick="goTo(3)">Continuar →</button>
+    </div>
+  </div>
+
+  <!-- ══ STEP 3: Descrições dos serviços ══ -->
+  <div class="step" id="step-3">
+    <div class="step-header">
+      <div class="step-tag">Passo 3 · Descrições</div>
+      <h2>Conta mais sobre cada serviço</h2>
+      <p>Quando a cliente clica em um serviço no site, ela vê uma explicação. Escreva 1–2 linhas sobre o que é e pra quem é indicado — do seu jeito, sem precisar ser formal.</p>
+    </div>
+
+    <div id="descriptionCards">
+      <!-- Populated by JS based on selected services -->
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-back" onclick="goTo(2)">← Voltar</button>
+      <button class="btn-next" onclick="goTo(4)">Continuar →</button>
+    </div>
+  </div>
+
+  <!-- ══ STEP 4: Atendimento e Logística ══ -->
+  <div class="step" id="step-4">
+    <div class="step-header">
+      <div class="step-tag">Passo 4 · Atendimento</div>
+      <h2>Como funciona na prática?</h2>
+      <p>Detalhes que ajudam a cliente a saber o que esperar antes mesmo de entrar em contato.</p>
+    </div>
+
+    <div class="card">
+      <label for="cidades">Em quais cidades ou bairros você atende?</label>
+      <input type="text" id="cidades" placeholder="Ex: São Paulo — Zona Sul, ABC Paulista...">
+    </div>
+
+    <div class="card">
+      <label for="taxa">Você cobra taxa de deslocamento?</label>
+      <div class="pill-group" style="margin-bottom:12px;">
+        <input type="radio" class="pill-option" name="taxa_radio" id="taxa_nao"><label class="pill-label" for="taxa_nao">Não cobro</label>
+        <input type="radio" class="pill-option" name="taxa_radio" id="taxa_sim"><label class="pill-label" for="taxa_sim">Cobro em alguns casos</label>
+        <input type="radio" class="pill-option" name="taxa_radio" id="taxa_gratis"><label class="pill-label" for="taxa_gratis">Gratuita até certo km</label>
+      </div>
+      <input type="text" id="taxa" placeholder="Detalhes: ex. grátis até 10 km, R$30 acima disso">
+    </div>
+
+    <div class="card">
+      <label for="horarios">Quais seus horários de atendimento?</label>
+      <div class="hint">Dias da semana e faixas de horário.</div>
+      <textarea id="horarios" placeholder="Ex: Segunda a sexta, 9h às 19h. Sábados, 9h às 14h."></textarea>
+    </div>
+
+    <div class="card">
+      <label for="duracao">Quanto tempo dura cada sessão, em média? <span class="badge-opt">opcional</span></label>
+      <div class="hint">Pode ser geral ou por serviço. Ex: limpeza ~90 min, drenagem ~60 min</div>
+      <textarea id="duracao" placeholder="Informe a duração média dos serviços..."></textarea>
+    </div>
+
+    <div class="card">
+      <label>Formas de pagamento aceitas</label>
+      <div class="pill-group">
+        <input type="checkbox" class="pill-option" id="pix"><label class="pill-label" for="pix">Pix</label>
+        <input type="checkbox" class="pill-option" id="dinheiro"><label class="pill-label" for="dinheiro">Dinheiro</label>
+        <input type="checkbox" class="pill-option" id="debito"><label class="pill-label" for="debito">Débito</label>
+        <input type="checkbox" class="pill-option" id="credavista"><label class="pill-label" for="credavista">Crédito à vista</label>
+        <input type="checkbox" class="pill-option" id="credparc"><label class="pill-label" for="credparc">Crédito parcelado</label>
+      </div>
+      <input type="text" id="parcelas" placeholder="Se parcelado, até quantas vezes?" style="margin-top:12px;">
+    </div>
+
+    <div class="card">
+      <label for="cancelamento">Política de cancelamento <span class="badge-opt">opcional</span></label>
+      <div class="hint">Ex: peço aviso com 24h de antecedência, sem taxa de cancelamento</div>
+      <input type="text" id="cancelamento" placeholder="Como você lida com cancelamentos?">
+    </div>
+
+    <div class="card">
+      <label>Você atende homens também?</label>
+      <div class="pill-group">
+        <input type="radio" class="pill-option" name="homens" id="homens_sim"><label class="pill-label" for="homens_sim">Sim</label>
+        <input type="radio" class="pill-option" name="homens" id="homens_nao"><label class="pill-label" for="homens_nao">Não</label>
+        <input type="radio" class="pill-option" name="homens" id="homens_alguns"><label class="pill-label" for="homens_alguns">Alguns serviços</label>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-back" onclick="goTo(3)">← Voltar</button>
+      <button class="btn-next" onclick="goTo(5)">Continuar →</button>
+    </div>
+  </div>
+
+  <!-- ══ STEP 5: Fotos e Resultados ══ -->
+  <div class="step" id="step-5">
+    <div class="step-header">
+      <div class="step-tag">Passo 5 · Fotos & Resultados</div>
+      <h2>Mostre o seu trabalho</h2>
+      <p>Essa seção é a que mais converte visitas em agendamentos. Quanto mais visual, melhor.</p>
+    </div>
+
+    <div class="card">
+      <label>Você tem fotos de antes e depois?</label>
+      <div class="pill-group" style="margin-bottom:12px;">
+        <input type="radio" class="pill-option" name="antesdepois" id="ad_sim"><label class="pill-label" for="ad_sim">Tenho</label>
+        <input type="radio" class="pill-option" name="antesdepois" id="ad_nao"><label class="pill-label" for="ad_nao">Não tenho</label>
+        <input type="radio" class="pill-option" name="antesdepois" id="ad_algumas"><label class="pill-label" for="ad_algumas">Tenho de alguns</label>
+      </div>
+      <input type="text" id="antesdepois" placeholder="Se tiver, de quais tratamentos? Ex: limpeza de pele, drenagem...">
+    </div>
+
+    <div class="card">
+      <label>As clientes autorizaram o uso das fotos?</label>
+      <div class="pill-group">
+        <input type="radio" class="pill-option" name="autorizacao" id="aut_sim"><label class="pill-label" for="aut_sim">Sim</label>
+        <input type="radio" class="pill-option" name="autorizacao" id="aut_nao"><label class="pill-label" for="aut_nao">Ainda não</label>
+        <input type="radio" class="pill-option" name="autorizacao" id="aut_precisa"><label class="pill-label" for="aut_precisa">Preciso de um texto para pedir</label>
+      </div>
+    </div>
+
+    <div class="card">
+      <label>Tem fotos do seu setup ou dos produtos que usa?</label>
+      <div class="hint">Mala, equipamentos, ambiente que monta na casa das clientes...</div>
+      <div class="pill-group">
+        <input type="radio" class="pill-option" name="setup" id="setup_sim"><label class="pill-label" for="setup_sim">Tenho</label>
+        <input type="radio" class="pill-option" name="setup" id="setup_nao"><label class="pill-label" for="setup_nao">Não tenho</label>
+        <input type="radio" class="pill-option" name="setup" id="setup_poucas"><label class="pill-label" for="setup_poucas">Tenho algumas</label>
+      </div>
+    </div>
+
+    <div class="card">
+      <label for="marcas">Quais marcas ou produtos você usa nos atendimentos? <span class="badge-opt">opcional</span></label>
+      <div class="hint">Marcas reconhecidas passam mais confiança para quem visita o site.</div>
+      <textarea id="marcas" placeholder="Ex: Ionto Comed, Kosmomed, Biossance..."></textarea>
+    </div>
+
+    <div class="card">
+      <label for="video">Tem algum vídeo curto para incluir no site? <span class="badge-opt">opcional</span></label>
+      <input type="text" id="video" placeholder="Link do YouTube, Instagram ou TikTok...">
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-back" onclick="goTo(4)">← Voltar</button>
+      <button class="btn-next" onclick="goTo(6)">Continuar →</button>
+    </div>
+  </div>
+
+  <!-- ══ STEP 6: Depoimentos ══ -->
+  <div class="step" id="step-6">
+    <div class="step-header">
+      <div class="step-tag">Passo 6 · Depoimentos</div>
+      <h2>O que as suas clientes dizem?</h2>
+      <p>Cole aqui mensagens de WhatsApp, avaliações do Google, ou qualquer elogio recebido. Não precisa ser elaborado — quanto mais natural, melhor.</p>
+    </div>
+
+    <div class="card">
+      <label>Depoimentos das clientes</label>
+      <div class="hint">Cole prints descritos em texto, mensagens do WhatsApp, avaliações do Google...</div>
+      <div id="testimonialList">
+        <div class="testimony-block">
+          <textarea placeholder="&quot;Amei o atendimento! Letícia é super atenciosa e profissional. Minha pele ficou incrível após a limpeza de pele.&quot; — Maria S."></textarea>
+        </div>
+      </div>
+      <button class="btn-add" onclick="addTestimonial()">+ Adicionar outro depoimento</button>
+    </div>
+
+    <div class="card">
+      <label for="googlelink">Link das suas avaliações no Google <span class="badge-opt">opcional</span></label>
+      <input type="text" id="googlelink" placeholder="https://g.co/kgs/...">
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-back" onclick="goTo(5)">← Voltar</button>
+      <button class="btn-next" onclick="goTo(7)">Continuar →</button>
+    </div>
+  </div>
+
+  <!-- ══ STEP 7: Contato e Extras ══ -->
+  <div class="step" id="step-7">
+    <div class="step-header">
+      <div class="step-tag">Passo 7 · Contato & Extras</div>
+      <h2>Últimos detalhes ✦</h2>
+      <p>Informações de contato e alguns extras que deixam o site completo.</p>
+    </div>
+
+    <div class="card">
+      <label for="whatsapp">WhatsApp para agendamentos</label>
+      <input type="tel" id="whatsapp" value="11 97407-7401" placeholder="11 97407-7401">
+    </div>
+
+    <div class="card">
+      <label for="instagram">Instagram <span class="badge-opt">opcional</span></label>
+      <input type="text" id="instagram" placeholder="@leticiadsestetica">
+    </div>
+
+    <div class="card">
+      <label for="outras_redes">Outras redes ativas <span class="badge-opt">opcional</span></label>
+      <input type="text" id="outras_redes" placeholder="TikTok, YouTube, Pinterest...">
+    </div>
+
+    <div class="card">
+      <label for="email">E-mail profissional <span class="badge-opt">opcional</span></label>
+      <input type="email" id="email" placeholder="leticia@email.com">
+    </div>
+
+    <hr class="divider">
+
+    <div class="card">
+      <label for="faq">Perguntas frequentes que suas clientes fazem <span class="badge-opt">opcional</span></label>
+      <div class="hint">O que você sempre precisa explicar antes de uma sessão?</div>
+      <textarea id="faq" placeholder="Ex: &quot;Precisa vir em jejum?&quot;, &quot;Pode fazer na gravidez?&quot;..."></textarea>
+    </div>
+
+    <div class="card">
+      <label for="contraindicacoes">Contraindicações importantes <span class="badge-opt">opcional</span></label>
+      <div class="hint">Avisos que você quer deixar visíveis no site por segurança.</div>
+      <textarea id="contraindicacoes" placeholder="Ex: Radiofrequência contraindicada para gestantes e portadores de marca-passo..."></textarea>
+    </div>
+
+    <div class="card">
+      <label for="planos">Planos futuros <span class="badge-opt">opcional</span></label>
+      <div class="hint">Abrir estúdio, novos serviços, outras cidades? Vale mencionar no site!</div>
+      <input type="text" id="planos" placeholder="Ex: Estou abrindo espaço próprio em março de 2026">
+    </div>
+
+    <div class="card">
+      <label for="mudancas">Tem algo no site atual que você não gostou ou quer mudar? <span class="badge-opt">opcional</span></label>
+      <textarea id="mudancas" placeholder="Pode falar à vontade — cores, textos, seções..."></textarea>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-back" onclick="goTo(6)">← Voltar</button>
+      <button class="btn-next" onclick="finish()" style="background:var(--accent);">Finalizar ✓</button>
+    </div>
+  </div>
+
+  <!-- ══ FINISH ══ -->
+  <div class="finish-screen" id="finishScreen">
+    <div class="finish-icon">🌿</div>
+    <h2>Tudo certo, Letícia!</h2>
+    <p>Obrigada por preencher tudo com tanto cuidado. Clique abaixo para enviar as respostas diretamente via WhatsApp.</p>
+
+    <button class="btn-export" id="btnWhatsApp" onclick="sendWhatsApp()">
+      <span id="btnWhatsAppText">📲 Enviar pelo WhatsApp</span>
+    </button>
+
+    <div style="margin-top:16px; display:flex; flex-direction:column; gap:8px; align-items:center;">
+      <button class="btn-export-secondary" onclick="exportData()">⬇ Baixar como .txt</button>
+      <button class="btn-export-secondary" onclick="copyData()">Copiar para área de transferência</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const TOTAL_STEPS = 7;
+  let currentStep = 1;
+
+  const services = [
+    { id: 's1',  name: '1ª Limpeza de Pele com Peeling', price: 'R$190' },
+    { id: 's2',  name: 'Limpeza de Pele Simples', price: 'R$170' },
+    { id: 's3',  name: 'Aplicação de Radiofrequência', price: 'R$220' },
+    { id: 's4',  name: 'Aplicação de Intradermoterapia', price: 'R$250' },
+    { id: 's5',  name: 'Drenagem Linfática', price: 'R$170' },
+    { id: 's6',  name: 'Massagem Relaxante', price: 'R$190' },
+    { id: 's7',  name: 'Massagem com Bambus ou Pantala', price: 'R$150' },
+    { id: 's8',  name: 'Detox Quântico', price: 'R$180' },
+    { id: 's9',  name: 'Massagem com Pedras Quentes', price: 'R$165' },
+    { id: 's10', name: 'Massagem com Óleos', price: 'R$190' },
+    { id: 's11', name: 'Massagem com Velas', price: 'R$130' },
+  ];
+
+  // Build service list
+  const serviceList = document.getElementById('serviceList');
+  services.forEach(s => {
+    serviceList.innerHTML += `
+      <div class="service-item">
+        <input type="checkbox" class="svc-check" id="${s.id}" checked>
+        <div class="svc-info">
+          <label class="svc-name" for="${s.id}">${s.name}</label>
+        </div>
+        <input class="svc-price-edit" type="text" value="${s.price}" title="Preço" id="price_${s.id}">
+      </div>`;
+  });
+
+  // Build step dots
+  const dotsContainer = document.getElementById('stepDots');
+  for (let i = 1; i <= TOTAL_STEPS; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'step-dot' + (i === 1 ? ' active' : '');
+    dot.title = `Passo ${i}`;
+    dot.onclick = () => { if (i < currentStep) goTo(i); };
+    dot.id = `dot-${i}`;
+    dotsContainer.appendChild(dot);
+  }
+
+  function updateProgress() {
+    const pct = (currentStep / TOTAL_STEPS) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = `${currentStep} de ${TOTAL_STEPS}`;
+    for (let i = 1; i <= TOTAL_STEPS; i++) {
+      const dot = document.getElementById(`dot-${i}`);
+      dot.className = 'step-dot' + (i === currentStep ? ' active' : i < currentStep ? ' done' : '');
+    }
+  }
+
+  function goTo(n) {
+    if (n === 3) buildDescriptionCards();
+    document.getElementById(`step-${currentStep}`).classList.remove('active');
+    currentStep = n;
+    document.getElementById(`step-${currentStep}`).classList.add('active');
+    updateProgress();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function buildDescriptionCards() {
+    const container = document.getElementById('descriptionCards');
+    container.innerHTML = '';
+    services.forEach(s => {
+      const chk = document.getElementById(s.id);
+      if (chk && chk.checked) {
+        container.innerHTML += `
+          <div class="card">
+            <label for="desc_${s.id}">${s.name}</label>
+            <div class="hint">1–2 linhas: o que é e pra quem é indicado</div>
+            <textarea id="desc_${s.id}" placeholder="Ex: Sessão de limpeza profunda para remover cravos e impurezas. Indicada para peles mistas e oleosas."></textarea>
+          </div>`;
+      }
+    });
+    if (!container.innerHTML) {
+      container.innerHTML = '<div class="card"><p style="color:var(--muted);font-size:14px;">Volte ao passo anterior e marque os serviços que você oferece.</p></div>';
+    }
+  }
+
+  function addTestimonial() {
+    const list = document.getElementById('testimonialList');
+    const block = document.createElement('div');
+    block.className = 'testimony-block';
+    block.innerHTML = `<textarea placeholder="Depoimento da cliente..."></textarea><button class="remove-btn" onclick="this.parentElement.remove()">✕</button>`;
+    list.appendChild(block);
+    block.querySelector('textarea').focus();
+  }
+
+  function finish() {
+    document.getElementById(`step-${currentStep}`).classList.remove('active');
+    document.getElementById('finishScreen').classList.add('active');
+    document.getElementById('progressFill').style.width = '100%';
+    document.getElementById('progressLabel').textContent = 'Concluído ✓';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function collectData() {
+    const sections = [];
+
+    // SOBRE VOCÊ
+    const sobre = [];
+    sobre.push(`nome: ${v('nome')}`);
+    sobre.push(`formacao: ${v('formacao')}`);
+    sobre.push(`instituicao: ${v('instituicao')}`);
+    sobre.push(`tempo_atuacao: ${v('tempo')}`);
+    if (v('cursos') !== '—') sobre.push(`cursos: ${v('cursos')}`);
+    if (v('filosofia') !== '—') sobre.push(`filosofia: ${v('filosofia')}`);
+    sections.push('[sobre]\n' + sobre.join('\n'));
+
+    // SERVIÇOS ATIVOS
+    const svcs = [];
+    services.forEach(s => {
+      const chk = document.getElementById(s.id);
+      if (chk && chk.checked) {
+        const price = document.getElementById(`price_${s.id}`).value.trim();
+        svcs.push(`- ${s.name} | ${price}`);
+      }
+    });
+    const novos = v('servicosNovos');
+    if (novos !== '—') svcs.push(`extras: ${novos}`);
+    const pacotes = v('pacotes');
+    if (pacotes !== '—') svcs.push(`pacotes: ${pacotes}`);
+    if (svcs.length) sections.push('[servicos]\n' + svcs.join('\n'));
+
+    // EM BREVE
+    const emb = [];
+    ['emb1','emb2','emb3','emb4','emb5'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.checked) emb.push(`- ${el.nextElementSibling.textContent.replace('✦ ','').trim()}`);
+    });
+    if (emb.length) sections.push('[em_breve]\n' + emb.join('\n'));
+
+    // DESCRIÇÕES
+    const descs = [];
+    services.forEach(s => {
+      const el = document.getElementById(`desc_${s.id}`);
+      if (el && el.value.trim()) descs.push(`${s.name}: ${el.value.trim()}`);
+    });
+    if (descs.length) sections.push('[descricoes]\n' + descs.join('\n'));
+
+    // ATENDIMENTO
+    const atend = [];
+    atend.push(`cidades: ${v('cidades')}`);
+    atend.push(`taxa_deslocamento: ${v('taxa')}`);
+    atend.push(`horarios: ${v('horarios')}`);
+    if (v('duracao') !== '—') atend.push(`duracao_sessoes: ${v('duracao')}`);
+    const pagamentos = ['pix','dinheiro','debito','credavista','credparc']
+      .filter(id => document.getElementById(id)?.checked)
+      .map(id => ({pix:'Pix',dinheiro:'Dinheiro',debito:'Débito',credavista:'Crédito à vista',credparc:'Crédito parcelado'}[id]));
+    atend.push(`pagamento: ${pagamentos.join(', ') || '—'}`);
+    if (v('parcelas') !== '—') atend.push(`parcelamento: ${v('parcelas')}`);
+    if (v('cancelamento') !== '—') atend.push(`cancelamento: ${v('cancelamento')}`);
+    const hom = ['homens_sim','homens_nao','homens_alguns'].find(id => document.getElementById(id)?.checked);
+    if (hom) atend.push(`atende_homens: ${{homens_sim:'sim',homens_nao:'nao',homens_alguns:'alguns servicos'}[hom]}`);
+    sections.push('[atendimento]\n' + atend.join('\n'));
+
+    // FOTOS
+    const fotos = [];
+    const adVal = ['ad_sim','ad_nao','ad_algumas'].find(id => document.getElementById(id)?.checked);
+    if (adVal) fotos.push(`antes_depois: ${{ad_sim:'tem',ad_nao:'nao_tem',ad_algumas:'tem_alguns'}[adVal]}`);
+    if (v('antesdepois') !== '—') fotos.push(`antes_depois_detalhe: ${v('antesdepois')}`);
+    const autVal = ['aut_sim','aut_nao','aut_precisa'].find(id => document.getElementById(id)?.checked);
+    if (autVal) fotos.push(`autorizacao_fotos: ${{aut_sim:'sim',aut_nao:'ainda_nao',aut_precisa:'precisa_texto'}[autVal]}`);
+    const setupVal = ['setup_sim','setup_nao','setup_poucas'].find(id => document.getElementById(id)?.checked);
+    if (setupVal) fotos.push(`fotos_setup: ${{setup_sim:'tem',setup_nao:'nao_tem',setup_poucas:'tem_poucas'}[setupVal]}`);
+    if (v('marcas') !== '—') fotos.push(`marcas_produtos: ${v('marcas')}`);
+    if (v('video') !== '—') fotos.push(`video: ${v('video')}`);
+    if (fotos.length) sections.push('[fotos_e_resultados]\n' + fotos.join('\n'));
+
+    // DEPOIMENTOS
+    const deps = [];
+    document.querySelectorAll('#testimonialList textarea').forEach((t, i) => {
+      if (t.value.trim()) deps.push(`dep${i+1}: ${t.value.trim()}`);
+    });
+    if (v('googlelink') !== '—') deps.push(`google_reviews: ${v('googlelink')}`);
+    if (deps.length) sections.push('[depoimentos]\n' + deps.join('\n'));
+
+    // CONTATO
+    const contato = [];
+    contato.push(`whatsapp: ${v('whatsapp')}`);
+    if (v('instagram') !== '—') contato.push(`instagram: ${v('instagram')}`);
+    if (v('outras_redes') !== '—') contato.push(`outras_redes: ${v('outras_redes')}`);
+    if (v('email') !== '—') contato.push(`email: ${v('email')}`);
+    sections.push('[contato]\n' + contato.join('\n'));
+
+    // EXTRAS
+    const extras = [];
+    if (v('faq') !== '—') extras.push(`faq: ${v('faq')}`);
+    if (v('contraindicacoes') !== '—') extras.push(`contraindicacoes: ${v('contraindicacoes')}`);
+    if (v('planos') !== '—') extras.push(`planos_futuros: ${v('planos')}`);
+    if (v('mudancas') !== '—') extras.push(`mudancas_desejadas: ${v('mudancas')}`);
+    if (extras.length) sections.push('[extras]\n' + extras.join('\n'));
+
+    return sections.join('\n\n');
+  }
+
+  function v(id) { return document.getElementById(id)?.value?.trim() || '—'; }
+
+  function sendWhatsApp() {
+    const text = collectData();
+    const phone = '55977010955';
+    const encoded = encodeURIComponent(text);
+    const url = `https://wa.me/${phone}?text=${encoded}`;
+    window.open(url, '_blank');
+
+    const btn = document.getElementById('btnWhatsApp');
+    const btnText = document.getElementById('btnWhatsAppText');
+    btnText.textContent = '✓ WhatsApp aberto!';
+    btn.style.background = '#7A9E7E';
+    setTimeout(() => {
+      btnText.textContent = '📲 Enviar pelo WhatsApp';
+      btn.style.background = '';
+    }, 4000);
+  }
+
+  function exportData() {
+    const text = collectData();
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'leticia-estetica-conteudo.txt';
+    a.click(); URL.revokeObjectURL(url);
+  }
+
+  function copyData() {
+    const text = collectData();
+    navigator.clipboard.writeText(text).then(() => {
+      const btns = document.querySelectorAll('.btn-export-secondary');
+      btns.forEach(b => { if (b.textContent.includes('Copiar')) { b.textContent = 'Copiado! ✓'; setTimeout(() => b.textContent = 'Copiar para área de transferência', 2000); } });
+    });
+  }
+</script>
+</body>
+</html>

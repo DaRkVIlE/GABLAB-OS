@@ -115,7 +115,7 @@ Ao concluir este workflow, confirme ao Gabriel que o sistema está 100% contextu
 🕐 Última sessão: [data do SELF_CONTEXT.md]
 📌 Status Atual: [itens da seção EM PROGRESSO do STATUS.md]
 ⚠️ Bloqueios: [itens da seção BLOQUEADO do STATUS.md, ou nenhum]
-👥 Clientes Ativos: [Leticia, Porto, Bistrô56, Felix Cell, Master Pumps]
+👥 Clientes Ativos: [Leticia, Paulo]
 🔧 MCP Server: ✅ kairox-mcp-server v3.2 ativo (30+ tools)
 🧠 Hivemind: ✅ Protocol v2.0 sincronizado
 🎯 Protocolo em Operação: Agent-First + Task-First + Antigravity Desktop

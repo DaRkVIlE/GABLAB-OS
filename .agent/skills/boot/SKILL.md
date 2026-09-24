@@ -1,4 +1,4 @@
-﻿---
+---
 name: boot
 description: Liga o motor KAIROS - boot completo do sistema, verificacao de subsistemas, deep scan e prontidao para demandas
 ---
@@ -36,7 +36,7 @@ Escaneie rapidamente os diretórios ativos:
 
 4. Liste `reasoning-packages/strategic/` → identifique os RPs estratégicos mais recentes
 5. Liste `reasoning-packages/core/` → confirme os RPs fundamentais (FABLE5, etc.)
-6. Liste `clients/` → verifique os clientes ativos (`leticia`, `Porto`, `BIstrô56`, `Felix cell`, `Master pumps`)
+6. Liste `clients/` → verifique os clientes ativos (`leticia`, `paulo`)
 7. Liste `squads/` → confirme squads disponíveis
 8. Liste `.agent/skills/` → confirme as 17 skills nativas do Antigravity
 9. Liste `scripts/` → confirme scripts operacionais e MCP server
@@ -116,10 +116,7 @@ Para cada cliente em `clients/`:
 
 13. Verifique status e arquivos principais:
     - `clients/leticia/` → estética, LPs, prompt de atendimento
-    - `clients/Porto/` → automações e entregas
-    - `clients/BIstrô56/` → cardápio, bots e fluxos
-    - `clients/Felix cell/` → atendimento e pós-venda
-    - `clients/Master pumps/` → projetos de engenharia e automações
+    - `clients/paulo/` → ateliê/tapeçaria, catálogo, bot e automações
 14. Identifique status: `ativo | em deploy | pipeline | concluído`
 
 **Resultado:** Status de cada conta de cliente alinhado para atendimento imediato.
@@ -151,10 +148,7 @@ Após completar as fases, apresente o relatório neste formato:
 
 ═══ CLIENTES ATIVOS ═══
 • Leticia: [status]
-• Porto: [status]
-• Bistrô56: [status]
-• Felix Cell: [status]
-• Master Pumps: [status]
+• Paulo: [status]
 
 ═══ BLOQUEIOS & AGENDA ═══
 [Itens pendentes do STATUS.md ou novas prioridades do Gabriel]

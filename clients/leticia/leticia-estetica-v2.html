@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Letícia D | Estética Facial & Corporal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#F7F2ED;
+  --warm:#FDFAF7;
+  --espresso:#3B2A22;
+  --clay:#9C6B4E;
+  --blush:#E8C9B8;
+  --gold:#C4A882;
+  --light-gold:#E8D9C4;
+  --dark:#1C130F;
+}
+html{scroll-behavior:smooth}
+body{font-family:"Jost",sans-serif;background:var(--warm);color:var(--espresso);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{font-family:"Cormorant Garamond",serif}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+a{text-decoration:none}
+img{max-width:100%;display:block}
+
+/* ── TYPOGRAPHY SYSTEM ── */
+.eyebrow{font-family:"Jost",sans-serif;font-size:10px;letter-spacing:.35em;text-transform:uppercase;font-weight:400;color:var(--clay)}
+.eyebrow--light{color:var(--gold)}
+.display{font-family:"Cormorant Garamond",serif;font-weight:300;line-height:1.05;color:var(--espresso)}
+.display em{font-style:italic;color:var(--clay)}
+.display--light{color:var(--warm)}
+.display--light em{color:var(--gold)}
+.body-copy{font-family:"Jost",sans-serif;font-size:15px;font-weight:300;line-height:1.85;color:var(--espresso);opacity:.78}
+.body-copy--light{color:rgba(253,250,247,.65);opacity:1}
+.label{font-family:"Jost",sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:400}
+
+/* ── HAIRLINE ── */
+.hr{height:1px;background:var(--gold);opacity:.3}
+.hr--short{width:52px}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:"Jost",sans-serif;font-size:11px;letter-spacing:.25em;text-transform:uppercase;font-weight:400;transition:background .25s,transform .2s;border:none;cursor:pointer;padding:15px 40px}
+.btn:hover{transform:translateY(-2px)}
+.btn--dark{background:var(--espresso);color:var(--warm)}
+.btn--dark:hover{background:var(--clay)}
+.btn--outline{background:transparent;color:var(--espresso);border:1px solid var(--gold)}
+.btn--outline:hover{border-color:var(--espresso)}
+.btn--gold{background:var(--gold);color:var(--espresso)}
+.btn--gold:hover{background:var(--blush)}
+
+/* ── NAV ── */
+#nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .4s,box-shadow .4s;height:72px}
+#nav.scrolled{background:rgba(253,250,247,.97);box-shadow:0 1px 0 rgba(196,168,130,.18);backdrop-filter:blur(12px)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:72px}
+.nav-logo-name{font-family:"Cormorant Garamond",serif;font-size:24px;font-weight:500;color:var(--espresso);line-height:1;letter-spacing:.02em}
+.nav-logo-sub{font-family:"Jost",sans-serif;font-size:9.5px;font-weight:300;color:var(--clay);letter-spacing:.26em;text-transform:uppercase;margin-top:3px}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-link{font-family:"Jost";font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--espresso);font-weight:400;position:relative}
+.nav-link::after{content:"";position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--clay);transition:width .3s}
+.nav-link:hover::after{width:100%}
+.ham{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;gap:6px}
+.ham span{display:block;width:22px;height:1.5px;background:var(--espresso);transition:all .25s}
+.mob-menu{display:none;flex-direction:column;gap:20px;padding:24px 32px 32px;background:var(--warm);border-top:1px solid var(--light-gold)}
+.mob-menu.open{display:flex}
+.mob-link{font-family:"Jost";font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--espresso)}
+
+/* ── HERO ── */
+#hero{min-height:100vh;background:var(--cream);display:flex;flex-direction:column;position:relative;overflow:hidden}
+.hero-deco{position:absolute;inset:0;pointer-events:none;opacity:.1}
+.hero-inner{max-width:1200px;margin:0 auto;width:100%;padding:130px 32px 96px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;flex:1}
+.hero-h1{font-size:clamp(52px,7vw,92px);margin:20px 0 30px}
+.hero-p{max-width:420px;margin-bottom:44px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+/* hero card */
+.hcard-wrap{position:relative;width:100%;max-width:390px;margin:0 auto}
+.hcard{background:var(--warm);border:1px solid var(--light-gold);padding:44px 44px 48px;position:relative}
+.hcorner{position:absolute;width:22px;height:22px}
+.hc-tl{top:11px;left:11px;border-top:1px solid var(--gold);border-left:1px solid var(--gold)}
+.hc-tr{top:11px;right:11px;border-top:1px solid var(--gold);border-right:1px solid var(--gold)}
+.hc-bl{bottom:11px;left:11px;border-bottom:1px solid var(--gold);border-left:1px solid var(--gold)}
+.hc-br{bottom:11px;right:11px;border-bottom:1px solid var(--gold);border-right:1px solid var(--gold)}
+.hcard-logo{text-align:center;margin-bottom:32px}
+.hcard-logo img{width:170px;height:170px;object-fit:contain;margin:0 auto}
+.hcard-name{font-family:"Cormorant Garamond",serif;font-size:26px;font-weight:400;color:var(--espresso);margin-top:6px;letter-spacing:.02em;text-align:center}
+.hcard-sub{font-family:"Jost";font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--clay);margin-top:4px;font-weight:300;text-align:center}
+.hcard-list{display:flex;flex-direction:column;gap:13px;margin-top:24px}
+.hcard-item{display:flex;align-items:center;gap:12px}
+.dot{width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.hcard-item span{font-family:"Jost";font-size:13px;font-weight:300;color:var(--espresso)}
+.hcard-item .it{color:var(--clay);font-style:italic}
+.hcard-shadow{position:absolute;top:11px;left:11px;right:-11px;bottom:-11px;background:var(--light-gold);z-index:-1;opacity:.45}
+.scroll-hint{display:flex;flex-direction:column;align-items:center;gap:8px;padding-bottom:36px;align-self:flex-end;margin:0 auto}
+.scroll-label{font-family:"Jost";font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:var(--clay);opacity:.55}
+.scroll-line{width:1px;height:38px;background:linear-gradient(to bottom,var(--clay),transparent);opacity:.35}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+.reveal.vis{opacity:1;transform:none}
+
+/* ── SOBRE ── */
+#sobre{background:var(--warm);padding:120px 0}
+.sobre-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:center}
+.sobre-art{background:var(--cream);aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;position:relative;overflow:visible}
+.stat-float{position:absolute;bottom:-24px;right:-24px;background:var(--espresso);padding:22px 30px;min-width:148px}
+.stat-float-num{font-family:"Cormorant Garamond",serif;font-size:40px;font-weight:300;line-height:1;color:var(--gold)}
+.stat-float-lbl{font-family:"Jost";font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:300;margin-top:5px;color:rgba(253,250,247,.65)}
+.sobre-text{padding-bottom:8px}
+.sobre-h2{font-size:clamp(34px,4vw,52px);margin:16px 0 28px}
+.sobre-stats{display:flex;gap:44px;margin-top:36px}
+.sstat-val{font-family:"Cormorant Garamond",serif;font-size:26px;font-weight:300;color:var(--clay)}
+.sstat-lbl{font-family:"Jost";font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--espresso);opacity:.55;margin-top:3px;font-weight:300}
+
+/* ── SERVIÇOS ── */
+#servicos{background:var(--cream);padding:120px 0}
+.sec-inner{max-width:1000px;margin:0 auto;padding:0 32px}
+.sec-header{text-align:center;margin-bottom:56px}
+.sec-h2{font-size:clamp(34px,4vw,56px);margin:14px 0 18px}
+.sec-desc{font-family:"Jost";font-size:14px;font-weight:300;line-height:1.8;color:var(--espresso);opacity:.6;max-width:480px;margin:0 auto}
+.tabs{display:flex;justify-content:center;margin-bottom:52px}
+.tabs-inner{display:flex;border:1px solid var(--light-gold);overflow:hidden}
+.tab{font-family:"Jost";font-size:11px;letter-spacing:.22em;text-transform:uppercase;padding:13px 36px;border:none;cursor:pointer;transition:all .25s;font-weight:400;background:transparent;color:var(--espresso)}
+.tab.on{background:var(--espresso);color:var(--warm)}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(276px,1fr));gap:1px;background:var(--light-gold)}
+.svc-card{padding:34px 38px;display:flex;flex-direction:column;justify-content:space-between;min-height:124px;transition:background .2s;cursor:default}
+.svc-card:hover{background:var(--blush)!important}
+.svc-name{font-family:"Cormorant Garamond",serif;font-size:19px;font-weight:400;color:var(--espresso);line-height:1.3;margin-bottom:14px}
+.svc-price{font-family:"Cormorant Garamond",serif;font-size:26px;font-weight:300;color:var(--clay)}
+.promo-box{margin-top:44px;padding:26px 38px;border:1px solid var(--light-gold);background:var(--warm);text-align:center}
+.promo-txt{font-family:"Cormorant Garamond",serif;font-size:17px;font-style:italic;color:var(--clay);margin-bottom:7px}
+.promo-sub{font-family:"Jost";font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--espresso);opacity:.55;font-weight:300}
+.svc-cta{text-align:center;margin-top:44px}
+.futuro-box{margin-top:18px;text-align:center}
+.futuro-eyebrow{font-family:"Jost",sans-serif;font-size:10px;letter-spacing:.28em;text-transform:uppercase;font-weight:400;color:var(--clay);opacity:.7;margin-bottom:16px}
+.futuro-list{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.futuro-pill{font-family:"Jost",sans-serif;font-size:12px;font-weight:300;letter-spacing:.02em;color:var(--espresso);opacity:.55;border:1px dashed var(--gold);padding:9px 20px;border-radius:30px;background:transparent}
+
+/* ── HERO HINT (FUNNEL ENTRY) ── */
+.hero-hint{font-family:"Jost",sans-serif;font-size:12.5px;font-weight:300;color:var(--espresso);opacity:.6;margin-top:18px}
+.hero-hint-link{color:var(--clay);font-weight:400;border-bottom:1px solid var(--clay);padding-bottom:1px}
+.hero-hint-link:hover{color:var(--espresso);border-color:var(--espresso)}
+
+/* ── TRIAGEM (QUIZ / TOPO DE FUNIL) ── */
+#triagem{background:var(--cream);padding:120px 0}
+.triagem-inner{max-width:720px;margin:0 auto;padding:0 32px}
+.quiz-card{background:var(--warm);border:1px solid var(--light-gold);padding:48px 44px;position:relative;margin-top:8px}
+.quiz-progress{height:2px;background:var(--light-gold);width:100%;margin-bottom:28px;overflow:hidden}
+.quiz-progress-bar{height:100%;background:var(--clay);width:0%;transition:width .4s ease}
+.quiz-step-label{font-family:"Jost";font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--clay);opacity:.7;margin-bottom:22px}
+.quiz-q{font-family:"Cormorant Garamond",serif;font-size:clamp(21px,3vw,27px);font-weight:400;color:var(--espresso);line-height:1.3;margin-bottom:8px;animation:fi .35s ease}
+.quiz-note{font-family:"Jost";font-size:12.5px;font-weight:300;color:var(--espresso);opacity:.55;margin-bottom:6px;line-height:1.6}
+.quiz-options{display:flex;flex-direction:column;gap:11px;margin-top:24px}
+.quiz-opt{font-family:"Jost";font-size:14px;font-weight:300;text-align:left;color:var(--espresso);background:transparent;border:1px solid var(--light-gold);padding:16px 22px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:space-between;width:100%}
+.quiz-opt:hover{border-color:var(--clay);background:var(--cream)}
+.quiz-opt.sel{background:var(--espresso);border-color:var(--espresso);color:var(--warm)}
+.quiz-opt-check{width:8px;height:8px;border-radius:2px;border:1px solid var(--gold);flex-shrink:0;margin-left:14px;opacity:0}
+.quiz-opt.sel .quiz-opt-check{opacity:1;background:var(--gold)}
+.quiz-input{width:100%;font-family:"Jost";font-size:16px;font-weight:300;color:var(--espresso);background:transparent;border:none;border-bottom:1px solid var(--light-gold);padding:14px 2px;margin-top:24px;transition:border-color .2s}
+.quiz-input:focus{outline:none;border-color:var(--clay)}
+.quiz-nav{display:flex;justify-content:space-between;align-items:center;margin-top:40px}
+.quiz-btn{font-family:"Jost";font-size:11px;letter-spacing:.2em;text-transform:uppercase;padding:14px 32px;border:none;cursor:pointer;transition:all .2s}
+.quiz-btn--dark{background:var(--espresso);color:var(--warm)}
+.quiz-btn--dark:hover{background:var(--clay)}
+.quiz-btn--dark:disabled{background:var(--light-gold);color:rgba(59,42,34,.4);cursor:not-allowed}
+.quiz-btn--ghost{background:transparent;color:var(--espresso);opacity:.5}
+.quiz-btn--ghost:hover{opacity:.9}
+.quiz-result-title{font-family:"Cormorant Garamond",serif;font-size:clamp(23px,3vw,30px);font-weight:400;color:var(--espresso);margin-bottom:14px;animation:fi .4s ease}
+.quiz-result-text{font-family:"Jost";font-size:14px;font-weight:300;color:var(--espresso);opacity:.7;line-height:1.8;margin-bottom:28px}
+.quiz-calendly-link{font-family:"Jost";font-size:12px;font-weight:400;letter-spacing:.05em;color:var(--clay);border-bottom:1px solid var(--clay);padding-bottom:1px;text-align:center}
+.quiz-calendly-link:hover{color:var(--espresso);border-color:var(--espresso)}
+.quiz-result-actions{display:flex;flex-direction:column;align-items:center;gap:10px}
+
+/* ── DIFERENCIAIS ── */
+#diferenciais{background:var(--espresso);padding:120px 0}
+.dif-inner{max-width:1200px;margin:0 auto;padding:0 32px}
+.dif-header{text-align:center;margin-bottom:68px}
+.dif-h2{font-size:clamp(34px,4vw,56px);margin:14px 0 0}
+.dif-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:2px;background:rgba(196,168,130,.18)}
+.dif-card{background:var(--espresso);padding:48px 36px;transition:background .3s}
+.dif-card:hover{background:rgba(196,168,130,.08)}
+.dif-icon{font-family:"Cormorant Garamond",serif;font-size:22px;color:var(--gold);margin-bottom:18px}
+.dif-title{font-family:"Cormorant Garamond",serif;font-size:22px;font-weight:400;color:var(--warm);margin-bottom:14px;line-height:1.2}
+.dif-line{width:28px;height:1px;background:var(--gold);opacity:.45;margin-bottom:18px}
+.dif-desc{font-family:"Jost";font-size:14px;font-weight:300;color:rgba(253,250,247,.6);line-height:1.8}
+
+/* ── DEPOIMENTOS ── */
+#depoimentos{background:var(--warm);padding:120px 0}
+.dep-inner{max-width:780px;margin:0 auto;padding:0 32px}
+.dep-card{background:var(--cream);padding:60px 52px;position:relative;min-height:250px}
+.dep-c-tl{position:absolute;top:14px;left:14px;width:18px;height:18px;border-top:1px solid var(--gold);border-left:1px solid var(--gold)}
+.dep-c-br{position:absolute;bottom:14px;right:14px;width:18px;height:18px;border-bottom:1px solid var(--gold);border-right:1px solid var(--gold)}
+.dep-q{font-family:"Cormorant Garamond",serif;font-size:76px;color:var(--gold);opacity:.25;line-height:.5;margin-bottom:22px;user-select:none}
+.dep-text{font-family:"Cormorant Garamond",serif;font-size:clamp(17px,2.4vw,22px);font-style:italic;font-weight:300;color:var(--espresso);line-height:1.75;margin-bottom:36px;animation:fi .45s ease}
+.dep-author{display:flex;align-items:center;gap:14px}
+.dep-avatar{width:30px;height:30px;border-radius:50%;background:var(--blush);display:flex;align-items:center;justify-content:center;font-family:"Cormorant Garamond",serif;font-size:14px;color:var(--espresso);flex-shrink:0}
+.dep-name{font-family:"Jost";font-size:12px;font-weight:500;color:var(--espresso)}
+.dep-svc{font-family:"Jost";font-size:11px;color:var(--clay);font-weight:300;margin-top:2px}
+.dep-dots{display:flex;justify-content:center;gap:9px;margin-top:28px}
+.dep-dot{height:7px;border:none;cursor:pointer;transition:all .3s;background:var(--light-gold);border-radius:4px;padding:0}
+.dep-dot.on{background:var(--clay);width:22px}
+.dep-dot:not(.on){width:7px}
+
+/* ── CTA ── */
+#cta{background:var(--cream);padding:96px 32px}
+.cta-inner{max-width:660px;margin:0 auto;text-align:center}
+.cta-vline{width:1px;height:56px;background:linear-gradient(to bottom,transparent,var(--gold));margin:0 auto 36px}
+.cta-h2{font-size:clamp(34px,5vw,60px);margin-bottom:22px}
+.cta-p{font-family:"Jost";font-size:14px;font-weight:300;line-height:1.85;color:var(--espresso);opacity:.7;max-width:440px;margin:0 auto 44px}
+
+/* ── CONTATO ── */
+#contato{background:var(--espresso);padding:96px 0}
+.contato-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.contato-h2{font-size:clamp(30px,3.5vw,50px);margin:14px 0 36px}
+.contato-divider{width:38px;height:1px;background:var(--gold);opacity:.45;margin-bottom:36px}
+.contato-fields{display:flex;flex-direction:column;gap:28px}
+.cf-label{font-family:"Jost";font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:300;margin-bottom:7px}
+.cf-val{font-family:"Cormorant Garamond",serif;font-size:21px;color:var(--warm);transition:color .2s;display:block}
+.cf-val:hover{color:var(--gold)}
+.cf-text{font-family:"Cormorant Garamond",serif;font-size:17px;color:rgba(253,250,247,.7);font-weight:300;line-height:1.5}
+.contato-card{background:rgba(255,255,255,.04);border:1px solid rgba(196,168,130,.22);padding:52px 44px}
+.contato-card-h3{font-family:"Cormorant Garamond",serif;font-size:30px;font-weight:300;color:var(--warm);margin-bottom:14px}
+.contato-card-p{font-family:"Jost";font-size:13px;font-weight:300;color:rgba(253,250,247,.55);line-height:1.85;margin-bottom:36px}
+.contato-note{font-family:"Jost";font-size:10px;color:rgba(253,250,247,.3);text-align:center;font-weight:300;margin-top:14px}
+
+/* ── FOOTER ── */
+footer{background:var(--dark);padding:40px 32px}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.footer-logo{font-family:"Cormorant Garamond",serif;font-size:21px;font-weight:400;color:var(--gold)}
+.footer-city{font-family:"Jost";font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(253,250,247,.28);font-weight:300}
+.footer-wa{font-family:"Jost";font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:300}
+.footer-hr{height:1px;background:var(--gold);opacity:.08;margin:22px 0}
+.footer-copy{font-family:"Jost";font-size:10px;color:rgba(253,250,247,.18);font-weight:300;text-align:center}
+
+/* ── FLOATING WA ── */
+#fwa{position:fixed;bottom:30px;right:30px;width:54px;height:54px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 18px rgba(37,211,102,.38);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;transform:scale(.85);border:none;cursor:pointer;padding:0}
+#fwa.vis{opacity:1;pointer-events:auto;transform:scale(1)}
+#fwa:hover{transform:scale(1.08)!important}
+
+/* ── LOGO HERO ── */
+.hero-logo-wrap{display:flex;justify-content:center;margin-bottom:28px}
+.hero-logo-wrap img{width:120px;height:120px;object-fit:contain}
+
+/* ── ANIMATIONS ── */
+@keyframes fiu{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+.fiu1{animation:fiu .7s .08s ease both}
+.fiu2{animation:fiu .7s .18s ease both}
+.fiu3{animation:fiu .7s .28s ease both}
+.fiu4{animation:fiu .7s .38s ease both}
+.fiu5{animation:fiu .7s .48s ease both}
+
+/* ── FAQ ── */
+#faq{background:var(--warm);padding:120px 0}
+.faq-inner{max-width:780px;margin:0 auto;padding:0 32px}
+.faq-list{display:flex;flex-direction:column;gap:2px;margin-top:8px;background:var(--light-gold)}
+.faq-item{background:var(--warm)}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:24px 32px;cursor:pointer;gap:20px;transition:background .2s}
+.faq-q:hover{background:var(--cream)}
+.faq-q-text{font-family:"Cormorant Garamond",serif;font-size:19px;font-weight:400;color:var(--espresso);line-height:1.3}
+.faq-icon{width:20px;height:20px;flex-shrink:0;position:relative;color:var(--gold)}
+.faq-icon::before,.faq-icon::after{content:"";position:absolute;background:var(--clay);transition:transform .3s,opacity .3s}
+.faq-icon::before{top:50%;left:0;right:0;height:1px;transform:translateY(-50%)}
+.faq-icon::after{top:0;bottom:0;left:50%;width:1px;transform:translateX(-50%)}
+.faq-item.open .faq-icon::after{transform:translateX(-50%) rotate(90deg);opacity:0}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+.faq-a-inner{padding:0 32px 24px;font-family:"Jost";font-size:14px;font-weight:300;color:var(--espresso);opacity:.72;line-height:1.85}
+.faq-item.open .faq-a{max-height:400px}
+
+/* ── DOMICÍLIO ── */
+#domicilio{background:var(--espresso);padding:120px 0}
+.dom-inner{max-width:1200px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.dom-text{color:var(--warm)}
+.dom-h2{font-size:clamp(34px,4vw,52px);margin:16px 0 28px;color:var(--warm)}
+.dom-h2 em{color:var(--gold)}
+.dom-body{font-family:"Jost";font-size:14px;font-weight:300;color:rgba(253,250,247,.65);line-height:1.85;margin-bottom:36px}
+.dom-bullets{display:flex;flex-direction:column;gap:16px;margin-bottom:40px}
+.dom-bullet{display:flex;align-items:flex-start;gap:14px}
+.dom-bullet-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:8px}
+.dom-bullet-text{font-family:"Jost";font-size:14px;font-weight:300;color:rgba(253,250,247,.72);line-height:1.7}
+.dom-card{border:1px solid rgba(196,168,130,.28);padding:48px 44px;background:rgba(255,255,255,.03)}
+.dom-card-icon{font-family:"Cormorant Garamond",serif;font-size:32px;color:var(--gold);margin-bottom:20px}
+.dom-card-title{font-family:"Cormorant Garamond",serif;font-size:26px;font-weight:300;color:var(--warm);margin-bottom:10px}
+.dom-card-sub{font-family:"Jost";font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);opacity:.7;margin-bottom:24px}
+.dom-card-body{font-family:"Jost";font-size:13px;font-weight:300;color:rgba(253,250,247,.55);line-height:1.85;margin-bottom:32px}
+
+/* ── QUIZ MODAL ── */
+#quiz-modal-overlay{position:fixed;inset:0;background:rgba(28,19,15,.6);z-index:500;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+#quiz-modal-overlay.open{display:flex}
+.quiz-modal{background:var(--warm);max-width:560px;width:100%;max-height:90vh;overflow-y:auto;position:relative;padding:48px 44px 40px}
+.quiz-modal-close{position:absolute;top:18px;right:22px;background:none;border:none;cursor:pointer;font-family:"Jost";font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--espresso);opacity:.45}
+.quiz-modal-close:hover{opacity:.9}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .ham{display:flex}
+  .hero-inner{grid-template-columns:1fr!important;padding-top:130px!important;gap:48px}
+  .hcard-wrap{max-width:340px}
+  .sobre-inner{grid-template-columns:1fr!important;gap:64px!important}
+  .contato-inner{grid-template-columns:1fr!important;gap:48px!important}
+  .dom-inner{grid-template-columns:1fr!important;gap:48px!important}
+  .dep-card{padding:36px 24px}
+  .quiz-card{padding:34px 24px}
+  .quiz-modal{padding:34px 24px 30px}
+  .footer-row{flex-direction:column;text-align:center}
+  .hero-inner > div:last-child{display:none}
+}
+@media(max-width:500px){
+  .hero-inner > div:last-child{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#hero">
+      <div class="nav-logo-name">Letícia D</div>
+      <div class="nav-logo-sub">Estética Facial &amp; Corporal</div>
+    </a>
+    <div class="nav-links">
+      <a href="#sobre" class="nav-link">Sobre</a>
+      <a href="#servicos" class="nav-link">Serviços</a>
+      <a href="#domicilio" class="nav-link">Domicílio</a>
+      <a href="#diferenciais" class="nav-link">Diferenciais</a>
+      <a href="#depoimentos" class="nav-link">Depoimentos</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+      <a href="#contato" class="nav-link">Contato</a>
+      <a href="#" id="open-quiz-nav" class="btn btn--dark" style="padding:10px 22px">Agendar</a>
+    </div>
+    <button class="ham" id="ham" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mob-menu" id="mob-menu">
+    <a href="#sobre" class="mob-link">Sobre</a>
+    <a href="#servicos" class="mob-link">Serviços</a>
+    <a href="#domicilio" class="mob-link">Domicílio</a>
+    <a href="#diferenciais" class="mob-link">Diferenciais</a>
+    <a href="#depoimentos" class="mob-link">Depoimentos</a>
+    <a href="#faq" class="mob-link">FAQ</a>
+    <a href="#contato" class="mob-link">Contato</a>
+    <a href="#" id="open-quiz-mob" class="btn btn--dark" style="width:100%;justify-content:center">Agendar pelo WhatsApp</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <svg class="hero-deco" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="160" cy="180" rx="310" ry="310" fill="none" stroke="#C4A882" stroke-width="0.8"/>
+    <ellipse cx="160" cy="180" rx="210" ry="210" fill="none" stroke="#C4A882" stroke-width="0.4"/>
+    <ellipse cx="1300" cy="760" rx="270" ry="270" fill="none" stroke="#9C6B4E" stroke-width="0.7"/>
+    <line x1="0" y1="880" x2="580" y2="280" stroke="#C4A882" stroke-width="0.4"/>
+    <line x1="1440" y1="0" x2="860" y2="520" stroke="#C4A882" stroke-width="0.4"/>
+  </svg>
+  <div class="hero-inner">
+    <div>
+      <p class="eyebrow fiu1">Estética Facial &amp; Corporal</p>
+      <h1 class="display hero-h1 fiu2">A arte<br/><em>de cuidar</em><br/>de você.</h1>
+      <p class="body-copy hero-p fiu3">Tratamentos faciais e corporais personalizados para revelar a melhor versão de você. Cada sessão é uma experiência única de bem-estar e beleza.</p>
+      <div class="hero-btns fiu4">
+        <a href="#" class="btn btn--dark" id="open-quiz-hero2">Agendar Agora</a>
+        <a href="#servicos" class="btn btn--outline">Ver Serviços</a>
+      </div>
+      <p class="hero-hint fiu4">Não sabe por onde começar? <a href="#" class="hero-hint-link" id="open-quiz-hero">Faça a triagem rápida →</a></p>
+    </div>
+    <div>
+      <div class="hcard-wrap fiu3">
+        <div class="hcard">
+          <div class="hcorner hc-tl"></div><div class="hcorner hc-tr"></div>
+          <div class="hcorner hc-bl"></div><div class="hcorner hc-br"></div>
+          <div class="hcard-logo">
+            <img src="data:image/jpeg;base64,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" alt="Letícia D Logo"/>
+          </div>
+          <div class="hr" style="margin-bottom:0"></div>
+          <div class="hcard-list" style="margin-top:22px">
+            <div class="hcard-item"><span class="dot"></span><span>Limpeza de Pele com Peeling</span></div>
+            <div class="hcard-item"><span class="dot"></span><span>Radiofrequência</span></div>
+            <div class="hcard-item"><span class="dot"></span><span>Massagem Relaxante</span></div>
+            <div class="hcard-item"><span class="dot"></span><span>Drenagem Linfática</span></div>
+            <div class="hcard-item"><span class="dot"></span><span class="it">Atendimento exclusivo a domicílio 🏡</span></div>
+          </div>
+        </div>
+        <div class="hcard-shadow"></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span class="scroll-label">Role para baixo</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══ SOBRE ═══ -->
+<section id="sobre">
+  <div class="sobre-inner reveal">
+    <div class="sobre-art">
+      <svg viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:82%">
+        <rect x="58" y="58" width="284" height="384" fill="none" stroke="#E8D9C4" stroke-width="1"/>
+        <rect x="36" y="36" width="284" height="384" fill="none" stroke="#C4A882" stroke-width="0.5" stroke-dasharray="4 4"/>
+        <circle cx="200" cy="187" r="92" fill="none" stroke="#9C6B4E" stroke-width="1.4"/>
+        <path d="M159 180 Q175 169 183 180" stroke="#3B2A22" stroke-width="1.1" stroke-linecap="round" fill="none"/>
+        <path d="M217 180 Q225 169 243 180" stroke="#3B2A22" stroke-width="1.1" stroke-linecap="round" fill="none"/>
+        <path d="M184 210 Q200 224 216 210" stroke="#3B2A22" stroke-width="1" stroke-linecap="round" fill="none"/>
+        <path d="M200 279 Q200 349 200 389" stroke="#C4A882" stroke-width="0.7" stroke-dasharray="2 5"/>
+        <path d="M98 425 Q128 385 158 365 Q148 395 138 425" fill="#E8D9C4" opacity="0.55"/>
+        <path d="M302 425 Q272 385 242 365 Q252 395 262 425" fill="#E8D9C4" opacity="0.55"/>
+        <text x="200" y="453" text-anchor="middle" font-family="Cormorant Garamond" font-size="13.5" fill="#9C6B4E" font-style="italic">Beleza com propósito</text>
+      </svg>
+      <div class="stat-float">
+        <div class="stat-float-num">5+</div>
+        <div class="stat-float-lbl">Anos de<br/>Experiência</div>
+      </div>
+    </div>
+    <div class="sobre-text">
+      <p class="eyebrow">Sobre mim</p>
+      <h2 class="display sobre-h2">Cuidado que vai além<br/><em>da superfície.</em></h2>
+      <div class="hr hr--short" style="margin-bottom:28px"></div>
+      <p class="body-copy" style="margin-bottom:18px">Sou Letícia, esteticista apaixonada pela arte de cuidar das pessoas. Especializada em estética facial e corporal, ofereço tratamentos personalizados que combinam técnicas modernas com um toque humano e acolhedor.</p>
+      <p class="body-copy">Atendo exclusivamente a domicílio — levo toda a estrutura e os cosméticos premium até você, para que viva uma experiência completa de bem-estar sem sair de casa.</p>
+      <div class="sobre-stats">
+        <div><div class="sstat-val">100%</div><div class="sstat-lbl">Satisfação</div></div>
+        <div><div class="sstat-val">Premium</div><div class="sstat-lbl">Cosméticos</div></div>
+        <div><div class="sstat-val">Individual</div><div class="sstat-lbl">Atendimento</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SERVIÇOS ═══ -->
+<section id="servicos">
+  <div class="sec-inner">
+    <div class="reveal">
+      <div class="sec-header">
+        <p class="eyebrow" style="display:block">O que ofereço</p>
+        <h2 class="display sec-h2">Valores e Serviços</h2>
+        <p class="sec-desc">Tratamentos faciais e corporais selecionados da linha Premium. Preços promocionais para múltiplos serviços e sessões.</p>
+      </div>
+      <div class="tabs" id="svc-tabs">
+        <div class="tabs-inner">
+          <button class="tab on" data-tab="facial">Facial</button>
+          <button class="tab" data-tab="corporal">Corporal</button>
+          <button class="tab" data-tab="todos">Ver Todos</button>
+        </div>
+      </div>
+      <div class="svc-grid" id="svc-grid"></div>
+      <div class="promo-box">
+        <p class="promo-txt">Preços promocionais para mais de um serviço e múltiplas sessões.</p>
+        <p class="promo-sub">Necessário agendamento prévio</p>
+      </div>
+      <div class="futuro-box reveal">
+        <p class="futuro-eyebrow">Em breve no menu</p>
+        <div class="futuro-list" id="futuro-grid"></div>
+      </div>
+      <div class="svc-cta">
+        <a href="#" id="open-quiz-svc" class="btn btn--dark">Agendar pelo WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DIFERENCIAIS ═══ -->
+<section id="diferenciais">
+  <div class="dif-inner">
+    <div class="reveal">
+      <div class="dif-header">
+        <p class="eyebrow eyebrow--light">Por que me escolher</p>
+        <h2 class="display display--light dif-h2">Uma experiência<br/><em>inigualável.</em></h2>
+      </div>
+      <div class="dif-grid">
+        <div class="dif-card">
+          <div class="dif-icon">✦</div>
+          <h3 class="dif-title">Atendimento Personalizado</h3>
+          <div class="dif-line"></div>
+          <p class="dif-desc">Cada sessão é adaptada ao seu tipo de pele e necessidades específicas, garantindo o melhor resultado possível.</p>
+        </div>
+        <div class="dif-card">
+          <div class="dif-icon">✦</div>
+          <h3 class="dif-title">Produtos Premium</h3>
+          <div class="dif-line"></div>
+          <p class="dif-desc">Utilizamos apenas cosméticos de alta performance, selecionados para potencializar os resultados dos tratamentos.</p>
+        </div>
+        <div class="dif-card">
+          <div class="dif-icon">✦</div>
+          <h3 class="dif-title">Técnicas Especializadas</h3>
+          <div class="dif-line"></div>
+          <p class="dif-desc">Formação contínua nas melhores técnicas do mercado estético, com protocolos modernos e eficazes.</p>
+        </div>
+        <div class="dif-card">
+          <div class="dif-icon">✦</div>
+          <h3 class="dif-title">Conforto da Sua Casa</h3>
+          <div class="dif-line"></div>
+          <p class="dif-desc">Atendimento exclusivo a domicílio — sem deslocamento, sem espera. A Letícia leva toda a estrutura premium até você, no seu espaço e no seu tempo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DEPOIMENTOS ═══ -->
+<section id="depoimentos">
+  <div class="dep-inner">
+    <div class="reveal">
+      <div class="sec-header">
+        <p class="eyebrow" style="display:block">Depoimentos</p>
+        <h2 class="display sec-h2">O que dizem<br/>as clientes</h2>
+      </div>
+      <div class="dep-card">
+        <div class="dep-c-tl"></div><div class="dep-c-br"></div>
+        <div class="dep-q">"</div>
+        <p class="dep-text" id="dep-text"></p>
+        <div class="dep-author">
+          <div class="dep-avatar" id="dep-avatar"></div>
+          <div>
+            <div class="dep-name" id="dep-name"></div>
+            <div class="dep-svc" id="dep-svc"></div>
+          </div>
+        </div>
+      </div>
+      <div class="dep-dots" id="dep-dots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section id="cta">
+  <div class="cta-inner">
+    <div class="reveal">
+      <div class="cta-vline"></div>
+      <h2 class="display cta-h2">Pronta para cuidar<br/><em>de você mesma?</em></h2>
+      <p class="body-copy cta-p">Agende o seu horário agora mesmo pelo WhatsApp. Atendimento exclusivo e personalizado para cada cliente.</p>
+      <a href="#" id="open-quiz-cta" class="btn btn--dark">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Agendar pelo WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ QUIZ MODAL ═══ -->
+<div id="quiz-modal-overlay">
+  <div class="quiz-modal">
+    <button class="quiz-modal-close" id="quiz-modal-close">✕ Fechar</button>
+    <div class="sec-header" style="margin-bottom:32px;text-align:left">
+      <p class="eyebrow" style="display:block">Antes de agendar</p>
+      <h2 class="display" style="font-size:clamp(26px,4vw,38px);margin:10px 0 10px">Vamos encontrar o<br/><em>tratamento ideal</em> pra você.</h2>
+      <p class="sec-desc" style="margin:0;text-align:left;max-width:100%">Responda algumas perguntas — leva menos de 1 min — e abra o WhatsApp com a mensagem já preenchida.</p>
+    </div>
+    <div class="quiz-progress"><div class="quiz-progress-bar" id="quiz-bar"></div></div>
+    <div class="quiz-step-label" id="quiz-step-label"></div>
+    <div id="quiz-body"></div>
+    <div class="quiz-nav" id="quiz-nav">
+      <button id="quiz-back" class="quiz-btn quiz-btn--ghost">Voltar</button>
+      <button id="quiz-next" class="quiz-btn quiz-btn--dark" disabled>Continuar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ATENDIMENTO A DOMICÍLIO ═══ -->
+<section id="domicilio">
+  <div class="dom-inner reveal">
+    <div class="dom-text">
+      <p class="eyebrow eyebrow--light">Comodidade</p>
+      <h2 class="display dom-h2">Tratamento no<br/><em>seu espaço.</em></h2>
+      <div class="hr hr--short" style="margin-bottom:28px;background:var(--gold)"></div>
+      <p class="dom-body">A Letícia atende <strong style="font-weight:500;color:rgba(253,250,247,.85)">exclusivamente a domicílio</strong> — ela leva toda a estrutura, equipamentos e produtos premium até você, proporcionando uma experiência completa no conforto da sua casa.</p>
+      <div class="dom-bullets">
+        <div class="dom-bullet"><div class="dom-bullet-dot"></div><p class="dom-bullet-text">Equipamentos e cosméticos premium levados até você</p></div>
+        <div class="dom-bullet"><div class="dom-bullet-dot"></div><p class="dom-bullet-text">Ideal para quem tem mobilidade reduzida, bebês ou agenda muito cheia</p></div>
+        <div class="dom-bullet"><div class="dom-bullet-dot"></div><p class="dom-bullet-text">Disponível para Mauá, Santo André, São Bernardo e região do ABC</p></div>
+        <div class="dom-bullet"><div class="dom-bullet-dot"></div><p class="dom-bullet-text">Taxa de deslocamento a combinar conforme localização</p></div>
+      </div>
+      <a href="#" class="btn btn--gold" id="open-quiz-dom">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Solicitar Atendimento a Domicílio
+      </a>
+    </div>
+    <div class="dom-card">
+      <div class="dom-card-icon">🏡</div>
+      <h3 class="dom-card-title">Como funciona</h3>
+      <p class="dom-card-sub">Passo a passo</p>
+      <div class="dom-card-body">
+        <p style="margin-bottom:14px"><strong style="color:var(--gold);font-weight:400">1.</strong> Entre em contato pelo WhatsApp e informe seu endereço e o tratamento desejado.</p>
+        <p style="margin-bottom:14px"><strong style="color:var(--gold);font-weight:400">2.</strong> Combinamos data, horário e a taxa de deslocamento (se aplicável).</p>
+        <p style="margin-bottom:14px"><strong style="color:var(--gold);font-weight:400">3.</strong> A Letícia chega com todo o equipamento e você relaxa no conforto da sua casa.</p>
+        <p><strong style="color:var(--gold);font-weight:400">4.</strong> Aproveite o tratamento sem se preocupar com trânsito ou estacionamento.</p>
+      </div>
+      <a href="#" class="btn btn--outline" id="open-quiz-dom2" style="color:var(--warm);border-color:rgba(196,168,130,.5);width:100%;justify-content:center">Agendar Agora →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section id="faq">
+  <div class="faq-inner">
+    <div class="reveal">
+      <div class="sec-header">
+        <p class="eyebrow" style="display:block">Dúvidas Frequentes</p>
+        <h2 class="display sec-h2">Perguntas &<br/><em>Respostas</em></h2>
+      </div>
+      <div class="faq-list" id="faq-list"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTATO ═══ -->
+<section id="contato">
+  <div class="contato-inner reveal">
+    <div>
+      <p class="eyebrow eyebrow--light">Contato</p>
+      <h2 class="display display--light contato-h2">Vamos conversar<br/>sobre você?</h2>
+      <div class="contato-divider"></div>
+      <div class="contato-fields">
+        <div>
+          <p class="cf-label">WhatsApp</p>
+          <a href="https://wa.me/5511974077401?text=Olá%20Letícia!%20Gostaria%20de%20agendar%20um%20atendimento." target="_blank" rel="noopener" class="cf-val">(11) 97407-7401</a>
+        </div>
+        <div>
+          <p class="cf-label">Horário de Atendimento</p>
+          <p class="cf-text">Segunda a Sábado<br/>9h às 19h</p>
+        </div>
+        <div>
+          <p class="cf-label">Modalidade</p>
+          <p class="cf-text">Atendimento exclusivo<br/>a domicílio 🏡</p>
+        </div>
+      </div>
+    </div>
+    <div class="contato-card">
+      <h3 class="contato-card-h3">Agende sua sessão</h3>
+      <p class="contato-card-p">Preencha a triagem rápida e abra o WhatsApp com tudo já preenchido. A Letícia vai até você — sem sair de casa.</p>
+      <a href="#" id="open-quiz-contato" class="btn btn--gold" style="width:100%;justify-content:center">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Enviar Mensagem
+      </a>
+      <p class="contato-note">Resposta em até 2 horas no horário comercial</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-row">
+      <div class="footer-logo">Letícia D</div>
+      <div class="footer-city">Estética Facial &amp; Corporal · São Paulo</div>
+      <a href="https://wa.me/5511974077401" target="_blank" rel="noopener" class="footer-wa">WhatsApp →</a>
+    </div>
+    <div class="footer-hr"></div>
+    <p class="footer-copy">© 2025 Letícia D Estética. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<!-- ═══ FLOATING WA ═══ -->
+<button id="fwa" title="Agendar pelo WhatsApp" aria-label="Agendar pelo WhatsApp">
+  <svg viewBox="0 0 24 24" width="26" height="26" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</button>
+
+<script>
+const WA = "https://wa.me/5511974077401?text=Ol%C3%A1%20Let%C3%ADcia!%20Gostaria%20de%20agendar%20um%20atendimento.";
+
+// ── NAV + FLOATING WA ──
+window.addEventListener('scroll', () => {
+  const s = window.scrollY > 42;
+  document.getElementById('nav').classList.toggle('scrolled', s);
+  document.getElementById('fwa').classList.toggle('vis', window.scrollY > 320);
+});
+
+// ── HAMBURGER ──
+const ham = document.getElementById('ham');
+const mob = document.getElementById('mob-menu');
+let open = false;
+ham.addEventListener('click', () => {
+  open = !open;
+  mob.classList.toggle('open', open);
+  const sp = ham.querySelectorAll('span');
+  sp[0].style.transform = open ? 'rotate(45deg) translate(5px,5px)' : '';
+  sp[1].style.opacity   = open ? '0' : '1';
+  sp[2].style.transform = open ? 'rotate(-45deg) translate(5px,-5px)' : '';
+});
+mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  open = false; mob.classList.remove('open');
+  ham.querySelectorAll('span').forEach((s,i) => {
+    s.style.transform = ''; if(i===1) s.style.opacity='1';
+  });
+}));
+
+// ── SERVICES ──
+const allSvc = [
+  {n:"1ª Limpeza de Pele com Peeling",p:"R$190",cat:"facial"},
+  {n:"Limpeza de Pele Simples",p:"R$170",cat:"facial"},
+  {n:"Aplicação de Radiofrequência",p:"R$220",cat:"facial"},
+  {n:"Aplicação de Intradermoterapia",p:"R$250",cat:"facial"},
+  {n:"Drenagem Linfática",p:"R$170",cat:"corporal"},
+  {n:"Massagem Relaxante",p:"R$190",cat:"corporal"},
+  {n:"Massagem com Bambus ou Pantala",p:"R$150",cat:"corporal"},
+  {n:"Detox Quântico",p:"R$180",cat:"corporal"},
+  {n:"Massagem com Pedras Quentes",p:"R$165",cat:"corporal"},
+  {n:"Massagem com Óleos",p:"R$190",cat:"corporal"},
+  {n:"Massagem com Velas",p:"R$130",cat:"corporal"},
+];
+const futuramente = [
+  "Microagulhamento","Liberação Miofascial","Tai Massage","Diástase","Auriculoterapia",
+];
+const bgs = ['#FDFAF7','#F7F2ED'];
+function renderSvc(list) {
+  document.getElementById('svc-grid').innerHTML = list.map((s,i) =>
+    `<div class="svc-card" style="background:${bgs[i%2]}" 
+       onmouseenter="this.style.background='#E8C9B8'"
+       onmouseleave="this.style.background='${bgs[i%2]}'">
+       <span class="svc-name">${s.n}</span>
+       <span class="svc-price">${s.p}</span>
+     </div>`
+  ).join('');
+}
+function renderFuturo(list) {
+  document.getElementById('futuro-grid').innerHTML = list.map(n =>
+    `<span class="futuro-pill">${n}</span>`
+  ).join('');
+}
+// Tab logic
+let curTab = 'facial';
+function switchTab(tab) {
+  curTab = tab;
+  const filtered = tab === 'todos' ? allSvc : allSvc.filter(s => s.cat === tab);
+  renderSvc(filtered);
+  document.querySelectorAll('#svc-tabs .tab').forEach(b => b.classList.toggle('on', b.dataset.tab === tab));
+}
+document.querySelectorAll('#svc-tabs .tab').forEach(b => b.addEventListener('click', () => switchTab(b.dataset.tab)));
+switchTab('facial');
+renderFuturo(futuramente);
+
+// ── TESTIMONIALS ──
+const testi = [
+  {name:"Mariana S.",text:"A Letícia transformou completamente minha pele. Após a limpeza com peeling, minha pele ficou visivelmente mais luminosa. Recomendo de olhos fechados!",svc:"Limpeza de Pele com Peeling"},
+  {name:"Camila R.",text:"A massagem relaxante foi uma experiência inesquecível. Saí completamente renovada, sem nenhuma tensão. O ambiente é acolhedor e a Letícia tem um toque incrível.",svc:"Massagem Relaxante"},
+  {name:"Fernanda M.",text:"Fiz a radiofrequência e os resultados superaram minhas expectativas. Profissionalismo e delicadeza em cada detalhe. Voltarei com certeza!",svc:"Aplicação de Radiofrequência"},
+];
+let ti = 0;
+function renderTesti() {
+  const t = testi[ti];
+  document.getElementById('dep-text').textContent = t.text;
+  document.getElementById('dep-name').textContent = t.name;
+  document.getElementById('dep-svc').textContent  = t.svc;
+  document.getElementById('dep-avatar').textContent = t.name[0];
+  document.querySelectorAll('.dep-dot').forEach((d,i) => d.classList.toggle('on', i===ti));
+}
+function buildDots() {
+  document.getElementById('dep-dots').innerHTML = testi.map((_,i) =>
+    `<button class="dep-dot${i===0?' on':''}" data-i="${i}"></button>`
+  ).join('');
+  document.querySelectorAll('.dep-dot').forEach(d =>
+    d.addEventListener('click', () => { ti=+d.dataset.i; renderTesti(); })
+  );
+}
+buildDots(); renderTesti();
+setInterval(() => { ti=(ti+1)%testi.length; renderTesti(); }, 5200);
+
+// ── TRIAGEM / QUIZ (TOPO DE FUNIL) ──
+// 👉 Troque pelo link real do seu evento no Calendly assim que estiver criado:
+const CALENDLY_URL = "https://calendly.com/experiasolutions/demonstracao";
+
+const STEPS = [
+  { id:'area', type:'single', q:'Qual área te interessa mais hoje?',
+    options:['Rosto','Corpo','Ainda não sei, quero uma indicação'] },
+  { id:'objetivo', type:'single', q:'Qual é o seu principal objetivo?',
+    options:['Limpeza de pele profunda','Relaxar e aliviar tensão','Firmeza e flacidez','Detox e bem-estar','Ainda não sei'] },
+  { id:'urgencia', type:'single', q:'Quando você gostaria de agendar?',
+    options:['Essa semana','Esse mês','Ainda estou pesquisando, sem previsão'] },
+  { id:'saude', type:'multi', q:'Antes de continuar — algum destes itens se aplica a você?',
+    note:'Isso me ajuda a indicar um protocolo seguro pra você.',
+    options:['Gestante ou amamentando','Marca-passo ou implante metálico','Lesão de pele ativa (acne inflamada, herpes, ferida)','Alergia conhecida a cosméticos','Nenhuma dessas opções'],
+    exclusive:'Nenhuma dessas opções' },
+  { id:'horario', type:'single', q:'Qual horário costuma ser melhor pra você?',
+    options:['Manhã','Tarde','Fim de tarde','Qualquer horário'] },
+  { id:'nome', type:'text', q:'Pra eu te chamar pelo nome certo — qual é o seu?',
+    placeholder:'Seu nome' },
+];
+let qIdx = 0;
+const qAnswers = {};
+
+function qFormatPhone(v) {
+  const d = v.replace(/\D/g,'').slice(0,11);
+  if (d.length <= 2) return d;
+  if (d.length <= 7) return `(${d.slice(0,2)}) ${d.slice(2)}`;
+  return `(${d.slice(0,2)}) ${d.slice(2,7)}-${d.slice(7)}`;
+}
+
+// Classifica o lead pra você priorizar as respostas no WhatsApp
+function qGetLeadTag(a) {
+  if (a.urgencia === 'Essa semana') return { emoji:'🔥', label:'Quer agendar essa semana' };
+  if (a.urgencia === 'Esse mês') return { emoji:'🌤️', label:'Quer agendar esse mês' };
+  return { emoji:'🌱', label:'Ainda pesquisando, sem pressa' };
+}
+
+function qValid() {
+  const s = STEPS[qIdx];
+  if (!s) return true;
+  if (s.type === 'single') return !!qAnswers[s.id];
+  if (s.type === 'multi') return Array.isArray(qAnswers[s.id]) && qAnswers[s.id].length > 0;
+  if (s.type === 'tel') return (qAnswers[s.id] || '').replace(/\D/g,'').length >= 10;
+  if (s.type === 'text') return (qAnswers[s.id] || '').trim().length > 1;
+  return true;
+}
+function qRenderNav() {
+  document.getElementById('quiz-back').style.visibility = qIdx === 0 ? 'hidden' : 'visible';
+  const next = document.getElementById('quiz-next');
+  next.disabled = !qValid();
+  next.textContent = qIdx === STEPS.length - 1 ? 'Ver recomendação' : 'Continuar';
+  document.getElementById('quiz-step-label').textContent = `Pergunta ${qIdx+1} de ${STEPS.length}`;
+  document.getElementById('quiz-bar').style.width = `${Math.min(100,(qIdx/STEPS.length)*100)}%`;
+}
+function qRenderStep() {
+  const s = STEPS[qIdx];
+  const body = document.getElementById('quiz-body');
+  let optsHtml = '';
+  if (s.type === 'single') {
+    optsHtml = `<div class="quiz-options">${s.options.map(o => `
+      <button class="quiz-opt${qAnswers[s.id]===o?' sel':''}" data-val="${o}">
+        <span>${o}</span><span class="quiz-opt-check"></span>
+      </button>`).join('')}</div>`;
+  } else if (s.type === 'multi') {
+    const cur = qAnswers[s.id] || [];
+    optsHtml = `<div class="quiz-options">${s.options.map(o => `
+      <button class="quiz-opt${cur.includes(o)?' sel':''}" data-val="${o}">
+        <span>${o}</span><span class="quiz-opt-check"></span>
+      </button>`).join('')}</div>`;
+  } else {
+    optsHtml = `<input class="quiz-input" type="${s.type==='tel'?'tel':'text'}" inputmode="${s.type==='tel'?'numeric':'text'}" maxlength="${s.type==='tel'?16:120}" placeholder="${s.placeholder||''}" value="${qAnswers[s.id]||''}" id="quiz-text-input" autocomplete="off"/>`;
+  }
+  body.innerHTML = `
+    <p class="quiz-q">${s.q}</p>
+    ${s.note ? `<p class="quiz-note">${s.note}</p>` : ''}
+    ${optsHtml}
+  `;
+  if (s.type === 'single') {
+    body.querySelectorAll('.quiz-opt').forEach(btn => btn.addEventListener('click', () => {
+      qAnswers[s.id] = btn.dataset.val;
+      qRenderStep();
+    }));
+  } else if (s.type === 'multi') {
+    body.querySelectorAll('.quiz-opt').forEach(btn => btn.addEventListener('click', () => {
+      const val = btn.dataset.val;
+      let cur = qAnswers[s.id] || [];
+      if (s.exclusive && val === s.exclusive) {
+        cur = cur.includes(val) ? [] : [val];
+      } else {
+        cur = cur.filter(v => v !== s.exclusive);
+        cur = cur.includes(val) ? cur.filter(v => v !== val) : [...cur, val];
+      }
+      qAnswers[s.id] = cur;
+      qRenderStep();
+    }));
+  } else {
+    const input = document.getElementById('quiz-text-input');
+    input.focus();
+    input.addEventListener('input', () => {
+      let val = input.value;
+      if (s.type === 'tel') {
+        val = qFormatPhone(val);
+        input.value = val;
+      }
+      qAnswers[s.id] = val;
+      qRenderNav();
+    });
+    input.addEventListener('keydown', e => { if (e.key === 'Enter' && qValid()) qGoNext(); });
+  }
+  qRenderNav();
+}
+function qGetRecommendation() {
+  const a = qAnswers;
+  if (a.saude && a.saude.length && !a.saude.includes('Nenhuma dessas opções')) {
+    return { title:'Vamos conversar com cuidado',
+      text:'Pelas suas respostas, prefiro confirmar pessoalmente com você o protocolo mais seguro antes de qualquer indicação. Vamos alinhar isso na sua avaliação — sem compromisso.' };
+  }
+  const map = {
+    'Limpeza de pele profunda': '1ª Limpeza de Pele com Peeling',
+    'Relaxar e aliviar tensão': 'Massagem Relaxante',
+    'Firmeza e flacidez': 'Aplicação de Radiofrequência',
+    'Detox e bem-estar': 'Detox Quântico',
+  };
+  const svc = map[a.objetivo];
+  if (!svc) {
+    return { title:'Vou te ajudar a escolher pessoalmente',
+      text:'Sem problema! Na sua avaliação, vamos conversar sobre o que você sente e encontrar juntas o tratamento ideal.' };
+  }
+  return { title:`Recomendação: ${svc}`,
+    text:'Com base no que você me contou, esse costuma ser o melhor ponto de partida.', svc };
+}
+function qBuildWaMessage(rec) {
+  const a = qAnswers;
+  const tag = qGetLeadTag(a);
+  const lines = [
+    'Olá Letícia! Preenchi a triagem no site 💛',
+    `Prioridade: ${tag.emoji} ${tag.label}`,
+    a.nome ? `Nome: ${a.nome}` : '',
+    a.area ? `Área de interesse: ${a.area}` : '',
+    a.objetivo ? `Objetivo: ${a.objetivo}` : '',
+    a.urgencia ? `Quando quer agendar: ${a.urgencia}` : '',
+    a.horario ? `Horário preferido: ${a.horario}` : '',
+    (a.saude && a.saude.length && !a.saude.includes('Nenhuma dessas opções')) ? `Pontos de atenção: ${a.saude.join(', ')}` : '',
+    rec.svc ? `Tratamento sugerido: ${rec.svc}` : '',
+  ].filter(Boolean);
+  return encodeURIComponent(lines.join('\n'));
+}
+function qRenderResult() {
+  const rec = qGetRecommendation();
+  const wa = `https://wa.me/5511974077401?text=${qBuildWaMessage(rec)}`;
+  const calendlyUrl = `${CALENDLY_URL}?name=${encodeURIComponent(qAnswers.nome||'')}`;
+  const urgNote = qAnswers.urgencia === 'Essa semana'
+    ? 'Você quer agendar essa semana — vamos garantir seu horário agora?'
+    : qAnswers.urgencia === 'Esse mês'
+    ? 'Você quer agendar esse mês — escolha um horário que funcione pra você:'
+    : 'Sem pressa nenhuma — guarde essa recomendação e me chame quando for o momento certo pra você.';
+  document.getElementById('quiz-body').innerHTML = `
+    <h3 class="quiz-result-title">${rec.title}</h3>
+    <p class="quiz-result-text">${rec.text}</p>
+    <p class="quiz-result-text" style="margin-top:-16px">${urgNote}</p>
+    <div class="quiz-result-actions">
+      <a href="${wa}" target="_blank" rel="noopener" class="btn btn--dark" style="width:100%;justify-content:center">Confirmar pelo WhatsApp</a>
+      <a href="${calendlyUrl}" target="_blank" rel="noopener" class="quiz-calendly-link">ou veja os horários disponíveis na agenda →</a>
+      <button id="quiz-restart" class="quiz-btn quiz-btn--ghost">Refazer o teste</button>
+    </div>
+  `;
+  document.getElementById('quiz-restart').addEventListener('click', qRestart);
+  document.getElementById('quiz-nav').style.display = 'none';
+  document.getElementById('quiz-step-label').textContent = 'Pronto!';
+  document.getElementById('quiz-bar').style.width = '100%';
+}
+function qGoNext() {
+  if (!qValid()) return;
+  qIdx++;
+  if (qIdx >= STEPS.length) { qRenderResult(); } else { qRenderStep(); }
+}
+function qGoBack() {
+  if (qIdx === 0) return;
+  qIdx--;
+  qRenderStep();
+}
+function qRestart() {
+  qIdx = 0;
+  for (const k in qAnswers) delete qAnswers[k];
+  document.getElementById('quiz-nav').style.display = 'flex';
+  qRenderStep();
+}
+document.getElementById('quiz-next').addEventListener('click', qGoNext);
+document.getElementById('quiz-back').addEventListener('click', qGoBack);
+qRenderStep();
+
+// ── QUIZ MODAL ──
+function openQuizModal() {
+  qRestart();
+  document.getElementById('quiz-modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeQuizModal() {
+  document.getElementById('quiz-modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('quiz-modal-close').addEventListener('click', closeQuizModal);
+document.getElementById('quiz-modal-overlay').addEventListener('click', function(e){ if(e.target===this) closeQuizModal(); });
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeQuizModal(); });
+// All open-quiz triggers
+['fwa','open-quiz-hero','open-quiz-hero2','open-quiz-svc','open-quiz-cta','open-quiz-dom','open-quiz-dom2','open-quiz-contato','open-quiz-nav','open-quiz-mob'].forEach(id => {
+  const el = document.getElementById(id);
+  if(el) el.addEventListener('click', e => { e.preventDefault(); openQuizModal(); });
+});
+// CTA agendar buttons that now should open quiz
+document.querySelectorAll('a[href*="wa.me"]').forEach(a => {
+  // Only replace ones that are the "Agendar" CTA style (not the footer/contact info)
+});
+
+// ── FAQ ──
+const faqs = [
+  { q:'Preciso fazer agendamento prévio?', a:'Sim! Todo atendimento é feito com agendamento para garantir exclusividade e tempo suficiente para você. Entre em contato pelo WhatsApp para verificar os horários disponíveis.' },
+  { q:'Qual a diferença entre a Limpeza Simples e a Limpeza com Peeling?', a:'A 1ª Limpeza com Peeling inclui esfoliação química ou mecânica para renovação celular mais profunda, indicada para quem nunca fez limpeza ou quer resultado mais intenso. A Limpeza Simples é ideal para manutenção, pele já tratada ou pele mais sensível.' },
+  { q:'O atendimento a domicílio tem custo adicional?', a:'A Letícia atende exclusivamente a domicílio, levando toda a estrutura até você. Pode haver uma taxa de deslocamento dependendo da sua localização. Atende Mauá, Santo André, São Bernardo e região do ABC. Consulte pelo WhatsApp para verificar sua área e o valor, se aplicável.' },
+  { q:'Gestantes podem fazer os tratamentos?', a:'Alguns procedimentos são contraindicados na gestação, como radiofrequência e intradermoterapia. Outros, como massagem relaxante e drenagem linfática adaptada, podem ser realizados com cuidados específicos. Me conte na triagem e avaliaremos juntas o melhor protocolo.' },
+  { q:'Quantas sessões são necessárias para ver resultado?', a:'Depende do tratamento e do seu objetivo. Sessões únicas como massagens e limpezas já oferecem resultado imediato. Para tratamentos de remodelamento corporal e radiofrequência, o protocolo ideal é de 4 a 10 sessões. Na sua avaliação, faço uma indicação personalizada.' },
+  { q:'Quais formas de pagamento são aceitas?', a:'Aceito Pix, cartão de débito e crédito (à vista e parcelado). Pagamento é realizado no dia do atendimento.' },
+  { q:'Posso remarcar ou cancelar meu horário?', a:'Sim! Peço apenas que o cancelamento ou remarcação seja feito com pelo menos 24 horas de antecedência pelo WhatsApp, para que o horário não seja perdido.' },
+  { q:'Os produtos usados são seguros para pele sensível?', a:'Trabalho com cosméticos de linha premium, selecionados para diferentes tipos e sensibilidades de pele. Antes de cada sessão faço uma breve avaliação para adaptar os produtos ao seu perfil.' },
+];
+const faqList = document.getElementById('faq-list');
+faqs.forEach((f,i) => {
+  const item = document.createElement('div');
+  item.className = 'faq-item';
+  item.innerHTML = `
+    <div class="faq-q" role="button" aria-expanded="false">
+      <span class="faq-q-text">${f.q}</span>
+      <span class="faq-icon" aria-hidden="true"></span>
+    </div>
+    <div class="faq-a"><p class="faq-a-inner">${f.a}</p></div>
+  `;
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    if(!isOpen) item.classList.add('open');
+  });
+  faqList.appendChild(item);
+});
+
+// ── REVEAL ──
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
+}, {threshold:.1});
+document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+</script>
+</body>
+</html>

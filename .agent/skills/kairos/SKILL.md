@@ -1,4 +1,4 @@
-﻿---
+---
 name: kairos
 description: Ativa o agente KAIROS - Master Orchestrator, Framework Developer and KAIROS Method Expert
 ---
@@ -466,11 +466,8 @@ Type `*help` to see all commands, or `*kb` to enable KB mode.
 
 | Cliente | Diretório | Status |
 | :--- | :--- | :--- |
-| Leticia | `clients/leticia/` | Ativo — formulários, LPs, config de IA |
-| Porto | `clients/Porto/` | Ativo — projetos e automações |
-| Bistrô56 | `clients/BIstrô56/` | Ativo — cardápio e automações |
-| Felix Cell | `clients/Felix cell/` | Ativo — bot e atendimento |
-| Master Pumps | `clients/Master pumps/` | Ativo — engenharia e automações |
+| Leticia | `clients/leticia/` | Ativo — estética, formulários, LPs, config de IA |
+| Paulo | `clients/paulo/` | Ativo — ateliê/tapeçaria, catálogo, bot e automações |
 
 ---
 
