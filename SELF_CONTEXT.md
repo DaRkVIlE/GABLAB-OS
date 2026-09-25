@@ -23,7 +23,15 @@
 ### AIOX Core & Skills — ✅ CANÔNICO E OTIMIZADO
 - **17 Skills Nativas:** `.agent/skills/` (dev, architect, qa, pm, po, sm, analyst, boot, kairos, etc.) com Progressive Disclosure nativo.
 - **204 tasks**, 14 workflows, 5 checklists em `.aiox-core/development/`
-- **Task-First Protocol:** Internalizado e alinhado ao Orion
+- **Smart Triage Engine v5:** 3 Tiers (Fast Path, Pipeline SDC, Deep Audit Triunvirato). IA Council de 12 cadeiras legado arquivado.
+- **Alan MindClone v6.0:** Conselheiro Estratégico Direto (filtro cashflow apenas em sessões de vendas explícitas).
+
+### SKORTEX (Meta-Orquestrador Autônomo) — 🟡 CONFIGURAÇÃO PENDENTE
+- **Runtime:** OpenClaw v2026.9.6 (Node.js 24.19.0 LTS)
+- **MCP Bridge:** KAIROX MCP Server v3.2 conectado → **33 tools, auto-approval**
+- **Workspace:** `skortex/` — `SOUL.md`, `AGENTS.md`, `Launch-SKORTEX.ps1`, `README.md`
+- **Config:** `~/.openclaw/openclaw.json`
+- **Pendente:** `openclaw configure` (chave API) + `openclaw channels add` (WhatsApp/Telegram)
 
 ### MCP Server v3.2 & Hivemind v2.0 — ✅ OPERACIONAL
 - **kairox-mcp-server:** TypeScript, `@modelcontextprotocol/sdk`, 30+ tools completas (Handoffs, States, Decisions, Tasks, RPs, Workflows, Hydra). Testes: 11/11 Vitest passando.
