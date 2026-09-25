@@ -6,10 +6,10 @@
 # ║          Data: 2026-05-12 | Dia 1 / 90                          ║
 # ╚══════════════════════════════════════════════════════════════════╝
 
-> **Última atualização:** 2026-09-24T10:59:00-03:00
-> **Estado Operacional:** 🟢 FRESH START CONCLUÍDO | KAIROX Engine v3.2 | Hivemind Protocol v2.0
+> **Última atualização:** 2026-09-25T08:24:00-03:00
+> **Estado Operacional:** 🟢 SMART TRIAGE v5 ATIVA | MindClone Alan v6.0 | Hivemind Protocol v2.0
 > **Agente:** NOESIS (KAIROS Master Orchestrator)
-> **Objetivo:** Orquestração unificada via Antigravity Desktop
+> **Objetivo:** Orquestração tática em 3 Tiers via Antigravity Desktop
 
 > [!IMPORTANT]
 > 🧪 **GABLAB v1.0 ATIVO** — Hub de governança pessoal consolidado em 17/05
@@ -457,8 +457,7 @@ BOSS FINAL T1: Primeiro Contrato Pago
 
 ## ✅ CONCLUÍDO RECENTEMENTE
 
-| Data | O que |
-|---|---|
+| 2026-09-25 | **Smart Triage v5 & MindClone Alan v6.0:** Arquivado IA Council de 12 cadeiras com regexes legados em `_archive/legacy-council/`. Implementada a Smart Triage Engine v5 em 3 Tiers (Tier 1 Fast Path, Tier 2 SDC Pipeline, Tier 3 Deep Audit via checagem factual + Triunvirato `@architect`, `@qa`, `@alan`). MindClone Alan v6.0 reequilibrado como conselheiro estratégico direto sem cashflow gate redutivo. |
 | 2026-09-24 | **Expurgo do FABLE5:** Removidos blocos estáticos de governança FABLE5 de todas as 17 skills em `.agent/skills/` e dos agentes em `.aiox-core/`. |
 | 2026-09-24 | **Fresh Start & Engine v3.2:** Saneamento do workspace (~1.2GB limpos/arquivados), KAIROX MCP Server v3.2 (30+ tools, 11/11 testes Vitest), Hivemind Protocol v2.0, skills core e SELF_CONTEXT atualizados. |
 | 2026-06-16 | **Fable 5 Governance:** Injetados os 6 princípios de controle (Hierarquia, Absolutos, Memória Derivada, Formatação Oculta, Escalada, Identidade) nos workflows `/boot`, `/context` e agent core (`KAIROS.md`). |

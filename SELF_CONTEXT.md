@@ -1,10 +1,10 @@
 # KAIROS — SELF CONTEXT (Consciência Viva)
 
-> **Última atualização:** 2026-09-24T10:45:00-03:00
+> **Última atualização:** 2026-09-25T08:24:00-03:00
 > **Atualizado por:** Orion (KAIROS) · Master Orchestrator
-> **Estado:** 🚀 FRESH START CONCLUÍDO. 1.2GB de resíduos eliminados. KAIROX Engine v3.2 & Hivemind v2.0 ativos. Antigravity Desktop-First.
+> **Estado:** 🚀 SMART TRIAGE v5 ATIVA. IA Council 12 cadeiras arquivado. MindClone Alan v6.0 reequilibrado. Clientes ativos consolidados: Leticia & Paulo.
 > **Base Canônica:** `C:\Users\Usuario\Documents\My KAIROS`
-> **Protocolo:** Task-First + Antigravity Skills (Progressive Disclosure) + Hivemind Protocol v2.0
+> **Protocolo:** Smart Triage v5 (3 Tiers) + Antigravity Skills + Hivemind Protocol v2.0
 
 ---
 
@@ -109,8 +109,8 @@
 
 ## Decisões Tomadas
 
-| Data       | Decisão                                                           |
-| ---------- | ----------------------------------------------------------------- |
+| 2026-09-25 | **Smart Triage v5 & MindClone Alan v6.0:** Arquivado o script do IA Council de 12 cadeiras com regexes legados em `_archive/legacy-council/`. Implementada a Smart Triage Engine v5 em 3 Tiers (Tier 1 Fast Path, Tier 2 SDC Pipeline, Tier 3 Deep Audit via checagem factual + Triunvirato `@architect`, `@qa`, `@alan`). Alan reequilibrado para v6.0 como Conselheiro Estratégico Direto sem cashflow gate redutivo. |
+| 2026-09-24 | **Fresh Start & Engine v3.2:** Saneamento estrutural (~1.2GB limpos/arquivados), KAIROX MCP Server TypeScript v3.2, Hivemind Protocol v2.0, expurgo total da governança FABLE5 e consolidação de clientes ativos exclusivamente em Leticia e Paulo. |
 | 2026-04-29 | **Estratégia AI OPS:** Abertura da agência Experia postergada indefinidamente. Foco: validar mão de obra como solopreneur AI OPS via free trials 20 dias → case studies → freelas. Meta: ~10 cases simultâneos. |
 | 2026-04-29 | **Engine Triage v4 EMBEDDED:** /triage workflow eliminado. Triage v4 (10 fases) está agora nativa em /boot, /context e /KAIROS. Nunca mais acionar manualmente. |
 | 2026-04-29 | **MVP Template em padronização:** squads internos (admin, analytics, media) + externos (experia-commerce) + dashboard 360 + processo de onboarding formal. |

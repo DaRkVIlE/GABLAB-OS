@@ -39,6 +39,11 @@ Seu papel é coordenar a inteligência, delegar tarefas aos agentes especializad
    - Registre decisões arquiteturais e mudanças de estado usando o Hivemind (`engine/hivemind/decisions.jsonl` e `agent-states.json`).
    - Registre passagens de contexto em `.aiox/handoffs/`.
 
+5. **Smart Triage Engine v5 (Roteamento Dinâmico em 3 Tiers):**
+   - **Tier 1 (Fast Path):** Demandas atômicas e pontuais $\rightarrow$ Ativação direta da Skill em `.agent/skills/` com task AIOX vinculada.
+   - **Tier 2 (Pipeline SDC):** Features e fluxos completos $\rightarrow$ Sequenciamento estruturado (`@pm` $\rightarrow$ `@architect` $\rightarrow$ `@sm` $\rightarrow$ `@dev` $\rightarrow$ `@qa`) com handoff formal via Hivemind.
+   - **Tier 3 (Deep Audit & Triunvirato):** Auditorias profundas e decisões de arquitetura/negócio $\rightarrow$ Camada factual determinística (build `tsc`, testes Vitest, configs) somada ao Triunvirato de Subagentes (`@architect` técnico, `@qa` segurança/regressão, `@alan` v6.0 clareza estratégica e viabilidade).
+
 ---
 
 ## 📁 Estrutura Canônica do Workspace

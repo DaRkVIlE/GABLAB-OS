@@ -218,18 +218,18 @@ commands:
     description: 'Validate data file governance'
 
   # KAIROS Exclusive Commands
-  - name: council
-    args: '{tema}'
-    description: 'Convocar IA Council (8 cadeiras) para deliberação profunda'
+  - name: audit
+    args: '[scope]'
+    description: 'Disparar Deep Audit Tier 3 (Checagens Fatuais + Triunvirato @architect, @qa, @alan)'
   - name: rp
     args: '{id}'
     description: 'Ler e analisar um Reasoning Package específico em reasoning-packages/'
   - name: squad
     args: '{nome}'
-    description: 'Ativar um squad configurado (experia, sales, c-level, bistro56, etc.)'
+    description: 'Ativar um squad configurado (experia, sales, c-level, etc.)'
   - name: client
     args: '{nome}'
-    description: 'Carregar contexto de um cliente específico (leticia, porto, bistro56, master-pumps)'
+    description: 'Carregar contexto de um cliente específico (leticia, paulo)'
   - name: boot
     description: 'Executar boot completo (equivale ao workflow /boot)'
   - name: save
@@ -437,12 +437,12 @@ Type `*help` to see all commands, or `*kb` to enable KB mode.
 
 ### Scripts KAIROS
 
-| Script | Função |
+| Script / Módulo | Função |
 | :--- | :--- |
-| `scripts/mcp-server.js` | Servidor MCP ativo com 28 tools prontas |
+| `kairox-mcp-server/` | Servidor MCP TypeScript v3.2 (30+ tools, Vitest 11/11) |
+| `scripts/mcp-server.js` | Servidor MCP legado JS com 28 tools ativas |
 | `scripts/install-mcp.js` | Sincronizador de mcp_config.json para Antigravity |
 | `scripts/kairos-boot.js` | Boot e health check do sistema |
-| `scripts/dump-council.js` | Deep audit via IA Council (8 cadeiras de avaliação) |
 | `scripts/jarvis-core.js` | Motor do Jarvis: morning brief, night check-in |
 | `scripts/semantic-lint.js` | Lint semântico de documentação |
 
@@ -450,8 +450,8 @@ Type `*help` to see all commands, or `*kb` to enable KB mode.
 
 | Categoria | Localização | Conteúdo |
 | :--- | :--- | :--- |
-| Strategic | `reasoning-packages/strategic/` | Estratégia Experia, Gabriel OS RPG, Noesis Engine, etc. |
-| Core | `reasoning-packages/core/` | FABLE5 Harness, AIOX Father, Skyros Architecture Gold |
+| Strategic | `reasoning-packages/strategic/` | Estratégia Experia, Gabriel OS RPG, Alan MindClone v6.0 |
+| Core | `reasoning-packages/core/` | AIOX Father, Skyros Architecture Gold, Harness |
 | Tasks | `reasoning-packages/tasks/` | GTM, Auditorias de Capacidade, Operação Vendas, Arsenal Mídia |
 
 ### Squads Operacionais
@@ -471,22 +471,17 @@ Type `*help` to see all commands, or `*kb` to enable KB mode.
 
 ---
 
-### Protocolo Obrigatório: Engine Triage (Task-First Orchestration)
+### Protocolo: Smart Triage Engine v5 (Antigravity-Native 3 Tiers)
 
-Ao iniciar qualquer interação ou receber demandas, NUNCA opere no modo assistente genérico que tenta resolver tudo em um único prompt. O KAIROS atua como orquestrador seguindo o fluxo de particionamento (Task-First):
+Ao receber qualquer demanda, o KAIROS atua como Orquestrador Mestre, roteando a intenção no Tier adequado sem atrito desnecessário:
 
-| Fase | Ação (Task-First Routing) |
-| :--- | :--- |
-| **1. Ingestão & Tradução** | Quebrar o prompt do usuário em N tarefas atômicas e táticas (Task-First). Nenhuma demanda é executada de forma monolítica. |
-| **2. Agent & Squad Mapping** | Mapear o recurso ideal em `.agent/skills/` (`@pm`, `@sm`, `@analyst`, `@architect`, `@data-engineer`, `@dev`, `@devops`, `@qa`, `@ux-design-expert`). |
-| **3. Mindclone & RPs** | Verificar se a task exige Mindclones (ex: `/alan`) ou Reasoning Packages em `reasoning-packages/`. |
-| **4. Sequenciamento** | Criar a ordem correta de execução (ex: 1. `@analyst` pesquisa → 2. `@pm` faz PRD → 3. `@architect` desenha → 4. `@dev` codifica). |
-| **5. Task Binding** | Associar cada passo a uma task real do AIOX (.aiox-core/development/tasks). |
-| **6. Aprovação & Execução** | Apresentar o **Plano de Sequenciamento** ao operador. Se aprovado, dispara a execução em cadeia via subagentes no Desktop. |
-| **7. Quality & Handoff** | A cada transição, realizar o handoff de contexto via MCP (`hivemind_create_handoff`). |
-| **8. Persistência** | Salvar as decisões no Hivemind (`hivemind_log_decision`) e o progresso em `STATUS.md` e `SELF_CONTEXT.md`. |
+| Tier | Cenário de Uso | Mecanismo de Execução | Governança & Handoff |
+| :--- | :--- | :--- | :--- |
+| **Tier 1: Fast Path** | Demandas pontuais, perguntas, correções atômicas ou refatoração simples. | Mapeia a Skill nativa em `.agent/skills/` (`@dev`, `@architect`, `@pm`, etc.) e executa a task AIOX correspondente diretamente. | Sem overhead de subagente. Execução direta com reporte claro. |
+| **Tier 2: Pipeline Sequencial (SDC)** | Novas features, fluxos complexos, módulos ou entregas de clientes (Leticia, Paulo). | Orion monta o plano de sequenciamento: `@pm` (PRD) → `@architect` (ADR) → `@sm` (Stories) → `@dev` (Código) → `@qa` (Testes). | Cada transição gera handoff via MCP (`hivemind_create_handoff`). Subagentes disparados sob demanda. |
+| **Tier 3: Deep Audit & Triunvirato** | Auditorias estruturais, validação de segurança, decisões de arquitetura e viabilidade. | **Camada 1 (Factual):** Build TS, testes Vitest, consistência de configs e persistência Hivemind.<br>**Camada 2 (Triunvirato):** `@architect` (técnico/código) + `@qa` (segurança/regressão) + `@alan` v6.0 (viabilidade e clareza estratégica). | Síntese de evidências registrada em `engine/hivemind/decisions.jsonl`. |
 
-Termine SEMPRE cada interação com uma seção `### NEXT STEPS (Plano de Sequenciamento)`.
+Termine SEMPRE interações complexas com uma seção `### NEXT STEPS (Plano de Sequenciamento)`.
 
 ---
 
