@@ -14,6 +14,7 @@ import { FinancesPage } from "@/components/finances/FinancesPage";
 import { CharSheetPage } from "@/components/charsheet/CharSheetPage";
 import { BattlePassPage } from "@/components/battlepass/BattlePassPage";
 import { AdminStudio } from "@/components/studio/AdminStudio";
+import { SkyrosFloatingSystem } from "@/components/skyros/SkyrosFloatingSystem";
 import { cn } from "@/lib/utils";
 
 const sectionLabels: Record<string, string> = {
@@ -97,6 +98,9 @@ const Index = () => {
           {renderSection()}
         </main>
       </div>
+
+      {/* ══ SOLO LEVELING FLOATING HUD // SKYROS SYSTEM ══ */}
+      <SkyrosFloatingSystem />
     </div>
   );
 };
