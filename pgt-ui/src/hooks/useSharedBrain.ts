@@ -17,7 +17,7 @@ export interface QuestBlock {
 }
 
 // ── SKYROS Score constants ──
-const REVENUE_GOAL = 30000; // R$ 30k meta
+const REVENUE_GOAL = 40000; // R$ 40k meta Season
 const MAX_STREAK_FOR_SCORE = 14; // 14 days = full streak score
 
 export function useSharedBrain() {

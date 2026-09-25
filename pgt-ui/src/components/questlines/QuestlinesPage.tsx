@@ -1,285 +1,224 @@
 import { useState, useEffect } from "react";
-import { Scroll, ChevronDown, ChevronUp, Trophy, Swords, Sparkles, Crown, Home, FileText, Smartphone, CheckSquare, Circle, Clock, AlertCircle, Dumbbell, Mic, Globe, Store } from "lucide-react";
+import {
+  Scroll, CheckCircle2, Circle, ChevronDown, Trophy,
+  Sparkles, Swords, Crown, Home, FileText, Dumbbell,
+  Mic, Globe, Store, Smartphone, AlertCircle, LayoutGrid, Compass, Zap
+} from "lucide-react";
 import { cn } from "@/lib/utils";
+import { systemAudio } from "@/lib/systemAudio";
 
-interface QuestStep {
+interface Step {
   id: string;
   title: string;
   xpReward: number;
   done: boolean;
   deadline?: string;
+  isHabit?: boolean;
 }
+
+export type QuestRank = "E" | "D" | "C" | "B" | "A" | "S";
 
 interface Questline {
   id: string;
   name: string;
+  rank: QuestRank;
   description: string;
   lore: string;
   category: "main" | "side" | "castle" | "life";
   priority: "P0" | "P1" | "P2";
   progress: number;
   totalSteps: number;
-  icon: typeof Trophy;
+  icon: any;
   active: boolean;
-  steps: QuestStep[];
   reward: string;
   deadline?: string;
+  steps: Step[];
 }
 
 const allQuestlines: Questline[] = [
   {
     id: "experia",
-    name: "⚔️ Experia Empire",
-    description: "Fechar 4-5 clientes locais com free tier → MRR R$3K (T1)",
-    lore: "O sonho que se torna empresa. A empresa que resolve tudo. Cada cliente fechado é um chefão abatido.",
+    name: "⚔️ Experia Empire (AI Ops)",
+    rank: "S",
+    description: "Conquistar clientes de automação & IA Ops via tráfego orgânico e outreach online (sem cold calls)",
+    lore: "A máquina de guerra comercial. O primeiro cliente pago de AI Ops este mês abre as portas da liberdade financeira.",
     category: "main",
     priority: "P0",
-    progress: 0,
+    progress: 2,
     totalSteps: 6,
     icon: Trophy,
     active: true,
-    reward: "R$3K MRR → Boss do IPTU começa a sangrar",
-    deadline: "Jun/2026 (Temporada 1)",
+    reward: "MRR R$ 3k-5k · Boss do IPTU e Contas começam a sangrar",
+    deadline: "Temporada 1 — Fundação",
     steps: [
-      { id: "e1", title: "📄 PRD da Experia — documento fundador", xpReward: 100, done: false, deadline: "Próxima missão 🔵" },
-      { id: "e2", title: "🎨 Design System Experia (tokens, cores, tipografia)", xpReward: 80, done: false },
-      { id: "e3", title: "🌐 Presença digital: Landing Page v1 + Instagram grade inicial", xpReward: 120, done: false },
-      { id: "e4", title: "📸 3 cases locais documentados (permuta ou free tier)", xpReward: 150, done: false, deadline: "15 dias" },
-      { id: "e5", title: "📞 Cold calls iniciadas (com cases como credencial)", xpReward: 100, done: false },
-      { id: "e6", title: "💰 Primeiro contrato pago assinado", xpReward: 500, done: false },
+      { id: "e1", title: "📄 PRD & Arquitetura da Experia — documento fundador", xpReward: 100, done: true },
+      { id: "e2", title: "🎨 Design System & Identidade Visual de Elite", xpReward: 80, done: true },
+      { id: "e3", title: "🌐 Landing Page de Alta Conversão da Experia", xpReward: 120, done: false },
+      { id: "e4", title: "📸 Sites Plin e Muli estruturados como portfólio de cases", xpReward: 150, done: false },
+      { id: "e5", title: "🚀 Campanha de Outreach Online & Tráfego Orgânico BR", xpReward: 120, done: false },
+      { id: "e6", title: "💰 Primeiro contrato pago assinado (R$ 1.500 - R$ 3.000)", xpReward: 500, done: false },
     ],
   },
   {
     id: "social-proof",
-    name: "📸 Operação Prova Social",
-    description: "3+ cases locais antes de cold calls — credencial na mão",
-    lore: "Sem prova social, é só papo. Com ela, o pitche se vende sozinho.",
+    name: "📸 Portfólio & Prova Social (Plin & Muli)",
+    rank: "A",
+    description: "Estruturar vitrines e cases de impacto antes da prospecção em massa",
+    lore: "Com vitrines impecáveis (Plin e Muli), a autoridade se impõe antes mesmo da proposta.",
     category: "side",
     priority: "P0",
-    progress: 0,
+    progress: 1,
     totalSteps: 3,
     icon: Sparkles,
     active: true,
-    reward: "Green light para cold calls",
-    deadline: "25 de Abril/2026",
+    reward: "Autoridade inquestionável para conversão de leads",
     steps: [
-      { id: "sp1", title: "Case 1 — Comércio local (dentista, petshop, bazar...)", xpReward: 50, done: false },
-      { id: "sp2", title: "Case 2 — Segundo comércio documentado", xpReward: 50, done: false },
-      { id: "sp3", title: "Case 3 — Terceiro documentado + métricas reais", xpReward: 50, done: false },
+      { id: "sp1", title: "Desenvolvimento do site / vitrine Plin", xpReward: 80, done: true },
+      { id: "sp2", title: "Desenvolvimento do site / vitrine Muli", xpReward: 80, done: false },
+      { id: "sp3", title: "Empacotamento dos 2 cases em PDF de apresentação comercial", xpReward: 100, done: false },
     ],
   },
   {
     id: "masterpumps",
     name: "🏭 Operação Master Pumps",
-    description: "Cunhado → RH → proposta formal → R$10K+",
-    lore: "A porta para o industrial. Um contrato muda tudo.",
+    rank: "S",
+    description: "Cunhado → RH → proposta formal de Avaliação de Desempenho",
+    lore: "A porta para o contrato corporativo industrial. Um único contrato de 80 a 150 colaboradores muda tudo.",
     category: "side",
     priority: "P1",
-    progress: 0,
+    progress: 1,
     totalSteps: 4,
     icon: Swords,
     active: true,
-    reward: "R$10-18K/mês · VPS · Infraestrutura Experia completa",
+    reward: "R$ 10k-18k enterprise · Infraestrutura e servidores da Experia",
     steps: [
-      { id: "mp1", title: "Primeira conversa com o cunhado (Avaliação de Desempenho)", xpReward: 30, done: false },
-      { id: "mp2", title: "Proposta inicial de Avaliação de Desempenho (80-150 pessoas)", xpReward: 50, done: false },
-      { id: "mp3", title: "Reunião com RH + expansão para Admin/Diretoria", xpReward: 80, done: false },
-      { id: "mp4", title: "Contrato enterprise assinado (R$10K+)", xpReward: 500, done: false },
+      { id: "mp1", title: "Alinhamento com o cunhado sobre o modelo de RH da fábrica", xpReward: 30, done: true },
+      { id: "mp2", title: "Elaborar proposta de Avaliação de Desempenho automatizada", xpReward: 60, done: false },
+      { id: "mp3", title: "Reunião de apresentação com a Diretoria / RH", xpReward: 100, done: false },
+      { id: "mp4", title: "Contrato enterprise fechado", xpReward: 500, done: false },
     ],
   },
   {
     id: "credito",
-    name: "🧹 Resgate do Crédito",
-    description: "Limpar Serasa → cartão físico → mobilidade financeira",
-    lore: "O Dragão do Limpa-Nome bloqueia a expansão. Derrotá-lo = acesso a crédito.",
+    name: "🧹 Resgate do Crédito & Limpa-Nome",
+    rank: "A",
+    description: "Cartão físico liberado → Acordo Serasa via War Chest 15k",
+    lore: "O Dragão do Limpa-Nome perde força a cada vitória.",
     category: "castle",
-    priority: "P1",
-    progress: 0,
+    priority: "P0",
+    progress: 1,
     totalSteps: 3,
     icon: Crown,
     active: true,
-    reward: "Cartão físico + acesso a crédito consciente",
+    reward: "Acesso a limites altos e contas empresariais",
     steps: [
-      { id: "cr1", title: "Solicitar cartão físico no banco sem dívida ativa", xpReward: 20, done: false, deadline: "AGORA — custo zero" },
-      { id: "cr2", title: "Feirão Limpa Nome / negociação Serasa (60-80% off)", xpReward: 80, done: false },
-      { id: "cr3", title: "Serasa zerado — nome limpo confirmado", xpReward: 200, done: false },
+      { id: "cr1", title: "Cartão Nubank físico solicitado e conquistado", xpReward: 50, done: true },
+      { id: "cr2", title: "War Chest R$ 15k acumulado para entrada simultânea", xpReward: 150, done: false },
+      { id: "cr3", title: "Feirão Limpa Nome (acordo de 60-80% off quitado)", xpReward: 300, done: false },
     ],
   },
   {
     id: "casa",
-    name: "🪣 Operação Base Limpa",
-    description: "Dedetização, faxina profunda, guarda-roupa, doações",
-    lore: "O Castelo não pode ser um campo de batalha sujo. Ambiente limpo = mente clara.",
+    name: "🪣 Operação Base Limpa (Castelo)",
+    rank: "B",
+    description: "Ordem absoluta no ambiente: doações feitas, guarda-roupa ok, manutenção pendente",
+    lore: "Um monarca não governa em meio ao caos. O ambiente externo reflete a clareza do intelecto.",
     category: "life",
     priority: "P1",
-    progress: 0,
+    progress: 3,
     totalSteps: 4,
     icon: Home,
     active: true,
-    reward: "Ambiente de trabalho e vida mais limpo",
+    reward: "Mente desobstruída · Castelo 100% operacional",
     steps: [
-      { id: "ca1", title: "Doação das roupas da mãe para brechós locais", xpReward: 30, done: false, deadline: "Qualquer tarde livre" },
-      { id: "ca2", title: "Faxina + dedetização embaixo da pia (baratas)", xpReward: 30, done: false },
-      { id: "ca3", title: "Trocar guarda-roupa amarelo pelo marrom do escritório", xpReward: 20, done: false },
-      { id: "ca4", title: "Consertar registro do chuveiro", xpReward: 20, done: false },
+      { id: "ca1", title: "Doação das roupas da mãe para brechós concluída", xpReward: 40, done: true },
+      { id: "ca2", title: "Descarte do guarda-roupa amarelo e alinhamento do marrom", xpReward: 40, done: true },
+      { id: "ca3", title: "Conserto do registro do chuveiro", xpReward: 30, done: true },
+      { id: "ca4", title: "Conserto da bomba da caixa acoplada + Faxina profunda (R$ 250)", xpReward: 50, done: false },
     ],
   },
   {
     id: "documentos",
-    name: "📄 Missão: Documentação",
-    description: "2ª via docs pessoais, certidão, mapear docs do apartamento",
-    lore: "Sem documentos, sem mobilidade. A burocracia não vai se resolver sozinha.",
+    name: "📄 Missão: Documentação & Mauá",
+    rank: "B",
+    description: "Poupatempo Mauá agendado → certidões e mapeamento habitacional",
+    lore: "Autonomia burocrática necessária para contratos, viagens e bancos.",
     category: "life",
     priority: "P1",
-    progress: 0,
+    progress: 1,
     totalSteps: 3,
     icon: FileText,
     active: true,
-    reward: "Autonomia documental completa",
+    reward: "Documentação regularizada para abertura de CNPJ e contas",
     steps: [
-      { id: "do1", title: "2ª via de documento de identidade (RG/CNH)", xpReward: 20, done: false },
-      { id: "do2", title: "Mapear documentos do apartamento (CDHU, IPTU)", xpReward: 15, done: false },
-      { id: "do3", title: "Certidão de nascimento + documentação completa", xpReward: 20, done: false },
+      { id: "do1", title: "2ª via do RG agendada no Poupatempo Mauá", xpReward: 40, done: true },
+      { id: "do2", title: "Mapear certidões e pasta física do apartamento", xpReward: 30, done: false },
+      { id: "do3", title: "Pasta digital de documentos pessoais e societários", xpReward: 50, done: false },
+    ],
+  },
+  {
+    id: "comunicacao",
+    name: "🎙️ Comunicação & Vitrine Instagram",
+    rank: "B",
+    description: "Reorganizar o Instagram atual como vitrine de IA Ops e automação",
+    lore: "Posicionamento digital atrai os clientes que o outreach convida.",
+    category: "side",
+    priority: "P2",
+    progress: 0,
+    totalSteps: 3,
+    icon: Mic,
+    active: true,
+    reward: "Presença digital alinhada com autoridade em IA",
+    steps: [
+      { id: "vz1", title: "Bio e destaques do Instagram atual reorganizados", xpReward: 30, done: false },
+      { id: "vz2", title: "Post carrossel explicativo sobre IA Ops para negócios", xpReward: 40, done: false },
+      { id: "vz3", title: "Gravação de vídeo demonstrando automação na prática", xpReward: 80, done: false },
     ],
   },
   {
     id: "saude",
-    name: "💪 Saúde & Corpo",
-    description: "Academia MMA, hipnose, skincare — o corpo como arma",
-    lore: "Guerreiro sem corpo forte é intelectual frágil. Disciplina física = disciplina mental.",
+    name: "💪 Fisiologia do Monarca",
+    rank: "A",
+    description: "Musculação diária, escápulas, postura ereta (1,92m · 102kg) e saúde bucal",
+    lore: "A mente mais afiada é inútil sem uma carcaça capaz de suportar a intensidade.",
     category: "life",
-    priority: "P2",
-    progress: 0,
-    totalSteps: 5,
+    priority: "P1",
+    progress: 1,
+    totalSteps: 4,
     icon: Dumbbell,
     active: true,
-    reward: "+30% energia diária · Buff de Disciplina permanente",
+    reward: "+40% de estâmina diária · Alinhamento postural",
     steps: [
-      { id: "sa1", title: "Rotina de exercícios em casa (30min/dia × 7 dias)", xpReward: 40, done: false },
-      { id: "sa2", title: "Skincare básico iniciado (produtos comprados)", xpReward: 20, done: false },
-      { id: "sa3", title: "Primeira sessão de auto-hipnose guiada (5min)", xpReward: 30, done: false },
-      { id: "sa4", title: "Matrícula na academia MMA (R$250/mês)", xpReward: 80, done: false },
-      { id: "sa5", title: "30 dias consecutivos de treino (qualquer modalidade)", xpReward: 200, done: false },
-    ],
-  },
-  {
-    id: "voz",
-    name: "🎙️ Voz & Canal",
-    description: "YouTube / Podcast / Narração — monetizar a arma primária",
-    lore: "A voz do Dragonborn não pode ficar calada. Herdada da mãe locutora, refinada pelo KAIROS.",
-    category: "side",
-    priority: "P2",
-    progress: 0,
-    totalSteps: 4,
-    icon: Mic,
-    active: true,
-    reward: "Canal ativo + primeiro conteúdo monetizado",
-    steps: [
-      { id: "vz1", title: "Gravar demo de narração (30s) para portfolio Experia", xpReward: 30, done: false },
-      { id: "vz2", title: "Configurar canal YouTube/podcast (nome + branding)", xpReward: 40, done: false },
-      { id: "vz3", title: "Publicar primeiro vídeo/episódio", xpReward: 80, done: false },
-      { id: "vz4", title: "3 conteúdos publicados com consistência semanal", xpReward: 100, done: false },
-    ],
-  },
-  {
-    id: "idiomas",
-    name: "🌐 Idiomas via IA",
-    description: "Inglês fluente usando método de imersão com IA",
-    lore: "Língua é alavancagem. Inglês = acesso ao mercado global. IA é o professor infinito.",
-    category: "life",
-    priority: "P2",
-    progress: 0,
-    totalSteps: 4,
-    icon: Globe,
-    active: true,
-    reward: "Inglês intermediário/avançado · Mercado global desbloqueado",
-    steps: [
-      { id: "id1", title: "Definir método de imersão (AI Tutor + consumo diário)", xpReward: 20, done: false },
-      { id: "id2", title: "30min/dia × 14 dias consecutivos de prática", xpReward: 50, done: false },
-      { id: "id3", title: "Primeira conversa inteira em inglês (5min+)", xpReward: 80, done: false },
-      { id: "id4", title: "Redação de proposta comercial em inglês", xpReward: 100, done: false },
-    ],
-  },
-  {
-    id: "felixcell",
-    name: "📱 Felix Cell — Assistente de Loja",
-    description: "Bot Clone + formulário de orçamento + copys para a loja de celular",
-    lore: "O Felix é o segundo caso real. Se funcionar, é mais um case para o portfolio Experia.",
-    category: "main",
-    priority: "P1",
-    progress: 0,
-    totalSteps: 4,
-    icon: Store,
-    active: true,
-    reward: "Case #2 documentado · +1 prova social",
-    deadline: "Trial 15 dias",
-    steps: [
-      { id: "fx1", title: "Onboarding: entrevista com dono (capturar voz/FAQ)", xpReward: 40, done: false },
-      { id: "fx2", title: "Setup bot clone no WhatsApp (Evolution API)", xpReward: 60, done: false },
-      { id: "fx3", title: "Formulário de orçamento automatizado", xpReward: 40, done: false },
-      { id: "fx4", title: "3 posts IG + copys gerados e aprovados pelo dono", xpReward: 50, done: false },
-    ],
-  },
-  {
-    id: "celular",
-    name: "📱 Consertar Celular",
-    description: "Display quebrado → levar na casa do avô → tio conserta",
-    lore: "Sem celular funcionando = sem internet móvel = sem mobilidade operacional.",
-    category: "life",
-    priority: "P1",
-    progress: 0,
-    totalSteps: 2,
-    icon: Smartphone,
-    active: true,
-    reward: "Mobilidade + Internet móvel desbloqueada",
-    steps: [
-      { id: "ce1", title: "Levar celular na casa do avô / tio arranjar a tela", xpReward: 20, done: false },
-      { id: "ce2", title: "Celular funcionando + chip com dados ativado", xpReward: 30, done: false },
+      { id: "sa1", title: "Treino de força diário (foco em escápulas e mobilidade)", xpReward: 40, done: false, isHabit: true },
+      { id: "sa2", title: "Consistência de sono e hidratação (3.5L água/dia)", xpReward: 30, done: false, isHabit: true },
+      { id: "sa3", title: "Consulta odontológica para extração do dente podre", xpReward: 80, done: false },
+      { id: "sa4", title: "30 dias consecutivos de consistência física", xpReward: 200, done: false },
     ],
   },
 ];
 
-const categoryColors: Record<string, string> = {
-  main: "border-yellow-500/50 bg-yellow-500/5",
-  side: "border-blue-500/30 bg-blue-500/5",
-  castle: "border-orange-500/30 bg-orange-500/5",
-  life: "border-gray-500/30 bg-gray-500/5",
-};
-
-const categoryLabels: Record<string, string> = {
-  main: "🏆 MAIN",
-  side: "⚔️ SIDE",
-  castle: "🏰 CASTELO",
-  life: "🧍 VIDA",
-};
-
-const priorityColors: Record<string, string> = {
-  P0: "text-red-400 border-red-500/30 bg-red-500/10",
-  P1: "text-yellow-400 border-yellow-500/30 bg-yellow-500/10",
-  P2: "text-blue-400 border-blue-500/30 bg-blue-500/10",
-};
-
-type FilterCat = "all" | "main" | "side" | "castle" | "life";
-
-interface QuestlinesPageProps {
-  expandedId?: string | null;
-}
-
-export function QuestlinesPage({ expandedId }: QuestlinesPageProps) {
+export function QuestlinesPage({ expandedId }: { expandedId?: string | null }) {
   const [questlines, setQuestlines] = useState<Questline[]>(allQuestlines);
-  const [expanded, setExpanded] = useState<string | null>(expandedId ?? null);
-  const [filter, setFilter] = useState<FilterCat>("all");
+  const [expanded, setExpanded] = useState<string | null>(expandedId ?? "experia");
+  const [viewMode, setViewMode] = useState<"list" | "galaxy">("list");
+  const [filter, setFilter] = useState<string>("all");
 
   useEffect(() => {
     if (expandedId) setExpanded(expandedId);
   }, [expandedId]);
 
   const toggleStep = (questlineId: string, stepId: string) => {
+    systemAudio.playHover();
     setQuestlines(prev => prev.map(q => {
       if (q.id !== questlineId) return q;
-      const newSteps = q.steps.map(s =>
-        s.id === stepId ? { ...s, done: !s.done } : s
-      );
+      const newSteps = q.steps.map(s => {
+        if (s.id === stepId) {
+          const nextState = !s.done;
+          if (nextState) systemAudio.playLevelUp();
+          return { ...s, done: nextState };
+        }
+        return s;
+      });
       const progress = newSteps.filter(s => s.done).length;
       return { ...q, steps: newSteps, progress };
     }));
@@ -288,168 +227,230 @@ export function QuestlinesPage({ expandedId }: QuestlinesPageProps) {
   const filtered = questlines.filter(q => q.active && (filter === "all" || q.category === filter));
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="font-serif text-2xl text-secondary glow-gold flex items-center gap-3">
-            <Scroll className="w-8 h-8" />
-            Questlines
-          </h2>
-          <p className="text-muted-foreground text-sm mt-1">T1-2026 FUNDAÇÃO · Clique para expandir e acompanhar etapas</p>
-        </div>
-        <div className="text-xs font-mono text-yellow-400 bg-yellow-500/10 border border-yellow-500/30 px-3 py-2 rounded">
-          {questlines.filter(q => q.priority === "P0").length} quests P0 ativas
-        </div>
-      </div>
+    <div className="space-y-6 max-w-6xl mx-auto animate-fade-in">
+      {/* ══ HEADER ══ */}
+      <div className="system-window p-6 border-system-purple/40">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2 text-[10px] font-mono text-system-purple uppercase tracking-widest mb-1">
+              <Scroll className="w-4 h-4 text-system-purple" />
+              <span>[SISTEMA DE QUESTLINES // ARCO PRINCIPAL DA VIDA]</span>
+            </div>
+            <h2 className="text-3xl font-system text-white uppercase tracking-wider glow-shadow">
+              Questlines & Galáxias
+            </h2>
+            <p className="text-muted-foreground font-rajdhani text-sm">
+              Trilhas estratégicas de ascensão: Expéria Empire, Base Limpa, Crédito e Fisiologia.
+            </p>
+          </div>
 
-      {/* Filter */}
-      <div className="flex gap-2 flex-wrap">
-        {(["all", "main", "side", "castle", "life"] as FilterCat[]).map(f => (
-          <button
-            key={f}
-            onClick={() => setFilter(f)}
-            className={cn(
-              "px-3 py-1 rounded text-xs font-mono uppercase transition-all",
-              filter === f
-                ? "bg-primary/20 border border-primary/50 text-primary"
-                : "bg-muted/30 text-muted-foreground hover:text-foreground"
-            )}
-          >
-            {f === "all" ? "Todos" : categoryLabels[f]}
-          </button>
-        ))}
-      </div>
-
-      {/* Questlines */}
-      <div className="space-y-3">
-        {filtered.map(questline => {
-          const Icon = questline.icon;
-          const isExpanded = expanded === questline.id;
-          const progressPct = questline.totalSteps > 0
-            ? (questline.progress / questline.totalSteps) * 100 : 0;
-
-          return (
-            <div
-              key={questline.id}
-              className={cn("rounded-xl border transition-all duration-300", categoryColors[questline.category])}
+          {/* Alternador de Modo: Lista vs Galáxia */}
+          <div className="flex items-center gap-1.5 p-1 bg-system-void/80 border border-system-border rounded">
+            <button
+              onClick={() => {
+                systemAudio.playHover();
+                setViewMode("list");
+              }}
+              className={cn(
+                "flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-mono transition-all",
+                viewMode === "list"
+                  ? "bg-system-cyan/20 border border-system-cyan text-system-cyan font-bold"
+                  : "text-muted-foreground hover:text-white"
+              )}
             >
-              {/* Header row — always visible */}
-              <button
-                onClick={() => setExpanded(isExpanded ? null : questline.id)}
-                className="w-full p-4 flex items-center gap-4 text-left"
-              >
-                <div className="w-10 h-10 rounded-lg bg-muted/30 flex items-center justify-center flex-shrink-0">
-                  <Icon className="w-5 h-5 text-secondary" />
-                </div>
+              <LayoutGrid className="w-3.5 h-3.5" />
+              <span>LISTA TÁTICA</span>
+            </button>
+            <button
+              onClick={() => {
+                systemAudio.playHover();
+                setViewMode("galaxy");
+              }}
+              className={cn(
+                "flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-mono transition-all",
+                viewMode === "galaxy"
+                  ? "bg-system-purple/20 border border-system-purple text-system-purple font-bold shadow-[0_0_10px_rgba(138,43,226,0.3)]"
+                  : "text-muted-foreground hover:text-white"
+              )}
+            >
+              <Compass className="w-3.5 h-3.5" />
+              <span>MODO GALÁXIA 🌌</span>
+            </button>
+          </div>
+        </div>
+      </div>
 
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <h3 className="font-medium">{questline.name}</h3>
-                    <span className={cn("text-xs font-mono px-2 py-0.5 rounded border", priorityColors[questline.priority])}>
-                      {questline.priority}
-                    </span>
-                    <span className="text-xs font-mono text-muted-foreground bg-muted/30 px-2 py-0.5 rounded">
-                      {categoryLabels[questline.category]}
-                    </span>
-                  </div>
-                  <p className="text-xs text-muted-foreground">{questline.description}</p>
+      {/* ══ MODO GALÁXIA (VISUAL DE CONSTELAÇÕES) ══ */}
+      {viewMode === "galaxy" && (
+        <div className="system-window p-6 border-system-purple/50 bg-system-void/90 relative overflow-hidden">
+          <div className="flex items-center justify-between mb-4 border-b border-system-purple/30 pb-3">
+            <div className="flex items-center gap-2 text-system-purple text-xs font-system tracking-wider uppercase">
+              <Zap className="w-4 h-4 animate-pulse" />
+              <span>MAPA DE CONSTELAÇÕES DIMENSIONAIS</span>
+            </div>
+            <span className="text-[11px] font-mono text-muted-foreground">
+              8 CONSTELAÇÕES ATIVAS
+            </span>
+          </div>
 
-                  {/* Progress bar */}
-                  <div className="flex items-center gap-2 mt-2">
-                    <div className="flex-1 h-1 bg-muted rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-secondary rounded-full transition-all"
-                        style={{ width: `${progressPct}%` }}
-                      />
-                    </div>
-                    <span className="text-xs font-mono text-muted-foreground">
-                      {questline.progress}/{questline.totalSteps}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex-shrink-0">
-                  {isExpanded ? (
-                    <ChevronUp className="w-5 h-5 text-muted-foreground" />
-                  ) : (
-                    <ChevronDown className="w-5 h-5 text-muted-foreground" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {questlines.map((ql) => {
+              const pct = Math.round((ql.progress / ql.totalSteps) * 100);
+              return (
+                <div
+                  key={ql.id}
+                  onClick={() => {
+                    systemAudio.playHover();
+                    setExpanded(ql.id);
+                    setViewMode("list");
+                  }}
+                  className={cn(
+                    "p-4 rounded border cursor-pointer transition-all hover:scale-[1.02]",
+                    ql.rank === "S" ? "system-rank-s" : "border-system-border/60 bg-system-void/60"
                   )}
-                </div>
-              </button>
-
-              {/* Expanded detail panel */}
-              {isExpanded && (
-                <div className="px-4 pb-4 border-t border-border/50 animate-fade-in">
-                  {/* Lore */}
-                  <p className="text-xs text-muted-foreground italic mt-4 mb-4 border-l-2 border-muted pl-3">
-                    {questline.lore}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-system text-sm text-white">{ql.name}</span>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded border border-system-cyan/40 text-system-cyan">
+                      RANK {ql.rank}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between text-xs font-mono text-muted-foreground mb-1.5">
+                    <span>{ql.progress}/{ql.totalSteps} Nódulos Iluminados</span>
+                    <span className="text-system-cyan font-bold">{pct}%</span>
+                  </div>
+                  <div className="h-1.5 w-full bg-system-void rounded-full overflow-hidden border border-system-border">
+                    <div
+                      className={cn(
+                        "h-full rounded-full transition-all duration-700",
+                        ql.rank === "S" ? "bg-system-purple shadow-[0_0_8px_#8a2be2]" : "bg-system-cyan"
+                      )}
+                      style={{ width: `${pct}%` }}
+                    />
+                  </div>
+                  <p className="text-[10px] font-mono text-muted-foreground mt-2">
+                    Clique para abrir os nódulos desta constelação →
                   </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
-                  {/* Deadline + Reward */}
-                  <div className="flex gap-3 mb-4 flex-wrap">
-                    {questline.deadline && (
-                      <div className="flex items-center gap-1 text-xs text-orange-400">
-                        <Clock className="w-3 h-3" />
-                        {questline.deadline}
+      {/* ══ MODO LISTA TÁTICA ══ */}
+      {viewMode === "list" && (
+        <div className="space-y-4">
+          {filtered.map((questline) => {
+            const isExpanded = expanded === questline.id;
+            const pct = Math.round((questline.progress / questline.totalSteps) * 100);
+
+            return (
+              <div
+                key={questline.id}
+                className={cn(
+                  "system-window transition-all duration-300 border overflow-hidden",
+                  questline.rank === "S" ? "system-rank-s" : "border-system-border"
+                )}
+              >
+                {/* Header da Questline */}
+                <div
+                  onClick={() => {
+                    systemAudio.playHover();
+                    setExpanded(isExpanded ? null : questline.id);
+                  }}
+                  className="p-5 flex items-center justify-between cursor-pointer hover:bg-white/[0.02] transition-colors"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className={cn(
+                      "w-11 h-11 rounded flex items-center justify-center border",
+                      questline.rank === "S"
+                        ? "bg-system-purple/20 border-system-purple text-system-purple"
+                        : "bg-system-cyan/15 border-system-cyan/40 text-system-cyan"
+                    )}>
+                      <questline.icon className="w-5 h-5" />
+                    </div>
+
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] font-mono px-1.5 py-0.2 rounded border border-system-cyan/40 text-system-cyan">
+                          RANK {questline.rank}
+                        </span>
+                        <span className="text-[10px] font-mono text-muted-foreground uppercase">
+                          {questline.priority}
+                        </span>
                       </div>
-                    )}
-                    <div className="flex items-center gap-1 text-xs text-secondary">
-                      <Trophy className="w-3 h-3" />
-                      {questline.reward}
+                      <h3 className="font-system text-base text-white tracking-wider mt-0.5">
+                        {questline.name}
+                      </h3>
+                      <p className="text-xs text-muted-foreground font-rajdhani">{questline.description}</p>
                     </div>
                   </div>
 
-                  {/* Steps checklist */}
-                  <div className="space-y-2">
-                    <div className="text-xs font-mono text-muted-foreground mb-2 uppercase tracking-wider">Etapas</div>
-                    {questline.steps.map((step, i) => (
-                      <button
-                        key={step.id}
-                        onClick={() => toggleStep(questline.id, step.id)}
-                        className={cn(
-                          "w-full flex items-start gap-3 p-3 rounded-lg border text-left transition-all",
-                          step.done
-                            ? "bg-secondary/10 border-secondary/30"
-                            : "bg-muted/20 border-border hover:border-primary/30"
-                        )}
-                      >
-                        <div className="mt-0.5 flex-shrink-0">
-                          {step.done ? (
-                            <CheckSquare className="w-4 h-4 text-secondary" />
-                          ) : (
-                            <Circle className="w-4 h-4 text-muted-foreground" />
+                  <div className="flex items-center gap-4">
+                    <div className="hidden sm:block text-right">
+                      <div className="text-xs font-mono text-system-cyan font-bold">{pct}% Concluído</div>
+                      <div className="text-[10px] font-mono text-muted-foreground">
+                        {questline.progress}/{questline.totalSteps} etapas
+                      </div>
+                    </div>
+                    <ChevronDown className={cn("w-4 h-4 text-muted-foreground transition-transform", isExpanded && "rotate-180")} />
+                  </div>
+                </div>
+
+                {/* Corpo Expandido com os Passos */}
+                {isExpanded && (
+                  <div className="p-5 border-t border-system-border/60 bg-system-void/80 space-y-3 animate-fade-in">
+                    <p className="text-xs font-rajdhani text-muted-foreground italic border-l-2 border-system-cyan/40 pl-2.5">
+                      {questline.lore}
+                    </p>
+
+                    <div className="space-y-2 pt-2">
+                      {questline.steps.map((step) => (
+                        <div
+                          key={step.id}
+                          onClick={() => toggleStep(questline.id, step.id)}
+                          className={cn(
+                            "flex items-center justify-between p-3 rounded border cursor-pointer transition-all",
+                            step.done
+                              ? "bg-system-cyan/10 border-system-cyan/40 text-white"
+                              : "bg-system-void/60 border-system-border/40 text-muted-foreground hover:border-system-cyan/30"
                           )}
-                        </div>
-                        <div className="flex-1">
-                          <p className={cn(
-                            "text-sm",
-                            step.done && "line-through text-muted-foreground"
-                          )}>
-                            {step.title}
-                          </p>
-                          <div className="flex items-center gap-2 mt-1">
-                            <span className="text-xs text-neon-purple font-mono">+{step.xpReward} XP</span>
-                            {step.deadline && (
-                              <span className="text-xs text-orange-400 font-mono">
-                                <AlertCircle className="w-3 h-3 inline mr-0.5" />
-                                {step.deadline}
+                        >
+                          <div className="flex items-center gap-3">
+                            {step.done ? (
+                              <CheckCircle2 className="w-4 h-4 text-system-cyan" />
+                            ) : (
+                              <Circle className="w-4 h-4 text-muted-foreground" />
+                            )}
+                            <span className={cn("text-xs font-rajdhani font-semibold", step.done && "line-through text-system-cyan")}>
+                              {step.title}
+                            </span>
+                          </div>
+
+                          <div className="flex items-center gap-2 font-mono text-[10px]">
+                            {step.isHabit && (
+                              <span className="px-1.5 py-0.2 rounded border border-system-gold/40 text-system-gold bg-system-gold/10">
+                                🔁 HÁBITO
                               </span>
                             )}
+                            <span className="text-system-cyan">+{step.xpReward} XP</span>
                           </div>
                         </div>
-                        <span className="text-xs font-mono text-muted-foreground flex-shrink-0 mt-0.5">
-                          #{i + 1}
-                        </span>
-                      </button>
-                    ))}
+                      ))}
+                    </div>
+
+                    <div className="pt-2 text-[11px] font-mono text-muted-foreground flex items-center justify-between">
+                      <span>🏆 Recompensa: {questline.reward}</span>
+                      {questline.deadline && <span className="text-system-gold">{questline.deadline}</span>}
+                    </div>
                   </div>
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

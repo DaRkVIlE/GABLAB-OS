@@ -1,9 +1,10 @@
-﻿import { Lock, Unlock, ShoppingBag, Gem, Calculator, RefreshCw } from "lucide-react";
+import { Lock, Unlock, ShoppingBag, Gem, Calculator, RefreshCw, Flame, Sparkles } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import * as api from "@/lib/gameApi";
 import type { RpgLootItem } from "@/lib/gameApi";
 import * as LucideIcons from "lucide-react";
+import { systemAudio } from "@/lib/systemAudio";
 
 const IconMap: Record<string, any> = LucideIcons as any;
 function DynIcon({ name, className }: { name: string; className?: string }) {
@@ -11,158 +12,245 @@ function DynIcon({ name, className }: { name: string; className?: string }) {
   return <Icon className={className} />;
 }
 
-const categoryColors: Record<string, string> = {
-  work:     "from-blue-500/20 to-blue-600/5",
-  castle:   "from-orange-500/20 to-orange-600/5",
-  personal: "from-purple-500/20 to-purple-600/5",
-  dopamine: "from-red-500/10 to-red-600/5",
-  utility:  "from-green-500/20 to-green-600/5",
-};
+// Fallback conscious dopamine items if DB is empty
+const fallbackLootItems: RpgLootItem[] = [
+  {
+    id: "weed-conscious",
+    name: "🌿 Baseado Consciente",
+    description: "Sessão de relaxamento noturno profundo após vitória tática do dia.",
+    cost: 500,
+    currency: "GEMS",
+    category: "dopamine",
+    tier: 3,
+    unlocked: false,
+    requirement: "Requer Streak ≥ 5 dias consecutivos + Quests do dia 100%",
+    icon: "Flame"
+  },
+  {
+    id: "master-bation",
+    name: "🔞 Master Bation Consciente",
+    description: "Liberação fisiológica regulada e deliberada, sem culpa.",
+    cost: 200,
+    currency: "GEMS",
+    category: "dopamine",
+    tier: 2,
+    unlocked: false,
+    requirement: "Requer bloco de Deep Work concluído + Foco matinal 100%",
+    icon: "Heart"
+  },
+  {
+    id: "snack-especial",
+    name: "🍿 Snack Especial da Noite",
+    description: "Refeição ou doce diferenciado para celebrar metas semanais.",
+    cost: 150,
+    currency: "GEMS",
+    category: "dopamine",
+    tier: 1,
+    unlocked: true,
+    requirement: "Consumo moderado após o jantar",
+    icon: "ShoppingBag"
+  },
+  {
+    id: "youtube-break",
+    name: "▶️ YouTube / Podcast (45 min)",
+    description: "Consumo livre de vídeos e entretenimento sem pressa.",
+    cost: 100,
+    currency: "GEMS",
+    category: "dopamine",
+    tier: 1,
+    unlocked: true,
+    requirement: "Após as 20:00",
+    icon: "Tv"
+  },
+  {
+    id: "insta-scroll",
+    name: "📱 Instagram Livre (20 min)",
+    description: "Explorar stories e feeds sem dispersar o dia produtivo.",
+    cost: 75,
+    currency: "GEMS",
+    category: "dopamine",
+    tier: 1,
+    unlocked: true,
+    requirement: "Apenas no bloco Santuário (noite)",
+    icon: "Smartphone"
+  },
+];
+
 const categoryLabels: Record<string, string> = {
-  work: "⚙️ Trabalho", castle: "🏠 Castelo", personal: "🧍 Pessoal",
-  dopamine: "🔥 Dopamina", utility: "🔧 Utilidade",
-};
-const currencyColors: Record<string, string> = {
-  REAL: "text-green-400", GEMS: "text-blue-400", SEEDS: "text-yellow-400", XP: "text-purple-400",
+  all: "Todos",
+  dopamine: "🔥 Dopamina Consciente",
+  work: "⚙️ Trabalho",
+  castle: "🏠 Castelo",
+  personal: "🧍 Pessoal",
+  utility: "🔧 Utilidade",
 };
 
-type FilterCat = "all" | "work" | "castle" | "personal" | "dopamine" | "utility";
+const currencyColors: Record<string, string> = {
+  REAL: "text-green-400", GEMS: "text-system-cyan", SEEDS: "text-system-gold", XP: "text-system-purple",
+};
+
+type FilterCat = "all" | "dopamine" | "work" | "castle" | "personal" | "utility";
 
 export function LootShop() {
   const [items, setItems] = useState<RpgLootItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<FilterCat>("all");
   const [unlocking, setUnlocking] = useState<string | null>(null);
-  const [calcPrice, setCalcPrice] = useState<string>("");
-  const [calcStock, setCalcStock] = useState<string>("1");
-  const [calcType, setCalcType] = useState<number>(0.5);
 
-  const load = async () => { setLoading(true); setItems(await api.getLootItems()); setLoading(false); };
+  const load = async () => {
+    setLoading(true);
+    try {
+      const data = await api.getLootItems();
+      if (data && data.length > 0) {
+        setItems(data);
+      } else {
+        setItems(fallbackLootItems);
+      }
+    } catch {
+      setItems(fallbackLootItems);
+    }
+    setLoading(false);
+  };
+
   useEffect(() => { load(); }, []);
 
   const handleToggleUnlock = async (item: RpgLootItem) => {
+    systemAudio.playHover();
     setUnlocking(item.id);
-    await api.updateLootItem(item.id, { unlocked: !item.unlocked });
-    await load();
+    const nextState = !item.unlocked;
+    if (nextState) systemAudio.playLevelUp();
+    try {
+      await api.updateLootItem(item.id, { unlocked: nextState });
+    } catch {
+      // offline fallback toggle
+    }
+    setItems(prev => prev.map(i => i.id === item.id ? { ...i, unlocked: nextState } : i));
     setUnlocking(null);
-  };
-
-  const calculateRP = () => {
-    const price = parseFloat(calcPrice || "0");
-    const stock = parseInt(calcStock || "1") || 1;
-    if (price <= 0) return 0;
-    return Math.ceil((Math.ceil(price / 10) * 10 * calcType) / stock);
   };
 
   const filtered = items.filter(i => filter === "all" || i.category === filter);
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
-        <div>
-          <h2 className="font-serif text-2xl text-secondary glow-gold flex items-center gap-3">
-            <ShoppingBag className="w-8 h-8" />Arsenal de Recompensas
-          </h2>
-          <p className="text-muted-foreground text-sm mt-1">Cada item custa realização — não dinheiro fácil</p>
-          <div className="flex gap-3 flex-wrap mt-4">
-            {Object.entries(currencyColors).map(([cur, color]) => (
-              <div key={cur} className="flex items-center gap-1 text-xs font-mono">
-                <Gem className={cn("w-3 h-3", color)} /><span className={color}>{cur}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="glass-card p-4 border-yellow-500/20 md:max-w-[400px] w-full">
-          <h3 className="text-xs font-mono text-yellow-400 mb-3 flex items-center gap-2">
-            <Calculator className="w-4 h-4" /> Calculadora de Precificação (RP Pricer)
-          </h3>
-          <div className="grid grid-cols-2 gap-3 mb-3">
-            <div>
-              <label className="block text-[10px] uppercase text-muted-foreground mb-1">Custo Real (R$)</label>
-              <input type="number" min={0} placeholder="Ex: 399.99"
-                className="w-full bg-background border border-border rounded px-2 py-1 text-sm outline-none"
-                value={calcPrice} onChange={e => setCalcPrice(e.target.value)} />
+    <div className="space-y-6 max-w-6xl mx-auto animate-fade-in">
+      {/* ══ HEADER ══ */}
+      <div className="system-window p-6 border-system-gold/40">
+        <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
+          <div>
+            <div className="flex items-center gap-2 text-[10px] font-mono text-system-gold uppercase tracking-widest mb-1">
+              <ShoppingBag className="w-4 h-4 text-system-gold" />
+              <span>[SISTEMA DE ARSENAL // RECOMPENSAS & DOPAMINA]</span>
             </div>
-            <div>
-              <label className="block text-[10px] uppercase text-muted-foreground mb-1">Estoque</label>
-              <input type="number" min={1}
-                className="w-full bg-background border border-border rounded px-2 py-1 text-sm outline-none"
-                value={calcStock} onChange={e => setCalcStock(e.target.value)} />
+            <h2 className="text-3xl font-system text-white uppercase tracking-wider glow-hunter">
+              Arsenal & Loot Shop
+            </h2>
+            <p className="text-muted-foreground font-rajdhani text-sm mt-1">
+              Dopamina Consciente: Recompensas compradas com disciplina real (Gemas e Streaks).
+            </p>
+            <div className="flex gap-4 flex-wrap mt-3">
+              {Object.entries(currencyColors).map(([cur, color]) => (
+                <div key={cur} className="flex items-center gap-1.5 text-xs font-mono">
+                  <Gem className={cn("w-3.5 h-3.5", color)} />
+                  <span className={cn("font-bold", color)}>{cur}</span>
+                </div>
+              ))}
             </div>
-            <div className="col-span-2">
-              <label className="block text-[10px] uppercase text-muted-foreground mb-1">Tipologia</label>
-              <select className="w-full bg-background border border-border rounded px-2 py-1 text-sm outline-none"
-                value={calcType} onChange={e => setCalcType(Number(e.target.value))}>
-                <option value={0.5}>Tipo I (Útil, Não distrai) — 0.5x</option>
-                <option value={1.0}>Tipo II (Útil, Distrai) — 1.0x</option>
-                <option value={1.0}>Tipo III (Inútil, Não distrai) — 1.0x</option>
-                <option value={2.0}>Tipo IV (Inútil, Distrai muito) — 2.0x</option>
-              </select>
-            </div>
-          </div>
-          <div className="bg-background/50 rounded p-2 text-center border border-border/50">
-            <span className="block text-[10px] uppercase text-muted-foreground">Preço Justo (Unitário)</span>
-            <span className="font-mono text-xl text-cyan-400 font-bold">{calculateRP()} GEMS</span>
           </div>
         </div>
       </div>
 
+      {/* ══ CATEGORY TABS ══ */}
       <div className="flex gap-2 flex-wrap">
-        {(["all","work","castle","personal","dopamine","utility"] as FilterCat[]).map(f => (
-          <button key={f} onClick={() => setFilter(f)}
-            className={cn("px-3 py-1 rounded-lg text-xs font-mono transition-all",
-              filter === f ? "bg-primary/20 border border-primary/50 text-primary" : "bg-muted/50 hover:bg-muted text-muted-foreground")}>
-            {f === "all" ? "Todos" : categoryLabels[f]}
+        {(["all", "dopamine", "work", "castle", "personal", "utility"] as FilterCat[]).map(f => (
+          <button
+            key={f}
+            onClick={() => {
+              systemAudio.playHover();
+              setFilter(f);
+            }}
+            className={cn(
+              "px-3.5 py-1.5 rounded text-xs font-mono transition-all",
+              filter === f
+                ? "bg-system-cyan/20 border border-system-cyan text-system-cyan font-bold shadow-[0_0_8px_rgba(0,240,255,0.3)]"
+                : "bg-system-void/80 border border-system-border/60 hover:border-system-cyan/40 text-muted-foreground"
+            )}
+          >
+            {categoryLabels[f]}
           </button>
         ))}
       </div>
 
+      {/* ══ ITEMS GRID ══ */}
       {loading ? (
-        <div className="flex items-center justify-center py-12 text-muted-foreground">
-          <RefreshCw className="w-5 h-5 animate-spin mr-2" />Carregando arsenal...
+        <div className="flex items-center justify-center py-12 text-muted-foreground font-mono text-xs">
+          <RefreshCw className="w-5 h-5 animate-spin mr-2 text-system-cyan" />
+          Acessando o Arsenal do Sistema...
         </div>
       ) : (
-        <div className="grid grid-cols-3 gap-4">
-          {filtered.length === 0 && <p className="text-sm text-muted-foreground col-span-3">Nenhum item nesta categoria.</p>}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {filtered.length === 0 && (
+            <p className="text-xs font-mono text-muted-foreground col-span-3">Nenhum item nesta categoria.</p>
+          )}
           {filtered.map((item, index) => (
-            <div key={item.id}
-              className={cn("relative overflow-hidden rounded-xl border transition-all duration-300 animate-fade-in",
-                item.unlocked ? "loot-item-unlocked cursor-pointer hover:scale-[1.02]" : "loot-item-locked")}
-              style={{ animationDelay: `${index * 60}ms` }}>
-              <div className={cn("absolute inset-0 bg-gradient-to-br", categoryColors[item.category])} />
-              <div className="relative p-5">
-                <div className="absolute top-3 right-3">
-                  {item.unlocked ? <Unlock className="w-4 h-4 text-secondary" /> : <Lock className="w-4 h-4 text-muted-foreground" />}
+            <div
+              key={item.id}
+              className={cn(
+                "system-window p-5 transition-all duration-300 border relative overflow-hidden",
+                item.unlocked ? "border-system-cyan/50 hover:border-system-cyan" : "border-system-border/60 opacity-60 grayscale-[40%]"
+              )}
+              style={{ animationDelay: `${index * 50}ms` }}
+            >
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded border border-system-gold/40 text-system-gold bg-system-gold/10">
+                  TIER {item.tier}
+                </span>
+                <div>
+                  {item.unlocked ? (
+                    <Unlock className="w-4 h-4 text-system-cyan" />
+                  ) : (
+                    <Lock className="w-4 h-4 text-muted-foreground" />
+                  )}
                 </div>
-                <div className="w-12 h-12 rounded-xl bg-card/80 flex items-center justify-center mb-3 mx-auto">
-                  <DynIcon name={item.icon} className={cn("w-6 h-6", item.unlocked ? "text-secondary" : "text-muted-foreground")} />
-                </div>
-                <div className="flex justify-center mb-2">
-                  <span className="text-xs font-mono bg-muted/50 px-2 py-0.5 rounded">TIER {item.tier}</span>
-                </div>
-                <h3 className={cn("font-serif text-sm text-center mb-1 leading-tight", item.unlocked ? "text-foreground" : "text-muted-foreground")}>
-                  {item.name}
-                </h3>
-                <p className="text-xs text-muted-foreground text-center mb-3 leading-relaxed">{item.description}</p>
-                <div className="text-center mb-3">
-                  <span className={cn("font-mono text-lg font-bold", currencyColors[item.currency])}>
-                    {item.cost.toLocaleString("pt-BR")} {item.currency}
-                  </span>
-                </div>
-                {item.requirement && (
-                  <div className="px-2 py-2 bg-muted/50 rounded-lg mb-3">
-                    <p className="text-xs text-muted-foreground text-center leading-relaxed">{item.requirement}</p>
-                  </div>
-                )}
-                <button onClick={() => handleToggleUnlock(item)} disabled={unlocking === item.id}
-                  className={cn("w-full py-2 rounded-lg font-medium text-sm transition-colors",
-                    item.unlocked ? "bg-secondary text-secondary-foreground hover:bg-secondary/90"
-                    : "bg-muted/50 text-muted-foreground hover:bg-muted")}>
-                  {unlocking === item.id
-                    ? <RefreshCw className="w-4 h-4 animate-spin mx-auto" />
-                    : item.unlocked ? "✅ Resgatar" : "🔒 Bloqueado"}
-                </button>
               </div>
+
+              <div className="w-12 h-12 rounded bg-system-void/90 border border-system-border flex items-center justify-center mb-3 mx-auto">
+                <DynIcon name={item.icon} className={cn("w-6 h-6", item.unlocked ? "text-system-cyan" : "text-muted-foreground")} />
+              </div>
+
+              <h3 className={cn("font-system text-sm text-center mb-1", item.unlocked ? "text-white" : "text-muted-foreground")}>
+                {item.name}
+              </h3>
+              <p className="text-xs font-rajdhani text-muted-foreground text-center mb-3 leading-relaxed">
+                {item.description}
+              </p>
+
+              <div className="text-center mb-3">
+                <span className={cn("font-mono text-base font-bold", currencyColors[item.currency] || "text-system-cyan")}>
+                  {item.cost.toLocaleString("pt-BR")} {item.currency}
+                </span>
+              </div>
+
+              {item.requirement && (
+                <div className="px-3 py-2 bg-system-void/80 border border-system-border/60 rounded mb-3">
+                  <p className="text-[11px] font-rajdhani text-muted-foreground text-center">
+                    <span className="text-system-gold font-bold">REQUISITO:</span> {item.requirement}
+                  </p>
+                </div>
+              )}
+
+              <button
+                onClick={() => handleToggleUnlock(item)}
+                disabled={unlocking === item.id}
+                className={cn(
+                  "w-full py-2 rounded text-xs font-system tracking-wider transition-all",
+                  item.unlocked
+                    ? "bg-system-cyan/20 border border-system-cyan text-system-cyan hover:bg-system-cyan/30 shadow-[0_0_10px_rgba(0,240,255,0.2)]"
+                    : "bg-system-void/80 border border-border text-muted-foreground hover:text-white"
+                )}
+              >
+                {unlocking === item.id
+                  ? <RefreshCw className="w-4 h-4 animate-spin mx-auto text-system-cyan" />
+                  : item.unlocked ? "✅ RESGATAR RECOMPENSA" : "🔒 BLOQUEADO"}
+              </button>
             </div>
           ))}
         </div>

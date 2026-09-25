@@ -3,10 +3,11 @@ import { CurrentQuestPanel } from "./CurrentQuestPanel";
 import { DataMatrix } from "./DataMatrix";
 import { useKAIROS } from "@/hooks/useKAIROS";
 import { useSharedBrain } from "@/hooks/useSharedBrain";
+import { systemAudio } from "@/lib/systemAudio";
 import {
   Cpu, Activity, Flame, Target, Zap, TrendingUp,
   AlertCircle, ChevronRight, Calendar, Bot, Loader2,
-  Wifi, WifiOff, Skull, Shield, RotateCcw, Trophy
+  Wifi, WifiOff, Skull, Shield, RotateCcw, Trophy, Clock, Sun, Moon, Swords
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -14,7 +15,14 @@ interface DashboardProps {
   onQuestlineClick?: (questlineId: string) => void;
 }
 
-const coldCallDeadline = new Date("2026-04-26");
+// Daily blocks for 07h-23h routine
+const DAILY_SCHEDULE = [
+  { time: "07:00 - 08:30", name: "Ritual Matinal & Ativação", type: "ritual", icon: Sun },
+  { time: "09:00 - 13:00", name: "Raid 1: AI Ops & Expéria MVP", type: "deepwork", icon: Zap },
+  { time: "14:00 - 18:00", name: "Raid 2: Outreach Orgânico & Aulas", type: "deepwork", icon: Swords },
+  { time: "19:00 - 21:00", name: "Arena: Treino de Força & Recuperação", type: "arena", icon: Shield },
+  { time: "22:00 - 23:00", name: "Santuário: Check-in Noturno & Reset", type: "sanctuary", icon: Moon },
+];
 
 export function Dashboard({ onQuestlineClick }: DashboardProps = {}) {
   const brain = useSharedBrain();
@@ -24,18 +32,19 @@ export function Dashboard({ onQuestlineClick }: DashboardProps = {}) {
     revenueProgress, revenueGoal, questsCompletedToday, bossesCompleted, bossesTotal,
   } = brain;
   const kairos = useKAIROS(30000);
-  const [daysUntilCalls, setDaysUntilCalls] = useState(0);
+  const [currentHour, setCurrentHour] = useState(new Date().getHours());
 
   useEffect(() => {
-    const diff = Math.ceil((coldCallDeadline.getTime() - Date.now()) / (1000 * 60 * 60 * 24));
-    setDaysUntilCalls(Math.max(0, diff));
+    const timer = setInterval(() => {
+      setCurrentHour(new Date().getHours());
+    }, 60000);
+    return () => clearInterval(timer);
   }, []);
 
-  const xpInLevel = xp % 100;
   const seasonStart = new Date("2026-04-10");
   const seasonDay = Math.max(1, Math.floor((Date.now() - seasonStart.getTime()) / (1000 * 60 * 60 * 24)) + 1);
 
-  // Bosses from roadmap.md via API (dynamic)
+  // Bosses from roadmap.md via API
   const activeBosses = kairos.bosses.filter(b => !b.status.includes("✅"));
   const completedBosses = kairos.bosses.filter(b => b.status.includes("✅"));
 
@@ -66,115 +75,120 @@ export function Dashboard({ onQuestlineClick }: DashboardProps = {}) {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-6xl mx-auto">
       {/* ══ LOSS AVERSION ALERT ══ */}
       {streakBroken && (
-        <div className="glass-card p-4 border-2 border-red-500/50 bg-red-500/10 animate-pulse">
+        <div className="system-window p-4 border-2 border-red-500/60 bg-red-500/10 animate-pulse">
           <div className="flex items-center gap-3">
             <Skull className="w-6 h-6 text-red-400" />
             <div>
-              <p className="font-mono text-sm text-red-400 font-bold">💀 STREAK QUEBRADO · -50 XP</p>
-              <p className="text-xs text-red-400/60 font-mono">Você perdeu a consistência. Reconstrua hoje ou afunde.</p>
+              <p className="font-mono text-sm text-red-400 font-bold uppercase tracking-wider">[ALERTA DO SISTEMA] 💀 STREAK QUEBRADO · -50 XP</p>
+              <p className="text-xs text-red-400/80 font-mono">Consistência perdida. Reconstrua imediatamente hoje ou afunde.</p>
             </div>
           </div>
         </div>
       )}
 
-      {/* War Banner */}
-      <div className={cn(
-        "glass-card p-8 relative overflow-hidden animate-fade-in",
-        skyrosScore <= 30 && "border-red-500/30 shadow-[0_0_30px_rgba(239,68,68,0.1)]"
-      )}>
-        <div className="absolute inset-0 opacity-10" style={{
-          backgroundImage: `linear-gradient(hsl(var(--neon-cyan) / 0.15) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--neon-cyan) / 0.15) 1px, transparent 1px)`,
-          backgroundSize: "20px 20px"
-        }} />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-neon-magenta/10" />
+      {/* ══ SOLO LEVELING WAR BANNER / COMMAND CENTER ══ */}
+      <div className="system-window p-6 border-system-cyan/40 relative overflow-hidden">
+        {/* Subtle Cyber Grid Background */}
+        <div className="absolute inset-0 scanline pointer-events-none opacity-40" />
 
-        <div className="relative z-10 flex items-start justify-between">
-          <div>
-            <div className="flex items-center gap-3 mb-3">
-              <Cpu className="w-6 h-6 text-primary" />
-              <span className="text-sm font-mono text-primary">
-                GABRIEL OS v4.2 // LVL {level} // T1-2026 · DIA {seasonDay}/90
+        <div className="relative z-10 flex flex-col xl:flex-row xl:items-center justify-between gap-6">
+          <div className="space-y-3">
+            <div className="flex items-center gap-3 flex-wrap">
+              <span className="text-[10px] font-mono tracking-widest text-system-cyan uppercase px-2 py-0.5 border border-system-cyan/40 bg-system-cyan/10 rounded">
+                [SISTEMA DE COMANDO // PROTOCOLO S-RANK]
               </span>
-              <Activity className="w-4 h-4 text-neon-green animate-pulse" />
-              {/* Backend status indicator */}
+              <span className="text-xs font-mono text-muted-foreground">
+                DIA {seasonDay} DA TEMPORADA
+              </span>
+              <Activity className="w-4 h-4 text-system-cyan animate-pulse" />
               {kairos.backendOnline ? (
-                <span className="flex items-center gap-1 text-[10px] font-mono text-neon-green">
-                  <Wifi className="w-3 h-3" /> LIVE
+                <span className="flex items-center gap-1 text-[10px] font-mono text-system-cyan">
+                  <Wifi className="w-3 h-3" /> NEURAL LINK ONLINE
                 </span>
               ) : (
-                <span className="flex items-center gap-1 text-[10px] font-mono text-red-400">
-                  <WifiOff className="w-3 h-3" /> OFFLINE
+                <span className="flex items-center gap-1 text-[10px] font-mono text-muted-foreground">
+                  <WifiOff className="w-3 h-3" /> STANDALONE LOCAL
                 </span>
               )}
             </div>
 
-            <h2 className="font-display text-4xl text-primary glow-cyan mb-2 uppercase tracking-wider">
-              Gabriel Lima
-            </h2>
-            <p className="text-muted-foreground font-mono text-sm mb-4">
-              &gt; Arquiteto-Comunicador · Voice of the Dragonborn
-            </p>
-
-            <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-500/10 border border-red-500/30 w-fit">
-              <AlertCircle className="w-4 h-4 text-red-400" />
-              <span className="text-sm font-mono text-red-400">
-                {kairos.isolationActive ? '🔴 ISOLATION MODE — DEEP WORK ATIVO' : 'T1 FUNDAÇÃO — MODO DE GUERRA ATIVO'}
-              </span>
+            <div>
+              <h2 className="text-3xl md:text-4xl font-system text-white tracking-widest uppercase glow-hunter">
+                SHADOW MONARCH GABRIEL
+              </h2>
+              <p className="text-muted-foreground font-rajdhani text-sm mt-0.5">
+                Arquiteto de Inteligência Artificial · Nível {level} · Sincronia Neural 99.4%
+              </p>
             </div>
 
-            <div className="flex items-center gap-3 mt-4 flex-wrap">
-              <StatPill icon={Flame} value={`${streak}d`} label="streak" color={streakBroken ? "text-red-400" : "text-neon-orange"} borderColor={streakBroken ? "border-red-500/30" : "border-neon-orange/30"} bgColor={streakBroken ? "bg-red-500/10" : "bg-neon-orange/10"} />
-              <StatPill icon={Zap} value={`${focoGems} GEMS`} label="foco" color="text-blue-400" borderColor="border-blue-400/30" bgColor="bg-blue-500/10" />
-              <StatPill icon={Target} value={`R$ ${realCoins.toLocaleString("pt-BR")}`} label="faturado" color="text-green-400" borderColor="border-green-500/30" bgColor="bg-green-500/10" />
-              {availableAttributePoints > 0 && (
-                <StatPill icon={TrendingUp} value={`${availableAttributePoints} pts`} label="skill pts" color="text-yellow-400" borderColor="border-yellow-500/30" bgColor="bg-yellow-500/10" />
-              )}
-            </div>
-
-            {/* ══ REVENUE PROGRESS BAR (Meta R$ 30k) ══ */}
-            <div className="mt-4 w-full max-w-md">
-              <div className="flex justify-between items-center mb-1.5">
-                <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">Meta Faturamento</span>
-                <span className="text-[10px] font-mono text-primary">
-                  R$ {realCoins.toLocaleString("pt-BR")} / R$ {revenueGoal.toLocaleString("pt-BR")} — {Math.round(revenueProgress)}%
+            {/* Badges de Estado */}
+            <div className="flex items-center gap-3 flex-wrap pt-1">
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded bg-system-crimson/15 border border-system-crimson/50 shadow-[0_0_12px_rgba(255,0,51,0.3)] animate-pulse">
+                <Flame className="w-4 h-4 text-system-crimson" />
+                <span className="text-xs font-system text-system-crimson tracking-wider">
+                  ⚡ MODO MONEY RUSH ATIVO
                 </span>
               </div>
-              <div className="h-2.5 w-full bg-muted/20 rounded-full overflow-hidden border border-border/30">
+
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded bg-system-purple/15 border border-system-purple/40 text-system-purple">
+                <Target className="w-4 h-4" />
+                <span className="text-xs font-mono">
+                  {kairos.isolationActive ? '🔴 DEEP WORK / ISOLATION' : 'ALVO: 1º CLIENTE AI OPS ESTE MÊS'}
+                </span>
+              </div>
+            </div>
+
+            {/* Stat Pills */}
+            <div className="flex items-center gap-2.5 pt-2 flex-wrap">
+              <StatPill icon={Flame} value={`${streak}d`} label="streak" color={streakBroken ? "text-red-400" : "text-system-gold"} borderColor="border-system-gold/30" bgColor="bg-system-gold/10" />
+              <StatPill icon={Zap} value={`${focoGems} GEMS`} label="mana" color="text-system-cyan" borderColor="border-system-cyan/30" bgColor="bg-system-cyan/10" />
+              <StatPill icon={Target} value={`R$ ${realCoins.toLocaleString("pt-BR")}`} label="faturado" color="text-green-400" borderColor="border-green-500/30" bgColor="bg-green-500/10" />
+              {availableAttributePoints > 0 && (
+                <StatPill icon={TrendingUp} value={`${availableAttributePoints} pts`} label="skill pts" color="text-system-purple" borderColor="border-system-purple/30" bgColor="bg-system-purple/10" />
+              )}
+            </div>
+
+            {/* ══ REVENUE PROGRESS BAR (Meta R$ 40k) ══ */}
+            <div className="pt-2 w-full max-w-lg">
+              <div className="flex justify-between items-center mb-1 text-xs font-mono">
+                <span className="text-muted-foreground uppercase text-[10px]">META DA SEASON: R$ 40.000</span>
+                <span className="text-system-cyan font-bold">
+                  R$ {realCoins.toLocaleString("pt-BR")} / R$ {revenueGoal.toLocaleString("pt-BR")} ({Math.round(revenueProgress)}%)
+                </span>
+              </div>
+              <div className="h-2.5 w-full bg-system-void rounded-full overflow-hidden border border-system-cyan/30 p-0.5">
                 <div
-                  className={cn(
-                    "h-full bg-gradient-to-r from-primary via-primary/80 to-primary/50 transition-all duration-1000 ease-out rounded-full",
-                    revenueProgress > 50 && "shadow-[0_0_15px_rgba(201,168,76,0.6)]"
-                  )}
+                  className="h-full bg-gradient-to-r from-system-cyan via-system-purple to-system-gold rounded-full transition-all duration-1000 shadow-[0_0_10px_#00f0ff]"
                   style={{ width: `${revenueProgress}%` }}
                 />
               </div>
             </div>
           </div>
 
-          {/* ══ SKYROS SCORE ORB (replaces old XP Orb) ══ */}
-          <div className="hidden xl:block relative text-center flex-shrink-0">
+          {/* ══ SKYROS SCORE ORB ══ */}
+          <div className="hidden xl:flex flex-col items-center justify-center flex-shrink-0">
             <div className={cn(
-              "w-32 h-32 border-2 rounded-full flex items-center justify-center relative transition-all duration-500",
+              "w-32 h-32 border-2 rounded-full flex items-center justify-center relative transition-all duration-500 shadow-[0_0_20px_rgba(0,240,255,0.15)]",
               skyrosScoreBorderColor,
               skyrosScore <= 30 && "animate-pulse"
             )}>
-              <div className="text-center">
-                <span className={cn("font-display text-3xl block", skyrosScoreColor)}>{skyrosScore}</span>
+              <div className="text-center z-10">
+                <span className={cn("font-system text-3xl block font-bold", skyrosScoreColor)}>{skyrosScore}</span>
                 <div className="text-[10px] text-muted-foreground uppercase font-mono">SKYROS</div>
-                <div className={cn("text-[10px] font-mono", skyrosScoreColor)}>
-                  {skyrosScore >= 80 ? "ELITE" : skyrosScore >= 50 ? "EM RISCO" : "CRÍTICO"}
+                <div className={cn("text-[9px] font-mono font-bold uppercase", skyrosScoreColor)}>
+                  {skyrosScore >= 80 ? "ELITE RANK" : skyrosScore >= 50 ? "EM RISCO" : "CRÍTICO"}
                 </div>
               </div>
               <svg className="absolute inset-0 w-full h-full -rotate-90">
-                <circle cx="64" cy="64" r="60" stroke="currentColor" strokeWidth="2" fill="transparent" className="text-muted/20" />
+                <circle cx="64" cy="64" r="58" stroke="currentColor" strokeWidth="3" fill="transparent" className="text-system-void/80" />
                 <circle
-                  cx="64" cy="64" r="60"
+                  cx="64" cy="64" r="58"
                   stroke="currentColor" strokeWidth="4" fill="transparent"
-                  strokeDasharray="377"
-                  strokeDashoffset={377 - (377 * (skyrosScore / 100))}
+                  strokeDasharray="364"
+                  strokeDashoffset={364 - (364 * (skyrosScore / 100))}
                   className={cn("transition-all duration-1000", skyrosScoreColor)}
                 />
               </svg>
@@ -183,132 +197,165 @@ export function Dashboard({ onQuestlineClick }: DashboardProps = {}) {
         </div>
       </div>
 
-      {/* ══ SPRINT / BATTLE PASS MINI WIDGET ══ */}
+      {/* ══ PROTOCOLO DO DIA: TIMELINE 07H - 23H ══ */}
+      <div className="system-window p-4 border-system-border/60">
+        <div className="flex items-center justify-between mb-3 border-b border-border/40 pb-2">
+          <div className="flex items-center gap-2">
+            <Clock className="w-4 h-4 text-system-cyan" />
+            <span className="text-xs font-system text-white tracking-wider uppercase">
+              PROTOCOLO DIÁRIO DE COMBATE (07H — 23H)
+            </span>
+          </div>
+          <span className="text-[10px] font-mono text-muted-foreground uppercase">
+            HORÁRIO ATUAL: {String(currentHour).padStart(2, '0')}:00
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
+          {DAILY_SCHEDULE.map((slot) => {
+            const Icon = slot.icon;
+            return (
+              <div
+                key={slot.time}
+                className={cn(
+                  "p-3 rounded border transition-all text-left",
+                  slot.type === "deepwork"
+                    ? "bg-system-cyan/10 border-system-cyan/30 text-white"
+                    : slot.type === "sanctuary"
+                    ? "bg-system-purple/10 border-system-purple/30 text-white"
+                    : "bg-system-void/60 border-system-border/40 text-muted-foreground"
+                )}
+              >
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-[10px] font-mono text-system-cyan">{slot.time}</span>
+                  <Icon className="w-3.5 h-3.5 text-system-cyan" />
+                </div>
+                <div className="text-xs font-rajdhani font-bold leading-tight">{slot.name}</div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ══ SPRINT / OPERAÇÕES ATIVAS ══ */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* OP 1 */}
-        <div className="glass-card p-4 border border-blue-500/20 bg-blue-500/5 hover:border-blue-500/40 transition-all cursor-pointer" onClick={() => onQuestlineClick?.("experia")}>
+        <div
+          className="system-window p-4 border-system-cyan/30 hover:border-system-cyan transition-all cursor-pointer group"
+          onClick={() => {
+            systemAudio.playHover();
+            onQuestlineClick?.("experia");
+          }}
+        >
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
-              <Trophy className="w-4 h-4 text-blue-400" />
-              <span className="font-mono text-xs uppercase tracking-wide text-blue-400">OP1: Experia MVP</span>
+              <Trophy className="w-4 h-4 text-system-cyan" />
+              <span className="font-system text-xs uppercase tracking-wide text-white group-hover:text-system-cyan transition-colors">
+                OP1: Experia MVP (AI Ops)
+              </span>
             </div>
-            <span className="font-mono text-xs text-blue-400">33%</span>
+            <span className="font-mono text-xs text-system-cyan font-bold">EM ANDAMENTO</span>
           </div>
-          <div className="h-1.5 w-full bg-muted/30 rounded-full overflow-hidden">
-            <div className="h-full bg-blue-500 rounded-full" style={{ width: "33%" }} />
+          <div className="h-1.5 w-full bg-system-void rounded-full overflow-hidden border border-system-cyan/30">
+            <div className="h-full bg-system-cyan rounded-full" style={{ width: "65%" }} />
           </div>
-          <p className="text-[10px] text-muted-foreground mt-2">1/3 Trials Entregues</p>
+          <p className="text-[11px] font-mono text-muted-foreground mt-2">
+            Foco: Outreach online + Tráfego orgânico BR · 1º Cliente AI Ops este mês (sem cold calls)
+          </p>
         </div>
 
         {/* OP 2 */}
-        <div className="glass-card p-4 border border-green-500/20 bg-green-500/5 hover:border-green-500/40 transition-all cursor-pointer" onClick={() => onQuestlineClick?.("english")}>
+        <div
+          className="system-window p-4 border-green-500/30 hover:border-green-500 transition-all cursor-pointer group"
+          onClick={() => {
+            systemAudio.playHover();
+            onQuestlineClick?.("english");
+          }}
+        >
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
               <Zap className="w-4 h-4 text-green-400" />
-              <span className="font-mono text-xs uppercase tracking-wide text-green-400">OP2: AI English Classes</span>
+              <span className="font-system text-xs uppercase tracking-wide text-white group-hover:text-green-400 transition-colors">
+                OP2: Aulas de Inglês AIDA
+              </span>
             </div>
-            <span className="font-mono text-xs text-green-400">0%</span>
+            <span className="font-mono text-xs text-green-400 font-bold">CAIXA RÁPIDO</span>
           </div>
-          <div className="h-1.5 w-full bg-muted/30 rounded-full overflow-hidden">
-            <div className="h-full bg-green-500 rounded-full" style={{ width: "0%" }} />
+          <div className="h-1.5 w-full bg-system-void rounded-full overflow-hidden border border-green-500/30">
+            <div className="h-full bg-green-400 rounded-full" style={{ width: "30%" }} />
           </div>
-          <p className="text-[10px] text-muted-foreground mt-2">R$ 0 / R$ 3.000 (Caixa Rápido)</p>
+          <p className="text-[11px] font-mono text-muted-foreground mt-2">
+            Meta: R$ 3.000 / mês · Alunos particulares com método de IA
+          </p>
         </div>
       </div>
 
       {/* ══ BOSS FIGHTS — Dynamic from roadmap.md ══ */}
-      <div className="glass-card p-6 border border-red-500/20 animate-fade-in">
+      <div className="system-window p-6 border-system-crimson/30 animate-fade-in">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
-            <Skull className="w-5 h-5 text-red-400" />
+            <Skull className="w-5 h-5 text-system-crimson animate-pulse" />
             <div>
-              <h3 className="font-display text-lg text-red-400 uppercase tracking-wide">
+              <h3 className="font-system text-base text-white uppercase tracking-wider">
                 Boss Fights Ativas (P0)
               </h3>
-              <p className="text-xs text-muted-foreground mt-0.5">
+              <p className="text-xs text-muted-foreground font-rajdhani">
                 {kairos.backendOnline
-                  ? `${activeBosses.length} boss(es) ativos · lido do roadmap.md`
-                  : 'Backend offline — inicie: node scripts/dashboard.js'
+                  ? `${activeBosses.length} chefões sincronizados com o roadmap`
+                  : 'Sincronizado via memória local'
                 }
               </p>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <button
-              onClick={() => kairos.refetch()}
-              className="icon-btn w-7 h-7 text-muted-foreground hover:text-primary"
+              onClick={() => {
+                systemAudio.playHover();
+                kairos.refetch();
+              }}
+              className="p-1.5 rounded border border-system-border hover:border-system-cyan text-muted-foreground hover:text-system-cyan transition-colors"
               title="Sincronizar roadmap"
             >
               <RotateCcw className="w-3.5 h-3.5" />
             </button>
-            <div className="flex items-center gap-2 text-xs text-orange-400 bg-orange-500/10 border border-orange-500/30 px-3 py-1.5 rounded-lg">
-              <Calendar className="w-3 h-3" />
-              <span className="font-mono">{daysUntilCalls}d até cold calls</span>
-            </div>
           </div>
         </div>
 
         {kairos.loading ? (
-          <div className="flex items-center justify-center py-8">
-            <Loader2 className="w-5 h-5 text-primary animate-spin mr-2" />
-            <span className="text-sm text-muted-foreground font-mono">Carregando roadmap...</span>
+          <div className="flex items-center justify-center py-6">
+            <Loader2 className="w-5 h-5 text-system-cyan animate-spin mr-2" />
+            <span className="text-xs text-muted-foreground font-mono">Consultando base neural...</span>
           </div>
         ) : activeBosses.length === 0 ? (
-          <div className="flex items-center justify-center py-8 gap-2 text-muted-foreground">
-            <Shield className="w-5 h-5 text-neon-green" />
-            <span className="font-mono text-sm">Nenhum boss ativo — área limpa! 🏆</span>
+          <div className="flex items-center justify-center py-6 gap-2 text-muted-foreground">
+            <Shield className="w-5 h-5 text-system-cyan" />
+            <span className="font-mono text-xs">Área limpa de ameaças críticas imediatas! 🏆</span>
           </div>
         ) : (
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             {activeBosses.map((boss, i) => (
               <div
                 key={boss.id}
-                className="flex items-center gap-4 p-4 rounded-xl border border-red-500/20 bg-red-500/5 hover:border-red-500/40 transition-all"
+                className="flex items-center gap-4 p-3.5 rounded border border-system-crimson/20 bg-system-crimson/5 hover:border-system-crimson/40 transition-all"
                 style={{ animationDelay: `${i * 60}ms` }}
               >
                 <div className="flex-shrink-0 text-xl">{getStatusEmoji(boss.status)}</div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-0.5">
-                    <span className={cn('text-[10px] font-mono font-bold px-2 py-0.5 rounded border', getPriorityColor(boss.priority))}>
+                    <span className={cn('text-[10px] font-mono font-bold px-2 py-0.2 rounded border', getPriorityColor(boss.priority))}>
                       {boss.priority}
                     </span>
-                    <span className="text-xs text-muted-foreground font-mono">{boss.project}</span>
-                    {boss.owner && (
-                      <span className="text-[10px] text-muted-foreground/50 font-mono">{boss.owner}</span>
-                    )}
+                    <span className="text-xs text-white font-mono">{boss.project}</span>
                   </div>
-                  <p className="text-sm text-foreground leading-tight">{boss.description}</p>
-                  <p className="text-[10px] text-muted-foreground mt-1 font-mono">{boss.status}</p>
+                  <p className="text-sm text-foreground leading-tight font-rajdhani">{boss.description}</p>
                 </div>
               </div>
             ))}
           </div>
         )}
-
-        {/* Quests P1/P2 in pipeline */}
-        {kairos.quests.length > 0 && (
-          <div className="mt-4 pt-4 border-t border-border">
-            <p className="text-xs text-muted-foreground font-mono mb-2">PIPELINE (P1–P3)</p>
-            <div className="flex flex-wrap gap-2">
-              {kairos.quests.slice(0, 5).map(q => (
-                <span
-                  key={q.id}
-                  className={cn('text-[10px] font-mono px-2 py-1 rounded border', getPriorityColor(q.priority))}
-                >
-                  [{q.priority}] {q.project}: {q.description.substring(0, 40)}{q.description.length > 40 ? '...' : ''}
-                </span>
-              ))}
-              {kairos.quests.length > 5 && (
-                <span className="text-[10px] font-mono text-muted-foreground px-2 py-1">
-                  +{kairos.quests.length - 5} mais
-                </span>
-              )}
-            </div>
-          </div>
-        )}
       </div>
 
-      {/* ══ DATA MATRIX — 4 Charts ══ */}
+      {/* ══ DATA MATRIX ══ */}
       <DataMatrix
         skyrosScore={skyrosScore}
         streak={streak}
@@ -322,19 +369,18 @@ export function Dashboard({ onQuestlineClick }: DashboardProps = {}) {
         revenueGoal={revenueGoal}
       />
 
-      {/* Main Content */}
+      {/* Main Content Quest Panel */}
       <div className="w-full">
-        {/* Quest Panel */}
         <CurrentQuestPanel />
       </div>
 
       {/* ══ BADGES / CONQUISTAS ══ */}
-      <div className="glass-card p-6 animate-fade-in">
+      <div className="system-window p-6 animate-fade-in">
         <div className="flex items-center gap-3 mb-4">
-          <Trophy className="w-5 h-5 text-primary" />
+          <Trophy className="w-5 h-5 text-system-gold" />
           <div>
-            <h3 className="font-display text-lg text-primary uppercase tracking-wide">Conquistas</h3>
-            <p className="text-xs text-muted-foreground">{badges.filter(b => b.unlocked).length}/{badges.length} desbloqueadas</p>
+            <h3 className="font-system text-base text-white uppercase tracking-wider">Conquistas do Caçador</h3>
+            <p className="text-xs text-muted-foreground font-mono">{badges.filter(b => b.unlocked).length}/{badges.length} desbloqueadas</p>
           </div>
         </div>
         <div className="flex flex-wrap gap-3">
@@ -342,15 +388,15 @@ export function Dashboard({ onQuestlineClick }: DashboardProps = {}) {
             <div
               key={badge.id}
               className={cn(
-                "flex items-center gap-2 px-4 py-2.5 rounded-xl border transition-all",
+                "flex items-center gap-2.5 px-4 py-2 rounded border transition-all",
                 badge.unlocked
-                  ? "bg-primary/5 border-primary/30 shadow-[0_0_15px_rgba(201,168,76,0.08)]"
+                  ? "bg-system-gold/10 border-system-gold/40 shadow-[0_0_12px_rgba(255,183,3,0.15)]"
                   : "bg-muted/5 border-border/30 opacity-30 grayscale"
               )}
             >
               <span className="text-lg">{badge.emoji}</span>
               <div>
-                <p className={cn("text-xs font-mono font-bold", badge.unlocked ? "text-primary" : "text-muted-foreground")}>
+                <p className={cn("text-xs font-mono font-bold", badge.unlocked ? "text-system-gold" : "text-muted-foreground")}>
                   {badge.name}
                 </p>
                 <p className="text-[9px] text-muted-foreground">{badge.desc}</p>
@@ -359,25 +405,6 @@ export function Dashboard({ onQuestlineClick }: DashboardProps = {}) {
           ))}
         </div>
       </div>
-
-      {/* Quick Nav Cards */}
-      <div className="grid grid-cols-3 gap-4">
-        {[
-          { label: "Questlines", emoji: "📜", desc: "7 ativas · 2 P0", section: "questlines" },
-          { label: "Skill Tree", emoji: "🌳", desc: `${availableAttributePoints} pontos disponíveis`, section: "skills" },
-          { label: "Boss Room", emoji: "💀", desc: `${activeBosses.length} boss(es) ativos`, section: "bosses" },
-        ].map((card) => (
-          <button
-            key={card.section}
-            onClick={() => onQuestlineClick?.(card.section === "questlines" ? "experia" : "")}
-            className="glass-card p-4 text-left hover:border-primary/50 transition-all group"
-          >
-            <div className="text-2xl mb-2">{card.emoji}</div>
-            <div className="font-medium group-hover:text-primary transition-colors">{card.label}</div>
-            <div className="text-xs text-muted-foreground">{card.desc}</div>
-          </button>
-        ))}
-      </div>
     </div>
   );
 }
@@ -385,7 +412,7 @@ export function Dashboard({ onQuestlineClick }: DashboardProps = {}) {
 function StatPill({
   icon: Icon, value, label, color, borderColor, bgColor
 }: {
-  icon: typeof Flame;
+  icon: any;
   value: string;
   label: string;
   color: string;
@@ -393,10 +420,10 @@ function StatPill({
   bgColor: string;
 }) {
   return (
-    <div className={cn("flex items-center gap-2 px-3 py-2 rounded-lg border", borderColor, bgColor)}>
-      <Icon className={cn("w-4 h-4", color)} />
-      <span className={cn("text-sm font-mono", color)}>{value}</span>
-      <span className="text-xs text-muted-foreground">{label}</span>
+    <div className={cn("flex items-center gap-2 px-3 py-1.5 rounded border", borderColor, bgColor)}>
+      <Icon className={cn("w-3.5 h-3.5", color)} />
+      <span className={cn("text-xs font-mono font-bold", color)}>{value}</span>
+      <span className="text-[10px] text-muted-foreground uppercase">{label}</span>
     </div>
   );
 }

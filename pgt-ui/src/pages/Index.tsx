@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { HubHeader } from "@/components/hub/HubHeader";
-import { StellarHub } from "@/components/hub/StellarHub";
+import { PortalHub3D } from "@/components/hub/PortalHub3D";
 import { Dashboard } from "@/components/dashboard/Dashboard";
 import { DailyQuestTracker } from "@/components/quests/DailyQuestTracker";
 import { BossRoom } from "@/components/bosses/BossRoom";
@@ -14,9 +14,10 @@ import { FinancesPage } from "@/components/finances/FinancesPage";
 import { CharSheetPage } from "@/components/charsheet/CharSheetPage";
 import { BattlePassPage } from "@/components/battlepass/BattlePassPage";
 import { AdminStudio } from "@/components/studio/AdminStudio";
+import { cn } from "@/lib/utils";
 
 const sectionLabels: Record<string, string> = {
-  hub: "Gabriel OS",
+  hub: "Gate Map // Sistema de Portais 3D",
   dashboard: "Command Center",
   quests: "Daily Quests",
   questlines: "Questlines",
@@ -51,7 +52,7 @@ const Index = () => {
   const renderSection = () => {
     switch (activeSection) {
       case "hub":
-        return <StellarHub onNavigate={handleNavigate} />;
+        return <PortalHub3D onNavigate={handleNavigate} />;
       case "dashboard":
         return <Dashboard onQuestlineClick={handleQuestlineClick} />;
       case "agenda":
@@ -92,7 +93,7 @@ const Index = () => {
           sectionLabel={sectionLabels[activeSection]}
         />
 
-        <main className="flex-1 p-6 overflow-auto">
+        <main className={cn("flex-1 overflow-auto", activeSection === "hub" ? "p-0 overflow-hidden" : "p-6")}>
           {renderSection()}
         </main>
       </div>

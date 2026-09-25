@@ -11,7 +11,8 @@ import {
   UserCircle,
   Home,
   Trophy,
-  Settings
+  Settings,
+  Compass
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -21,6 +22,7 @@ interface SidebarProps {
 }
 
 const navItems = [
+  { id: "hub", icon: Compass, label: "Gate Map 3D" },
   { id: "dashboard", icon: Home, label: "Command Center" },
   { id: "battlepass", icon: Trophy, label: "Season Pass" },
   { id: "charsheet", icon: UserCircle, label: "Char Sheet" },
@@ -42,10 +44,14 @@ export function Sidebar({ activeSection, onSectionChange }: SidebarProps) {
       <div className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-primary/50 via-transparent to-primary/50" />
       
       {/* Logo */}
-      <div className="mb-8 p-3 relative">
-        <Hexagon className="w-10 h-10 text-primary glow-cyan" />
-        <div className="absolute inset-0 bg-primary/10 blur-xl" />
-      </div>
+      <button 
+        onClick={() => onSectionChange("hub")} 
+        className="mb-8 p-3 relative group transition-transform hover:scale-110"
+        title="Retornar ao Gate Map 3D"
+      >
+        <Hexagon className="w-10 h-10 text-primary glow-cyan transition-colors group-hover:text-system-cyan" />
+        <div className="absolute inset-0 bg-primary/10 blur-xl group-hover:bg-system-cyan/20 transition-colors" />
+      </button>
 
       {/* Navigation */}
       <nav className="flex flex-col gap-1 flex-1">

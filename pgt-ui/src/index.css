@@ -7,85 +7,94 @@
 @layer base {
   :root {
     /* ═══════════════════════════════════════════════════════════
-       CYBER-ARCANO HYBRID THEME — Gabriel OS v4.2
-       Base: Cyberpunk dark navy | Accent: Arcane Gold (Boot.dev DNA)
-       Mantém glassmorphism + adiciona stone depth + serif majesty
+       SOLO LEVELING SYSTEM THEME — GABLAB LEVELING OS v5.0
+       Base: Void Black & Deep Navy (#050a14)
+       Primary: Electric Hunter Cyan (#00f0ff)
+       Secondary: Shadow Monarch Purple (#8a2be2)
+       Destructive: Crimson Alert (#ff0033)
+       Gold: Hunter Loot Gold (#ffb703)
     ═══════════════════════════════════════════════════════════ */
 
-    /* Core Dark (cyberpunk base, mais quente que antes) */
-    --background: 222 25% 5%;
-    --foreground: 40 20% 92%;
+    /* Core Dark (The Void) */
+    --background: 222 55% 4%;
+    --foreground: 0 0% 100%;
 
-    --card: 222 28% 7%;
-    --card-foreground: 40 20% 92%;
+    --card: 222 45% 6%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 222 28% 6%;
-    --popover-foreground: 40 20% 92%;
+    --popover: 222 50% 5%;
+    --popover-foreground: 0 0% 100%;
 
-    /* ★ PRIMARY: ARCANE GOLD (era cyan, agora gold) */
-    --primary: 43 77% 55%;
-    --primary-foreground: 222 25% 5%;
+    /* ★ PRIMARY: SYSTEM ELECTRIC CYAN (#00f0ff) */
+    --primary: 186 100% 50%;
+    --primary-foreground: 222 55% 4%;
 
-    /* SECONDARY: Neon Magenta (mantido — contraste dramático) */
-    --secondary: 320 100% 60%;
-    --secondary-foreground: 222 20% 4%;
+    /* SECONDARY: SHADOW MONARCH PURPLE (#8a2be2) */
+    --secondary: 271 81% 53%;
+    --secondary-foreground: 0 0% 100%;
 
-    /* Dark Stone */
-    --muted: 222 20% 11%;
-    --muted-foreground: 222 12% 52%;
+    /* Dark Stone & Muted Data */
+    --muted: 222 35% 10%;
+    --muted-foreground: 215 20% 65%;
 
-    /* Arcane Purple (XP, magia, KAIROS) */
-    --accent: 270 80% 62%;
-    --accent-foreground: 40 20% 92%;
+    /* Arcane Purple Accent */
+    --accent: 271 81% 53%;
+    --accent-foreground: 0 0% 100%;
 
-    /* Blood Red (Bosses, Perigo) */
-    --destructive: 0 80% 52%;
-    --destructive-foreground: 40 20% 92%;
+    /* Blood Red / Gate Alert (#ff0033) */
+    --destructive: 348 100% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 222 28% 16%;
-    --input: 222 25% 11%;
-    --ring: 43 77% 55%;
+    --border: 186 70% 18%;
+    --input: 222 35% 12%;
+    --ring: 186 100% 50%;
 
-    --radius: 0.5rem;
+    --radius: 0.25rem;
 
-    /* ═══ CYBER-ARCANO TOKEN SYSTEM ═══ */
+    /* ═══ SOLO LEVELING TOKEN SYSTEM ═══ */
+    --system-void: 222 55% 4%;        /* #050a14 */
+    --system-cyan: 186 100% 50%;      /* #00f0ff */
+    --system-cyan-dim: 187 90% 40%;   /* #00d9ff */
+    --system-purple: 271 81% 53%;     /* #8a2be2 */
+    --system-crimson: 348 100% 60%;   /* #ff0033 */
+    --system-gold: 43 100% 51%;       /* #ffb703 */
 
-    /* The gold universe */
-    --arcane-gold: 43 77% 55%;        /* #c9a84c — primary gold */
-    --arcane-amber: 38 68% 35%;       /* #8b6914 — deep gold */
-    --arcane-light: 48 90% 70%;       /* #f0d060 — bright gold glow */
+    /* The gold universe (compatibilidade com loot) */
+    --arcane-gold: 43 100% 51%;
+    --arcane-amber: 38 80% 35%;
+    --arcane-light: 48 100% 65%;
 
-    /* The arcane purple/cyan universe (KAIROS DNA) */
-    --neon-cyan: 186 90% 48%;         /* softer cyan, not pure neon */
-    --neon-purple: 270 80% 62%;       /* arcane purple */
-    --neon-magenta: 320 100% 60%;     /* kept from cyberpunk */
+    /* Cyan & Purple Neons */
+    --neon-cyan: 186 100% 50%;
+    --neon-purple: 271 81% 53%;
+    --neon-magenta: 320 100% 60%;
 
-    /* Nature colors */
-    --neon-green: 152 70% 42%;        /* forest green (not neon lime) */
-    --neon-orange: 25 95% 52%;        /* ember orange */
-    --blood-red: 0 80% 52%;           /* boss blood */
+    /* Status Colors */
+    --neon-green: 152 80% 45%;
+    --neon-orange: 25 100% 52%;
+    --blood-red: 348 100% 60%;
 
-    /* Stone surfaces */
-    --stone-dark: 222 28% 7%;
-    --stone-mid: 222 25% 10%;
-    --stone-border: 222 28% 18%;
+    /* Surfaces */
+    --stone-dark: 222 45% 6%;
+    --stone-mid: 222 35% 10%;
+    --stone-border: 186 60% 16%;
 
-    /* System */
-    --xp-bar: 43 77% 55%;             /* gold XP (era purple) */
-    --hp-bar: 0 80% 52%;
-    --gold-cyber: 43 77% 55%;
-    --glass-bg: 222 28% 8%;
-    --glass-border: 222 30% 18%;
+    /* Bars */
+    --xp-bar: 186 100% 50%;
+    --hp-bar: 348 100% 60%;
+    --gold-cyber: 43 100% 51%;
+    --glass-bg: 222 45% 6%;
+    --glass-border: 186 70% 20%;
 
     /* Sidebar */
-    --sidebar-background: 222 32% 4%;
-    --sidebar-foreground: 40 15% 65%;
-    --sidebar-primary: 43 77% 55%;
-    --sidebar-primary-foreground: 222 20% 4%;
-    --sidebar-accent: 270 80% 62%;
-    --sidebar-accent-foreground: 40 20% 92%;
-    --sidebar-border: 222 30% 10%;
-    --sidebar-ring: 43 77% 55%;
+    --sidebar-background: 222 60% 3%;
+    --sidebar-foreground: 215 20% 70%;
+    --sidebar-primary: 186 100% 50%;
+    --sidebar-primary-foreground: 222 55% 4%;
+    --sidebar-accent: 271 81% 53%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 186 50% 12%;
+    --sidebar-ring: 186 100% 50%;
   }
 }
 
@@ -97,23 +106,24 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', sans-serif;
-    /* Arcane grid: mais sutil, warm gold instead of cyan */
+    /* Solo Leveling System grid: void cyan lines */
     background-image:
-      linear-gradient(hsl(43 77% 55% / 0.015) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(43 77% 55% / 0.015) 1px, transparent 1px);
-    background-size: 48px 48px;
+      linear-gradient(hsl(186 100% 50% / 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(186 100% 50% / 0.02) 1px, transparent 1px);
+    background-size: 32px 32px;
   }
 
-  /* Display titles: Cinzel (fantasy serif — Blizzard energy) */
+  /* Display titles: Orbitron (Solo Leveling hard sci-fi tech) & Cinzel */
   h1, h2, h3 {
-    font-family: 'Cinzel', serif;
-    letter-spacing: 0.06em;
+    font-family: 'Orbitron', 'Cinzel', sans-serif;
+    letter-spacing: 0.08em;
   }
 
-  /* Sub-titles: Orbitron mantido para elementos HUD/tech */
+  /* Sub-titles: Rajdhani / Orbitron */
   h4, h5, h6 {
-    font-family: 'Orbitron', sans-serif;
-    letter-spacing: 0.04em;
+    font-family: 'Rajdhani', 'Orbitron', sans-serif;
+    letter-spacing: 0.05em;
+    font-weight: 600;
   }
 
   .font-mono {
@@ -121,15 +131,97 @@
   }
 
   .font-display {
-    font-family: 'Cinzel', serif;
+    font-family: 'Orbitron', 'Cinzel', serif;
   }
 
   .font-hud {
     font-family: 'Orbitron', sans-serif;
   }
+
+  .font-system {
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  .font-rajdhani {
+    font-family: 'Rajdhani', sans-serif;
+  }
+
+  .font-exo {
+    font-family: 'Exo 2', sans-serif;
+  }
 }
 
 @layer components {
+  /* ═══ SOLO LEVELING SYSTEM UI COMPONENTS ═══ */
+
+  /* The iconic Solo Leveling System Window */
+  .system-window {
+    @apply bg-card/90 backdrop-blur-2xl border rounded relative overflow-hidden;
+    border-color: rgba(0, 240, 255, 0.35);
+    box-shadow:
+      0 0 20px rgba(0, 240, 255, 0.12),
+      0 0 40px rgba(0, 240, 255, 0.04),
+      inset 0 1px 0 rgba(0, 240, 255, 0.25),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  .system-window::before {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.06) 0%, transparent 60%);
+  }
+
+  /* Rank S Shadow Monarch Window */
+  .system-rank-s {
+    border-color: rgba(138, 43, 226, 0.6) !important;
+    box-shadow:
+      0 0 25px rgba(138, 43, 226, 0.3),
+      0 0 50px rgba(138, 43, 226, 0.15),
+      inset 0 1px 0 rgba(138, 43, 226, 0.4) !important;
+  }
+
+  /* Rank A System Hunter Window */
+  .system-rank-a {
+    border-color: rgba(0, 240, 255, 0.7) !important;
+    box-shadow:
+      0 0 25px rgba(0, 240, 255, 0.3),
+      0 0 45px rgba(0, 240, 255, 0.1),
+      inset 0 1px 0 rgba(0, 240, 255, 0.4) !important;
+  }
+
+  /* Glow Utilities */
+  .glow-hunter {
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.8), 0 0 20px rgba(0, 240, 255, 0.4);
+  }
+
+  .glow-shadow {
+    text-shadow: 0 0 12px rgba(138, 43, 226, 0.85), 0 0 25px rgba(138, 43, 226, 0.45);
+  }
+
+  .glow-crimson {
+    text-shadow: 0 0 12px rgba(255, 0, 51, 0.85), 0 0 25px rgba(255, 0, 51, 0.45);
+  }
+
+  .box-glow-hunter {
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.4), inset 0 0 10px rgba(0, 240, 255, 0.2);
+  }
+
+  .box-glow-shadow {
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.45), inset 0 0 12px rgba(138, 43, 226, 0.25);
+  }
+
+  /* Scanline effect */
+  .scanline {
+    background: linear-gradient(
+      to bottom,
+      rgba(255,255,255,0),
+      rgba(255,255,255,0) 50%,
+      rgba(0, 240, 255, 0.03) 50%,
+      rgba(0, 240, 255, 0.03)
+    );
+    background-size: 100% 4px;
+  }
+
   /* ═══ CARD SYSTEM — Cyber-Arcano Glass ═══ */
 
   /* Base: glassmorphism mantido, mas com glow gold */
