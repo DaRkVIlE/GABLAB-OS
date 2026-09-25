@@ -169,7 +169,7 @@ Comando recebido: "${userText}".
 A matriz de IA do SKYROS está operando em alta frequência. Mantenha a clareza estratégica, proteja seu tempo e converta esforço mental em riqueza material real.`;
   };
 
-  const handleSendMessage = (textToSend?: string) => {
+  const handleSendMessage = async (textToSend?: string) => {
     const text = textToSend || inputMessage;
     if (!text.trim()) return;
 
@@ -186,24 +186,57 @@ A matriz de IA do SKYROS está operando em alta frequência. Mantenha a clareza 
     setInputMessage("");
     setIsTyping(true);
 
-    // Simulate system cognition & voice synthesis
-    setTimeout(() => {
-      const responseText = generateSystemResponse(text);
-      const systemMsg: Message = {
-        id: `sys-${Date.now()}`,
-        sender: "system",
-        text: responseText,
-        timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-      };
+    const apiUrl = import.meta.env.VITE_SKYROS_API_URL || "http://localhost:3001";
+    let responseText = "";
 
-      setMessages((prev) => [...prev, systemMsg]);
-      setIsTyping(false);
-      systemAudio.playPortalEnter();
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 4500);
 
-      if (voiceActive) {
-        systemVoice.speak(responseText);
+      const res = await fetch(`${apiUrl}/api/v1/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        signal: controller.signal,
+        body: JSON.stringify({
+          messages: [{ role: "user", content: text }],
+          telemetry: {
+            level,
+            xp,
+            streak,
+            realCoins,
+            revenueGoal,
+            skyrosScore,
+            currentHour: new Date().getHours(),
+          },
+        }),
+      });
+      clearTimeout(timeoutId);
+
+      if (res.ok) {
+        const data = await res.json();
+        responseText = data.reply || "";
+      } else {
+        responseText = generateSystemResponse(text);
       }
-    }, 450);
+    } catch {
+      // Local fallback if backend is offline
+      responseText = generateSystemResponse(text);
+    }
+
+    const systemMsg: Message = {
+      id: `sys-${Date.now()}`,
+      sender: "system",
+      text: responseText,
+      timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+    };
+
+    setMessages((prev) => [...prev, systemMsg]);
+    setIsTyping(false);
+    systemAudio.playPortalEnter();
+
+    if (voiceActive) {
+      systemVoice.speak(responseText);
+    }
   };
 
   return (
