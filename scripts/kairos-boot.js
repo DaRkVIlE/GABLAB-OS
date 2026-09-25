@@ -348,96 +348,32 @@ function scanDirForCouncil(dir, prefix) {
 }
 
 function phase3_intelligence() {
-    phaseHeader(3, 'INTELLIGENCE (IA Council)', '🏛️');
+    phaseHeader(3, 'INTELLIGENCE (Smart Triage v5 & Triunvirato)', '🏛️');
 
     try {
-        const councilPath = path.join(AIOX_ROOT, 'scripts', 'evolution', 'ia-council-engine.js');
-        const council = require(councilPath);
-
-        let files = [];
-        const dirsToScan = [
-            // === ROOT ===
-            ['', ''], // Root files (README.md, SELF_CONTEXT.md, STATUS.md, etc.)
-            ['distillation-dataset', 'distillation-dataset'],
-            ['scripts', 'scripts'],
-            ['scripts/evolution', 'scripts/evolution'],
-            ['squads', 'squads'],
-            ['docs', 'docs'],
-            ['reasoning-packages', 'reasoning-packages'],
-            ['clients/experia/config', 'clients/experia/config'],
-            // === AIOX RUNTIME STATE (Tier 1 — CRITICAL) ===
-            ['.aiox', '.aiox'], // codebase-map, gotchas, epic state, path-analysis
-            ['.synapse', '.synapse'], // 12 agent domains + 3 workflow domains + constitution
-            ['bin', 'bin'], // CLI runtime (aiox.js, aiox-init.js, aiox-ids.js)
-            ['data', 'data'], // entity-registry, memory.json, jarvis-narratives
-            // === AIOX CORE ENGINE ===
-            ['.aiox-core/opus-replicator', '.aiox-core/opus-replicator'],
-            ['.aiox-core/core', '.aiox-core/core'],
-            ['.aiox-core/core/docs', '.aiox-core/core/docs'],
-            ['.aiox-core/noesis', '.aiox-core/noesis'],
-            ['.aiox-core/data', '.aiox-core/data'],
-            // === DEVELOPMENT MODULE ===
-            ['.aiox-core/development', '.aiox-core/development'],
-            ['.aiox-core/development/agents', '.aiox-core/development/agents'],
-            ['.aiox-core/development/workflows', '.aiox-core/development/workflows'],
-            ['.aiox-core/development/tasks', '.aiox-core/development/tasks'],
-            ['.aiox-core/development/scripts', '.aiox-core/development/scripts'],
-            // === TIER 1 — VALIDATION & QUALITY ===
-            ['.aiox-core/schemas', '.aiox-core/schemas'], // V3 agent/task/squad schemas + validator
-            ['.aiox-core/quality', '.aiox-core/quality'], // metrics-collector, metrics-hook, seed-metrics
-            // === TIER 2 — INFRASTRUCTURE & INTEGRATIONS ===
-            ['.aiox-core/integrations', '.aiox-core/integrations'], // ClickUp, Telegram, Evolution API configs
-            ['.aiox-core/infrastructure', '.aiox-core/infrastructure'], // MCP contracts, tool templates
-            ['.aiox-core/workflow-intelligence', '.aiox-core/workflow-intelligence'], // WIS engine + learning
-            ['.aiox-core/manifests', '.aiox-core/manifests'], // CSV registries (agents, tasks, workers)
-            // === TIER 3 — LIFECYCLE & ELICITATION ===
-            ['.aiox-core/elicitation', '.aiox-core/elicitation'], // Interactive task engines
-            ['.aiox-core/hooks', '.aiox-core/hooks'], // IDS git lifecycle hooks
-            ['.aiox-core/noesis-operator', '.aiox-core/noesis-operator'], // Operator learning model
-            ['.aiox-core/handoffs', '.aiox-core/handoffs'], // Agent-to-agent handoff artifacts
-            // === AGENT LAYER ===
-            ['.antigravity/agents', '.antigravity/agents'],
-            // === TEST INFRASTRUCTURE ===
-            ['test', 'test'], // Context tests + run-all-tests.js
-        ];
-
-        for (const [dir, prefix] of dirsToScan) {
-            const fullPath = path.join(AIOX_ROOT, dir);
-            files = files.concat(scanDirForCouncil(fullPath, prefix));
+        const triadSkills = ['architect', 'qa', 'alan'];
+        const missingTriad = [];
+        for (const s of triadSkills) {
+            const skillPath = path.join(AIOX_ROOT, '.agent', 'skills', s, 'SKILL.md');
+            if (!fs.existsSync(skillPath)) missingTriad.push(s);
         }
 
-        ok(`System state: ${files.length} files scanned across ${dirsToScan.length} directories`);
-
-        // Load REAL quality baseline
-        let qualityBaseline = {};
-        const qbPath = path.join(AIOX_CORE, 'data', 'quality-baseline.json');
-        if (fs.existsSync(qbPath)) {
-            qualityBaseline = JSON.parse(fs.readFileSync(qbPath, 'utf8'));
-            info(`Quality baseline: ${qualityBaseline.current_baseline}/10 (trend: ${qualityBaseline.trend})`);
+        if (missingTriad.length === 0) {
+            ok('Smart Triage v5: Triunvirato operacional (@architect, @qa, @alan v6.0)');
+        } else {
+            warn(`Smart Triage v5: Skills ausentes no Triunvirato: ${missingTriad.join(', ')}`);
         }
 
-        const systemState = {
-            files,
-            metrics: {},
-            qualityBaseline,
-            antiPatterns: [],
-            projectRoot: AIOX_ROOT
-        };
-
-        const result = council.runCouncil(systemState);
-        ok(`Council Score: ${result.overallScore}/10 — ${result.totalGaps} gaps found`);
-
-        if (result.topGaps && result.topGaps.length > 0) {
-            info('Top gaps:');
-            result.topGaps.slice(0, 3).forEach((g, i) => {
-                const sev = g.severity >= 8 ? RED : g.severity >= 6 ? YELLOW : DIM;
-                console.log(`    ${sev}${i + 1}. [SEV ${g.severity}] ${g.description}${RESET}`);
-            });
+        // Checar persistência Hivemind
+        const decisionsPath = path.join(AIOX_ROOT, 'engine', 'hivemind', 'decisions.jsonl');
+        const statesPath = path.join(AIOX_ROOT, 'engine', 'hivemind', 'agent-states.json');
+        if (fs.existsSync(decisionsPath) && fs.existsSync(statesPath)) {
+            ok('Hivemind Protocol v2.0: Sincronizado (decisions.jsonl + agent-states.json)');
         }
 
-        return { status: 'OK', score: result.overallScore, gaps: result.totalGaps };
+        return { status: 'OK', engine: 'Smart Triage v5', triad: missingTriad.length === 0 };
     } catch (err) {
-        warn(`IA Council: ${err.message}`);
+        warn(`Intelligence: ${err.message}`);
         return { status: 'DEGRADED', error: err.message };
     }
 }
