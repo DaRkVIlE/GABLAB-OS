@@ -26,12 +26,13 @@
 - **Smart Triage Engine v5:** 3 Tiers (Fast Path, Pipeline SDC, Deep Audit Triunvirato). IA Council de 12 cadeiras legado arquivado.
 - **Alan MindClone v6.0:** Conselheiro Estratégico Direto (filtro cashflow apenas em sessões de vendas explícitas).
 
-### SKORTEX (Meta-Orquestrador Autônomo) — 🟡 CONFIGURAÇÃO PENDENTE
+### SKORTEX (Meta-Orquestrador Autônomo) — ✅ OPERACIONAL
 - **Runtime:** OpenClaw v2026.9.6 (Node.js 24.19.0 LTS)
 - **MCP Bridge:** KAIROX MCP Server v3.2 conectado → **33 tools, auto-approval**
 - **Workspace:** `skortex/` — `SOUL.md`, `AGENTS.md`, `Launch-SKORTEX.ps1`, `README.md`
-- **Config:** `~/.openclaw/openclaw.json`
-- **Pendente:** `openclaw configure` (chave API) + `openclaw channels add` (WhatsApp/Telegram)
+- **Model Engine:** OpenRouter (`openrouter/poolside/laguna-s-2.1:free`, fallbacks: `north-mini-code:free`, `space-bunny-alpha`) com 256k+ context e suporte nativo a tools testado e validado.
+- **Canais:** Telegram Bot integrado e vinculado ao ID do operador (`7390265104`).
+- **Launcher:** `Launch-SKORTEX.ps1` com modos `chat`, `daemon`, `status`, `setup`.
 
 ### MCP Server v3.2 & Hivemind v2.0 — ✅ OPERACIONAL
 - **kairox-mcp-server:** TypeScript, `@modelcontextprotocol/sdk`, 30+ tools completas (Handoffs, States, Decisions, Tasks, RPs, Workflows, Hydra). Testes: 11/11 Vitest passando.
