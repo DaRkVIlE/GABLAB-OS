@@ -1,0 +1,96 @@
+---
+// index.astro — Landing Page Oficial do Método MANA 3.0 & LEXI Alpha
+// Padrão Impeccable (Craft Floor) & UI/UX Pro Max (Design Intelligence)
+import '../styles/global.css';
+import Hero from '../components/Hero.astro';
+import AlunoEterno from '../components/AlunoEterno.astro';
+import MontanhaB2 from '../components/MontanhaB2.astro';
+import QuizSection from '../components/QuizSection.astro';
+import GamificationBarDemo from '../components/GamificationBarDemo.astro';
+import SCurveMapDemo from '../components/SCurveMapDemo.astro';
+import Faq from '../components/Faq.astro';
+import OfertaAlpha from '../components/OfertaAlpha.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<!doctype html>
+<html lang="pt-BR" class="scroll-smooth bg-slate-950 text-slate-100">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>LEXI Alpha • Método MANA 3.0</title>
+    <meta name="description" content="Você não estuda para falar. Você fala para aprender. Destrave seu inglês sem gramática escolar com os 5 Portais da Montanha B2 e tutores de IA com Recasting Natural." />
+    
+    <!-- Tipografia Editorial Studio (Google Fonts) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="LEXI Alpha • Método MANA 3.0" />
+    <meta property="og:description" content="Destrave sua fala em inglês em 6 a 8 meses com a Montanha B2." />
+    <meta property="og:type" content="website" />
+  </head>
+  <body class="min-h-screen flex flex-col font-sans selection:bg-emerald-500 selection:text-emerald-950">
+    <!-- Barra Superior Fixa Minimalista -->
+    <header class="fixed top-0 inset-x-0 z-50 bg-slate-950/85 backdrop-blur-md border-b border-slate-900/80 px-4 sm:px-8 py-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="text-white font-black text-xl tracking-wider">LEXI Alpha</span>
+        <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800/80 font-bold uppercase tracking-wider">MANA 3.0</span>
+      </div>
+
+      <nav class="hidden sm:flex items-center gap-8 text-sm text-slate-400 font-medium">
+        <a href="#portais" class="hover:text-white transition-colors">Os 5 Portais</a>
+        <a href="#pratica" class="hover:text-white transition-colors">Prática Oral</a>
+        <a href="#quiz" class="hover:text-white transition-colors">Diagnóstico</a>
+        <a href="#oferta" class="hover:text-white transition-colors">Turma Alpha</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="#quiz" class="px-4 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-emerald-950 text-xs sm:text-sm font-bold transition-all shadow-md shadow-emerald-500/20 active:scale-95">
+          Fazer Teste Grátis
+        </a>
+
+        <!-- Botão de Áudio com SVG Studio (sem emoji cru) -->
+        <button
+          id="audio-toggle"
+          aria-label="Ativar som do ecossistema"
+          title="Ativar/Desativar Som"
+          class="p-2 rounded-lg border border-slate-800 bg-slate-900/80 text-slate-400 hover:text-emerald-400 hover:border-slate-700 transition-colors"
+        >
+          <svg class="w-4 h-4 stroke-current fill-none stroke-2" viewBox="0 0 24 24">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+            <line x1="23" y1="9" x2="17" y2="15" />
+            <line x1="17" y1="9" x2="23" y2="15" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="flex-1 pb-20 sm:pb-0">
+      <Hero />
+      <AlunoEterno />
+      <MontanhaB2 />
+      <QuizSection />
+      <GamificationBarDemo />
+      <SCurveMapDemo />
+      <OfertaAlpha />
+      <Faq />
+    </main>
+
+    <Footer />
+
+    <!-- Apex Squad Scripts (Client-side only) -->
+    <script>
+      import { initAnimations } from '../scripts/animations.ts';
+      import { initAudioToggle, attachPortalHoverSFX } from '../scripts/audio.ts';
+
+      document.addEventListener('DOMContentLoaded', () => {
+        initAnimations();
+        initAudioToggle();
+        attachPortalHoverSFX();
+      });
+    </script>
+  </body>
+</html>
