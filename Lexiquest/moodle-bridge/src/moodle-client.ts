@@ -148,11 +148,10 @@ export class MoodleClient {
       };
 
       const portals = [
-        { id: 1, name: 'Portal 1: Descongelamento Imediato', cefr: 'A1-A2', total: 500 },
-        { id: 2, name: 'Portal 2: Velocidade Digital', cefr: 'A2-B1', total: 500 },
-        { id: 3, name: 'Portal 3: Sobrevivência em Conversas', cefr: 'B1', total: 500 },
-        { id: 4, name: 'Portal 4: Voz Executiva & Nuance', cefr: 'B2', total: 500 },
-        { id: 5, name: 'Portal 5: Densidade Lexical', cefr: 'B2-C1', total: 500 }
+        { id: 1, name: 'Portal 1: O Descongelamento · Raid Kit & Quebra do Tradutor Mental', cefr: 'A1-A2', total: 350 },
+        { id: 2, name: 'Portal 2: O Motor do BICS · Velocidade Digital & Fluência Assíncrona', cefr: 'A2-B1', total: 650 },
+        { id: 3, name: 'Portal 3: A Tração Conversacional · Presença Executiva & Small Talk', cefr: 'B1-B2', total: 750 },
+        { id: 4, name: 'Portal 4: A Fronteira Executiva · Desbloqueio Cognitivo & Pensamento Direto', cefr: 'B2', total: 750 }
       ];
 
       const currentPortal = portals.find(p => p.id === user.portalId) || portals[0];
@@ -261,11 +260,13 @@ export class MoodleClient {
 
   /**
    * Tool 4: moodle_unlock_boss_raid
-   * Unlocks after 21 days consecutive streak
+   * Verifies eligibility for the Boss Raid 1-on-1 with Gabe (PRD §8.3):
+   * Minimum routine (quests in >= 10 of last 14 days), >= 70% chunks in process,
+   * 1 Transfer Task approved, 1 No-Assist completed. Human sign-off required.
    */
   public async unlockBossRaid(userId: number | string, currentStreakDays: number): Promise<BossRaidUnlockResult> {
     const resolvedUserId = await this.resolveUserId(userId);
-    const requiredStreakDays = 21;
+    const requiredStreakDays = 10; // Rotina mínima do PRD §8.3 (>=10 dias nos últimos 14)
     const unlocked = currentStreakDays >= requiredStreakDays;
 
     return {
@@ -273,17 +274,18 @@ export class MoodleClient {
       unlocked,
       currentStreakDays,
       requiredStreakDays,
-      raidTitle: '⚔️ BOSS RAID EXECUTIVA DE GABE — SIMULAÇÃO DEFINITIVA',
-      simulationTopic: 'Negociação Internacional sob Pressão com Gabe & Alexandra (P4)',
+      raidTitle: '⚔️ BOSS RAID — SESSÃO 1-ON-1 DE 30 MIN COM GABE',
+      simulationTopic: 'Simulação de Alta Pressão com Sign-Off Humano e Boss Score (>= 70 e >= 5 chunks)',
       message: unlocked
-        ? `🎉 BOSS RAID DESBLOQUEADA! Ofensiva de ${currentStreakDays} dias atingida! O aluno está habilitado para a simulação executiva com Gabe.`
-        : `🔒 BOSS RAID BLOQUEADA: Ofensiva atual de ${currentStreakDays}/${requiredStreakDays} dias. Faltam ${requiredStreakDays - currentStreakDays} dias para o destrave.`
+        ? `🎉 ELEGÍVEL PARA BOSS RAID! Rotina de ${currentStreakDays} dias de quests ativa. O aluno cumpre a rotina mínima e está habilitado para agendar a simulação 1-on-1 de 30 min com Gabe (PRD §8.3).`
+        : `🔒 BOSS RAID BLOQUEADA: Rotina atual de ${currentStreakDays}/${requiredStreakDays} dias de quests. Conclua quests diárias para atingir a elegibilidade (PRD §8.3).`
     };
   }
 
   /**
-   * Tool 5: moodle_sync_habitica
-   * Connects to habitica-connector microservice
+   * Tool 5: moodle_sync_habitica (DEPRECATED per PRD Turma Alpha §4.3)
+   * Habitica foi descartado. Gamificação reside 100% no Moodle LMS + Level Up! (block_xp).
+   * Mantido apenas para compatibilidade de rotas e testes legados.
    */
   public async syncHabitica(
     userId: number | string,
@@ -293,38 +295,13 @@ export class MoodleClient {
     taskAlias: string = 'aida-daily-immersion'
   ): Promise<HabiticaSyncResult> {
     const resolvedUserId = await this.resolveUserId(userId);
-    try {
-      const response = await axios.post(
-        `${this.config.habiticaConnectorUrl}/webhook/aida-event`,
-        {
-          userId: resolvedUserId,
-          habiticaUserId,
-          xpAwarded,
-          streakDays,
-          taskAlias,
-          timestamp: new Date().toISOString()
-        },
-        { timeout: 4000 }
-      );
-
-      return {
-        success: true,
-        habiticaUserId,
-        streakDays,
-        xpSynced: xpAwarded,
-        questDamage: Math.round(xpAwarded * 0.4),
-        message: '✅ Sincronizado com sucesso com o Habitica Connector (Ofensiva e Quests atualizadas).'
-      };
-    } catch (err: any) {
-      // Local fallback simulation
-      return {
-        success: true,
-        habiticaUserId,
-        streakDays,
-        xpSynced: xpAwarded,
-        questDamage: Math.round(xpAwarded * 0.4),
-        message: `ℹ️ Habitica Connector em modo simulado/local: Dano na Quest=${Math.round(xpAwarded * 0.4)}, Streak=${streakDays}d (${err.message})`
-      };
-    }
+    return {
+      success: true,
+      habiticaUserId,
+      streakDays,
+      xpSynced: xpAwarded,
+      questDamage: 0,
+      message: 'ℹ️ Habitica foi descartado no PRD v1.0 Turma Alpha (§4.3). A gamificação opera exclusivamente via Moodle LMS + Level Up!.'
+    };
   }
 }

@@ -32,7 +32,7 @@ export function getMoodleToolsDefinitions(): Tool[] {
     },
     {
       name: 'moodle_record_chunk_mastery',
-      description: 'Registra a automaticidade de um chunk lexical. Se o tempo de reflexo do aluno for < 4.0s, grava a conclusão da atividade no Moodle e concede bônus de XP.',
+      description: 'Registra a automaticidade de um chunk lexical no Moodle. O tempo de reflexo < 4.0s é sinal de automaticidade (meta de treino sem nota, PRD §8.5), concedendo XP e atualizando o status de domínio.',
       inputSchema: {
         type: 'object',
         properties: {
@@ -55,7 +55,7 @@ export function getMoodleToolsDefinitions(): Tool[] {
     },
     {
       name: 'moodle_award_xp',
-      description: 'Concede pontos de experiência (XP) ao aluno no bloco Level Up! do Moodle por participação ativa e resposta oral.',
+      description: 'Concede pontos de experiência (XP) ao aluno no bloco Level Up! do Moodle por participação ativa e resposta oral (100% invisível no chat, PRD §9.1).',
       inputSchema: {
         type: 'object',
         properties: {
@@ -74,14 +74,14 @@ export function getMoodleToolsDefinitions(): Tool[] {
     },
     {
       name: 'moodle_unlock_boss_raid',
-      description: 'Verifica a ofensiva (streak) de dias consecutivos do aluno e desbloqueia a Boss Raid Executiva de Gabe se o streak for >= 21 dias.',
+      description: 'Verifica a elegibilidade para a Boss Raid (sessão 1-on-1 de 30 min com Gabe): rotina mínima >= 10 de 14 dias (PRD §8.3), Transfer Task e No-Assist concluídos. O sign-off final é humano com Boss Score >= 70 e >= 5 chunks.',
       inputSchema: {
         type: 'object',
         properties: {
           userId: userIdProperty,
           currentStreakDays: {
             type: 'number',
-            description: 'Total de dias consecutivos de ofensiva ativa'
+            description: 'Total de dias consecutivos de rotina diária ativa'
           }
         },
         required: ['userId', 'currentStreakDays']
@@ -89,7 +89,7 @@ export function getMoodleToolsDefinitions(): Tool[] {
     },
     {
       name: 'moodle_sync_habitica',
-      description: 'Sincroniza o progresso do dia, dano em Bosses de Quests e ofensiva com o microsserviço Habitica Connector.',
+      description: '[DEPRECATED PRD §4.3] Sincronização legado Habitica. O Habitica foi descartado no PRD v1.0 Turma Alpha; a gamificação opera 100% no Moodle LMS + Level Up!.',
       inputSchema: {
         type: 'object',
         properties: {
