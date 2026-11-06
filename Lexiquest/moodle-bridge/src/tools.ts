@@ -9,6 +9,11 @@ import {
 } from './types.js';
 
 export function getMoodleToolsDefinitions(): Tool[] {
+  const userIdProperty = {
+    oneOf: [{ type: 'number' }, { type: 'string' }],
+    description: 'ID numérico ou e-mail do estudante no Moodle LMS'
+  };
+
   return [
     {
       name: 'moodle_get_user_portal',
@@ -16,10 +21,7 @@ export function getMoodleToolsDefinitions(): Tool[] {
       inputSchema: {
         type: 'object',
         properties: {
-          userId: {
-            type: 'number',
-            description: 'ID numérico do estudante no Moodle LMS'
-          },
+          userId: userIdProperty,
           courseId: {
             type: 'number',
             description: 'ID do curso/portal específico (opcional)'
@@ -34,10 +36,7 @@ export function getMoodleToolsDefinitions(): Tool[] {
       inputSchema: {
         type: 'object',
         properties: {
-          userId: {
-            type: 'number',
-            description: 'ID numérico do estudante no Moodle LMS'
-          },
+          userId: userIdProperty,
           chunkId: {
             type: 'string',
             description: 'Identificador único do chunk lexical (ex: chunk_p2_012)'
@@ -60,10 +59,7 @@ export function getMoodleToolsDefinitions(): Tool[] {
       inputSchema: {
         type: 'object',
         properties: {
-          userId: {
-            type: 'number',
-            description: 'ID numérico do estudante no Moodle LMS'
-          },
+          userId: userIdProperty,
           xpAmount: {
             type: 'number',
             description: 'Quantidade de XP a conceder (10-100)'
@@ -82,10 +78,7 @@ export function getMoodleToolsDefinitions(): Tool[] {
       inputSchema: {
         type: 'object',
         properties: {
-          userId: {
-            type: 'number',
-            description: 'ID numérico do estudante no Moodle LMS'
-          },
+          userId: userIdProperty,
           currentStreakDays: {
             type: 'number',
             description: 'Total de dias consecutivos de ofensiva ativa'
@@ -100,10 +93,7 @@ export function getMoodleToolsDefinitions(): Tool[] {
       inputSchema: {
         type: 'object',
         properties: {
-          userId: {
-            type: 'number',
-            description: 'ID numérico do estudante no Moodle LMS'
-          },
+          userId: userIdProperty,
           habiticaUserId: {
             type: 'string',
             description: 'UUID do usuário no Habitica (opcional)'
